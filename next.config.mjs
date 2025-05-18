@@ -4,16 +4,7 @@ const withMDX = createMDX()
 
 /** @type {import('next').NextConfig} */
 const config = {
-  reactStrictMode: true,
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/docs/oramacore',
-        permanent: true
-      }
-    ]
-  }
+  reactStrictMode: true
 }
 
 export default withMDX(config)
