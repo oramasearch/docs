@@ -79,3 +79,7 @@ body {
 .orama-js {
 	--color-fd-primary: var(--orama-js-color);
 }
+
+a:where(.not-prose) {
+	text-decoration: none;
+}

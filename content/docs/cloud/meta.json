@@ -2,5 +2,6 @@
 	"root": true,
 	"title": "Orama Cloud",
 	"description": "Run Orama at scale. Managed.",
-	"icon": "Cloud"
+	"icon": "Cloud",
+	"pages": ["---Importing Data---", "...importing-data"]
 }
