@@ -1,3 +1,3 @@
 {
-	"pages": ["data-sources"]
+	"pages": ["data-sources", "static-files", "native-integrations"]
 }
