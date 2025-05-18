@@ -29,7 +29,8 @@
 			"trailingCommas": "none",
 			"semicolons": "asNeeded",
 			"indentWidth": 2,
-			"indentStyle": "space"
+			"indentStyle": "space",
+			"lineWidth": 120
 		}
 	}
 }
