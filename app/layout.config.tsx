@@ -21,5 +21,18 @@ export const baseOptions: BaseLayoutProps = {
     transparentMode: 'always',
     title: <Logo />
   },
-  links: []
+  links: [
+    {
+      text: 'Orama Cloud',
+      url: '/docs/cloud'
+    },
+    {
+      text: 'OramaCore',
+      url: '/docs/oramacore'
+    },
+    {
+      text: 'Orama JS',
+      url: '/docs/orama-js'
+    }
+  ]
 }
