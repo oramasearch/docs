@@ -1,0 +1,50 @@
+---
+title: The Collection Page
+description: All the information about your collection
+---
+
+## The Collection Page
+
+![Empty Collection](/docs/cloud/collections/empty-collection.png)
+
+Once you have created a collection, you will be redirected to the collection page. From here, you will always be able to see the basic information about the collection (name, description) as well as three fundamental, automatically generated information:
+
+- **API Endpoint**: This is the endpoint you will use to query the collection.
+- **Collection ID**: This is the unique identifier for the collection. You will need this ID to perform all sorts of operations on the collection, from adding data via REST API to using the collection in your code.
+- **Read API Key**: Hidden behind the "Show API Key" button, this is the API key you will use to query the collection. It can be safely shared on the client side and provides read-only access to the collection.
+
+In the same page, you will find a menu on the left side with the following options:
+
+### Datasources List
+This is the list of data sources in the collection. You can create, edit, and delete data sources from here. You can also see the status of each data source (`syncing`, `sync`, `error`) and various statistics about the data source.
+
+### Collection Settings
+This is the page where you can change the collection settings. You can change the name, description, and embedding models used to generate text embeddings on your documents.
+
+A the time of writing, you will not be able to change the language of the collection after it has been created. This will be enabled in a future release and will work for all existing collections.
+
+### Usage
+
+![Collection Usage](/docs/cloud/collections/collection-usage.png)
+
+This is where you will see how to interact with the collection via API or SDK. You will find some example code that will work out of the box, as well as some information about the collection and its data sources.
+
+### Resources Monitoring
+
+You will find some data about number of documents in your collection, system prompts created, triggers, segments, and more. 
+
+This section is under active development and will be improved in the future, giving you more information about the usage of your collection and its data sources.
+
+### Segments
+
+This is where you will be able to define the user segments for your collection. Segments are a way to group users based on their behavior or characteristics. You can use segments to personalize the experience for different groups of users, or to target specific groups with different content or features.
+
+### System Prompts
+
+This is where you will be able to define the system prompts for your collection. System prompts are a way to provide context to the model when generating responses. You can use system prompts to set the tone, style, or content of the responses, or to provide additional information that the model can use to generate more relevant and accurate responses.
+
+### Analytics
+This is where you will be able to see the analytics for your collection. You will be able to see how many queries have been made, how many documents have been retrieved, and other useful information about the usage of your collection.
+
+### Conversations
+This is where you will be able to see all the conversations that happened between your users and the collection. You will be able to see the queries made, the responses generated, and other useful information about the conversations. This is a powerful tool for understanding how your users are interacting with your collection and how you can improve the experience for them.

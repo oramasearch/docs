@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
+import { Cloud } from 'lucide-react'
 
 function Logo() {
   return (
@@ -24,7 +25,8 @@ export const baseOptions: BaseLayoutProps = {
   links: [
     {
       text: 'Orama Cloud',
-      url: '/docs/cloud'
+      url: '/docs/cloud',
+      icon: <Cloud className="w-4 h-4" />
     },
     {
       text: 'OramaCore',

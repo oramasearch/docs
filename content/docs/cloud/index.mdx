@@ -1,5 +1,64 @@
 ---
-title: OramaOpenSource
-description: Orama Open Source description
-icon: Tree
+title: Introduction to Orama Cloud
+description: Run Orama at scale. Managed.
 ---
+
+Orama Cloud is a fully managed service that allows you to run Orama at scale. It is designed to be easy to use, with a simple API and a web interface that makes it easy to manage your Orama collections.
+
+## History and Context
+
+When we started Orama in 2022, it was a simple JavaScript-based full-text search engine that could run in the browser. That was Orama 1.0.
+
+Orama 2.0 was a great step forward, allowing Orama to run in a CDN (Fastly, CloudFlare, etc.), allowing for a much faster and more efficient search experience. It was also the first version of Orama that could be used in production.
+
+Orama 3.0 introduced answer engine and RAG capabilities, making it a valid, modern, and powerful alternative to other engines that only focus on search.
+
+The current version of Orama, **Orama 4.0**, is a complete rewrite of the engine in Rust, which we called OramaCore. It's still open source, and now powers the cloud version of Orama. In a single service, you will find:
+
+- A fully-fledged full-text search engine
+- A scalable vector database
+- A high-performance answer engine
+- A powerful RAG engine
+- A JavaScript runtime that allows your to build agents and custom business logic
+
+And much more.
+
+## Concepts
+
+Before you get started with Orama Cloud, it's important to understand some key concepts:
+
+- [Collections](#collections)
+- [Data sources](#data-sources)
+- [Transactions](#transactions)
+
+### Collections
+
+A collection is a set of [**data sources**](#data-sources) that you want to use for RAG, search, or any other method of retrieval. Each collection has its own set of documents, and depending on your plan, you can create as many collections as you need.
+
+> **Why do I need different data sources? And why not just use a single collection for all of my data?**
+
+That is a fair question, and the answer is simple: imagine you're building a support agent for your company. You will have some data coming from Slack, some from Notion, some from your documentation, and so on.
+
+You could put everything in a single collection, but that could complicate things when it comes to updating, deleting, or adding new data.
+
+For example, you may want to scrape your documentation every day, so you'd have to remove the old data and add the new data. But what if you also want to keep the data from Slack and Notion? You'd have to re-import all of that data every time you update your documentation, which would be a pain.
+
+Instead, you can put data that will be updated frequently in a single [data source](#data-sources) (let's call it `docs`), and put data that follows a different update schedule in another data source (let's call it `slack`). This way, you can update the `docs` data source every day, and the `slack` data source every hour, for example. You can also add new data sources as needed, without having to worry about updating everything at once.
+
+When you create a collection, you can choose its language (English, Spanish, etc.), and the embedding model you want to use. You can always change these settings in the future, but remember that they will be shared across all of the data sources in that collection.
+
+### Data Sources
+
+A data source identifies a specific set of documents, ideally coming from a single origin. Continuing with the example above, you could have a data source for your documentation, one for your Slack messages, and one for your Notion pages.
+
+Every data source is segregated from the others, so you can update, delete, or add new data without affecting the data in the other data sources.
+
+At retrieval time (be it search, RAG, or any other method of retrieval), you can choose to use a single data source, multiple sources, or all of them. This flexibility allows you to have a single collection with multiple data sources and use them as needed for different purposes.
+
+### Transactions
+
+A transaction is a set of operations that you want to perform on a data source. Let's say you want to re-import all of your documentation data periodically.
+
+Instead of deleting all the documents one by one, you can open a transaction, tell Orama to delete all the docs, add the new ones, and then commit the transaction. This way, you can be sure that all of the operations are performed atomically, and you don't have to worry about the state of the data source in between operations.
+
+In fact, the new data will not be available until you commit the transaction, so you can be sure that the data source is always in a consistent state.
