@@ -20,6 +20,8 @@
 		"fumadocs-ui": "^15.3.3",
 		"lucide-react": "^0.511.0",
 		"next": "15.3.2",
+		"@orama/react-components": "^0.7.0",
+		"@orama/core": "^0.1.8",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"tailwind-merge": "^3.3.0"
