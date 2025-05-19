@@ -3,5 +3,12 @@
 	"title": "Orama Cloud",
 	"description": "Run Orama at scale. Managed.",
 	"icon": "Cloud",
-	"pages": ["index", "---Getting Started---", "collections", "---Importing Data---", "...importing-data"]
+	"pages": [
+		"index",
+		"---Getting Started---",
+		"collections",
+		"data-sources",
+		"---Importing Data---",
+		"...importing-data"
+	]
 }

@@ -1,7 +1,3 @@
 {
-  "pages": [
-    "create",
-    "the-collection-page",
-    "deleting-a-collection"
-  ]
+	"pages": ["create", "the-collection-page", "deleting-a-collection"]
 }
