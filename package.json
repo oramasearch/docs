@@ -12,7 +12,7 @@
 	},
 	"dependencies": {
 		"@orama/core": "^0.1.8",
-		"@orama/react-components": "^0.7.0",
+		"@orama/react-components": "^0.8.0",
 		"class-variance-authority": "^0.7.1",
 		"fumadocs-core": "15.3.3",
 		"fumadocs-docgen": "^2.0.0",
