@@ -1,3 +1,7 @@
 {
-	"pages": ["create"]
+	"pages": [
+		"create",
+		"---Native Integrations---",
+		"...native-integrations"
+	]
 }
