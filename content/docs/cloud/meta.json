@@ -7,7 +7,8 @@
 		"index",
 		"---Getting Started---",
 		"collections",
-		"data-sources",
+		"---Data Sources---",
+		"...data-sources",
 		"---Importing Data---",
 		"...importing-data"
 	]
