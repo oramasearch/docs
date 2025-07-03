@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { DocsLayoutProps } from 'fumadocs-ui/layouts/docs'
+import { Footer } from '@/lib/components/footer'
 
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import { baseOptions } from '@/app/layout.config'
@@ -21,7 +22,7 @@ const docsOptions: DocsLayoutProps = {
           ...option,
           icon: (
             <div
-              className="rounded-md p-1 shadow-lg ring-2 [&_svg]:size-6.5 md:[&_svg]:size-5"
+              className='rounded-md p-1 shadow-lg ring-2 [&_svg]:size-6.5 md:[&_svg]:size-5'
               style={
                 {
                   color,
@@ -40,5 +41,10 @@ const docsOptions: DocsLayoutProps = {
 }
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <DocsLayout {...docsOptions}>{children}</DocsLayout>
+  return (
+    <DocsLayout {...docsOptions}>
+      {children}
+      <Footer />
+    </DocsLayout>
+  )
 }
