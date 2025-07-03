@@ -1,16 +1,13 @@
+import { Hero } from '@/lib/components/hero'
 import Link from 'next/link'
 
 export default function HomePage() {
   return (
-    <main className="flex flex-1 flex-col justify-center text-center">
-      <h1 className="mb-4 text-2xl font-bold">Orama</h1>
-      <p className="text-fd-muted-foreground">
-        You can open{' '}
-        <Link href="/docs" className="text-fd-foreground font-semibold underline">
-          /docs
-        </Link>{' '}
-        and see the documentation.
-      </p>
-    </main>
+    <div>
+      <Hero
+        title='Smarter search starts here'
+        description='Orama gives you everything you need to create fast, powerful, and flexible search experiences.From full-text to vector search, local to cloud, all backed by modern AI.'
+      />
+    </div>
   )
 }
