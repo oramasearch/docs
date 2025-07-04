@@ -4,6 +4,8 @@
 /* DUSK THEME */
 
 @theme {
+  --breakpoint-md: 45rem;
+  --breakpoint-lg: 66rem;
 	--color-fd-background: hsl(250, 20%, 92%);
 	--color-fd-primary: hsl(340, 40%, 48%);
 	--color-fd-border: hsl(240, 40%, 90%);
