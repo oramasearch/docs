@@ -7,9 +7,11 @@ import {
   Suggestions,
   ChatRoot
 } from '@orama/ui/components'
-import { Sparkles } from 'lucide-react'
+import { useArrowKeysNavigation } from '@orama/ui/hooks'
+import { FileText, Sparkles } from 'lucide-react'
 import { CollectionManager } from '@orama/core'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const collectionManager = new CollectionManager({
   url: 'https://atlantis.cluster.oramacore.com',
@@ -28,18 +30,23 @@ const suggestions = [
 
 export function SmartSearch() {
   const [mounted, setMounted] = useState(false)
-  const [showBorderAnim, setShowBorderAnim] = useState(true)
+  const { ref, onKeyDown } = useArrowKeysNavigation()
 
   useEffect(() => {
     setMounted(true)
-    const timeout = setTimeout(() => setShowBorderAnim(false), 2000)
-    return () => clearTimeout(timeout)
   }, [])
 
   return (
     <SearchRoot client={collectionManager}>
       <ChatRoot client={collectionManager}>
-        <div className='p-4 rounded-3xl border border-b w-full relative'>
+        <section
+          className='p-4 rounded-3xl border border-b w-full relative bg-fd-background'
+          ref={ref}
+          onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
+            console.log('KeyDown', e.nativeEvent, ref.current)
+            onKeyDown(e.nativeEvent)
+          }}
+        >
           <SearchInput.Wrapper className='mx-auto'>
             <SearchInput.Input
               className='w-full p-3 rounded-md border border-input bg-input/30 shadow-inner shadow-input/20 focus:outline-none'
@@ -49,10 +56,15 @@ export function SmartSearch() {
           <SearchResults.NoResults>
             {(searchTerm) =>
               searchTerm ? (
-                <p className='text-center text-muted-foreground'>
-                  No results found for{' '}
-                  <span className='font-semibold'>{searchTerm}</span>
-                </p>
+                <div className='h-64 flex flex-col items-center justify-center'>
+                  <p>
+                    No results found for{' '}
+                    <span className='font-semibold'>"{searchTerm}"</span>
+                  </p>
+                  <p className='text-muted-foreground py-2'>
+                    Try searching for something else!
+                  </p>
+                </div>
               ) : (
                 <Suggestions.Wrapper className='mx-auto py-3 mt-2'>
                   <Suggestions.List className='w-full flex flex-wrap gap-4 items-center justify-center'>
@@ -76,16 +88,34 @@ export function SmartSearch() {
               )
             }
           </SearchResults.NoResults>
-          <SearchResults.Wrapper className='mx-auto mt-4 empty:hidden'>
+          <SearchResults.Wrapper className='mx-auto mt-4 empty:hidden h-64 overflow-auto'>
             <SearchResults.List className='w-full'>
               {(result, index) => (
-                <SearchResults.Item key={result.id}>
-                  <p>{(result.document?.title as string) ?? ''}</p>
+                <SearchResults.Item
+                  key={result.id}
+                  data-focus-on-arrow-nav
+                  as={Link}
+                  href='#replace-me'
+                  className='text-left w-full flex items-center gap-2 p-2 rounded-lg hover:bg-accent focus:outline-0 focus:bg-accent transition-colors duration-200'
+                >
+                  <div className='flex-0'>
+                    <FileText className='w-4 h-4' />
+                  </div>
+                  <div className='flex-1'>
+                    <p className='text-sm text-secondary-foreground font-medium'>
+                      {(result.document?.title as string) ?? ''}
+                    </p>
+                    <p className='text-xs text-secondary-foreground min-w-0 mt-1'>
+                      {result.document?.content
+                        ? `${(result.document?.content as string).slice(0, 140)}...`
+                        : ''}
+                    </p>
+                  </div>
                 </SearchResults.Item>
               )}
             </SearchResults.List>
           </SearchResults.Wrapper>
-        </div>
+        </section>
       </ChatRoot>
     </SearchRoot>
   )

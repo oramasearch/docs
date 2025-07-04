@@ -155,7 +155,7 @@ a:where(.not-prose) {
 }
 
 .suggestion-animate {
-  animation: slideInUp 0.8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation: slideInUp 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 .suggestion-delay-0 { animation-delay: 0ms; }
