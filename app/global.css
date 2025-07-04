@@ -147,3 +147,9 @@ body {
 a:where(.not-prose) {
 	text-decoration: none;
 }
+
+.net-bg {
+  background: url('/net-bg.svg') no-repeat bottom center;
+  background-size: cover;
+  height: 400px;
+}

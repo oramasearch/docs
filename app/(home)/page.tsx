@@ -17,13 +17,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section>
+      <section className='lg:my-10'>
         <div className='mx-auto max-w-fd-container flex flex-col justify-center items-center'>
           <div className='text-center max-w-[960px] w-90/100 md:w-80/100 lg:w-90/100 py-12'>
-            <h2 className='text-2xl xl:text-4xl leading-none text-foreground my-3 font-extrabold'>
+            <h2 className='text-xl md:text-4xl lg:text-5xl leading-none text-foreground my-3 font-extrabold'>
               Getting started
             </h2>
-            <p className='text-xs lg:text-lg leading-normal text-muted-foreground'>
+            <p className='text-sm md:text-lg leading-normal text-muted-foreground'>
               Check out our docsand dive into your next Orama Experience
             </p>
             <div className='mt-6 w-full flex flex-col items-center gap-3 lg:flex-row lg:gap-6 lg:justify-center'>
@@ -46,6 +46,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <div
+        aria-hidden='true'
+        className='fixed left-0 bottom-0 w-full pointer-events-none -z-10 net-bg'
+      />
     </>
   )
 }
