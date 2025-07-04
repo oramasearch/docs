@@ -5,17 +5,13 @@ import { Footer } from '@/lib/components/footer'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <HomeLayout {...baseOptions}>
-      <div className='min-h-screen flex flex-col'>
-        <div className='flex-1'>
-          {/*
-            The main content of the page will be rendered here.
-            This is where the children passed to this layout will appear.
-          */}
-          {children}
+    <div className='flex flex-col min-h-screen'>
+      <HomeLayout {...baseOptions}>
+        <div className='flex flex-col flex-1'>
+          <div className='flex-1'>{children}</div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </HomeLayout>
+      </HomeLayout>
+    </div>
   )
 }

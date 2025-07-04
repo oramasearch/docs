@@ -19,7 +19,7 @@ export default function HomePage() {
       </section>
       <section>
         <div className='mx-auto max-w-fd-container flex flex-col justify-center items-center'>
-          <div className='text-center max-w-[960px] w-90/100 md:w-80/100 lg:w-90/100'>
+          <div className='text-center max-w-[960px] w-90/100 md:w-80/100 lg:w-90/100 py-12'>
             <h2 className='text-2xl xl:text-4xl leading-none text-foreground my-3 font-extrabold'>
               Getting started
             </h2>
