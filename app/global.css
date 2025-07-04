@@ -153,3 +153,24 @@ a:where(.not-prose) {
   background-size: cover;
   height: 400px;
 }
+
+.suggestion-animate {
+  animation: slideInUp 0.8s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.suggestion-delay-0 { animation-delay: 0ms; }
+.suggestion-delay-1 { animation-delay: 80ms; }
+.suggestion-delay-2 { animation-delay: 160ms; }
+.suggestion-delay-3 { animation-delay: 240ms; }
+.suggestion-delay-4 { animation-delay: 320ms; }
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
