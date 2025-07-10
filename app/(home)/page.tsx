@@ -28,7 +28,7 @@ export default function HomePage() {
             </p>
             <div className='mt-6 w-full flex flex-col items-center gap-3 lg:flex-row lg:gap-6 lg:justify-center'>
               <Link
-                href='#'
+                href='/docs/oramacore'
                 className='max-w-60 w-full block py-2 px-4 text-center rounded-md bg-primary text-primary-foreground hover:bg-fd-base-primary/90 transition-colors duration-200 shadow-md shadow-fd-base-primary/20'
               >
                 Get started

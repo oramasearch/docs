@@ -4,11 +4,11 @@ import type { DocsLayoutProps } from 'fumadocs-ui/layouts/docs'
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import { baseOptions } from '@/app/layout.config'
 import { source } from '@/lib/source'
+import OramaWrapper from '@/lib/components/orama-wrapper'
 
 const docsOptions: DocsLayoutProps = {
   ...baseOptions,
   tree: source.pageTree,
-  githubUrl: 'https://github.com/oramasearch',
   sidebar: {
     tabs: {
       transform(option, node) {
@@ -40,5 +40,9 @@ const docsOptions: DocsLayoutProps = {
 }
 
 export default function Layout({ children }: { children: ReactNode }) {
-  return <DocsLayout {...docsOptions}>{children}</DocsLayout>
+  return (
+    <DocsLayout {...docsOptions}>
+      <OramaWrapper>{children}</OramaWrapper>
+    </DocsLayout>
+  )
 }

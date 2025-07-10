@@ -26,19 +26,22 @@ export const baseOptions: BaseLayoutProps = {
     transparentMode: 'always',
     title: <Logo />
   },
-  links: [
-    {
-      text: 'Orama Cloud',
-      url: '/docs/cloud',
-      icon: <Cloud className='w-4 h-4' />
-    },
-    {
-      text: 'OramaCore',
-      url: '/docs/oramacore'
-    },
-    {
-      text: 'Orama JS',
-      url: '/docs/orama-js'
-    }
-  ]
+  themeSwitch: {
+    enabled: false
+  }
+  // links: [
+  //   {
+  //     text: 'Orama Cloud',
+  //     url: '/docs/cloud',
+  //     icon: <Cloud className='w-4 h-4' />
+  //   },
+  //   {
+  //     text: 'OramaCore',
+  //     url: '/docs/oramacore'
+  //   },
+  //   {
+  //     text: 'Orama JS',
+  //     url: '/docs/orama-js'
+  //   }
+  // ]
 }

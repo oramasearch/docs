@@ -1,5 +1,10 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx'
-import { DocsPage, DocsBody, DocsDescription, DocsTitle } from 'fumadocs-ui/page'
+import {
+  DocsPage,
+  DocsBody,
+  DocsDescription,
+  DocsTitle
+} from 'fumadocs-ui/page'
 import { notFound } from 'next/navigation'
 import { Callout } from 'fumadocs-ui/components/callout'
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom'
@@ -18,6 +23,8 @@ export default async function Page(props: {
   const path = `content/docs/${page.file.path}`
   const MDX = page.data.body
 
+  console.log('Page rendered', page, path)
+
   return (
     <DocsPage
       toc={page.data.toc}
@@ -29,10 +36,14 @@ export default async function Page(props: {
       }}
     >
       <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription className="mb-4">{page.data.description}</DocsDescription>
-      <div className="flex flex-row gap-2 items-center mb-4">
+      <DocsDescription className='mb-4'>
+        {page.data.description}
+      </DocsDescription>
+      <div className='flex flex-row gap-2 items-center mb-4'>
         <LLMCopyButton slug={params.slug as unknown as string[]} />
-        <EditOnGitHub url={`https://github.com/oramasearch/docs/blob/dev/${path}`} />
+        <EditOnGitHub
+          url={`https://github.com/oramasearch/docs/blob/dev/${path}`}
+        />
       </div>
       <DocsBody>
         <MDX
@@ -41,7 +52,7 @@ export default async function Page(props: {
             Tab,
             Tabs,
             Callout,
-            img: props => <ImageZoom {...props} />
+            img: (props) => <ImageZoom {...props} />
           }}
         />
       </DocsBody>
