@@ -8,7 +8,7 @@ interface OramaWrapperProps {
 
 const OramaWrapper: React.FC<OramaWrapperProps> = ({ children }) => {
   return (
-    <div className='flex grow'>
+    <div className='pt-(--fd-nav-height) h-screen'>
       <ChatTabs
         items={[
           {

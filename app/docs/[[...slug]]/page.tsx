@@ -23,8 +23,6 @@ export default async function Page(props: {
   const path = `content/docs/${page.file.path}`
   const MDX = page.data.body
 
-  console.log('Page rendered', page, path)
-
   return (
     <DocsPage
       toc={page.data.toc}
