@@ -14,11 +14,12 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const collectionManager = new CollectionManager({
-  url: 'https://atlantis.cluster.oramacore.com',
   collectionID: 'ooo4f22zau7q7ta4i1grlgji',
-  readAPIKey: 'WvStWzar7tqdX3FOZbhCMDWSQsWAewUu'
+  apiKey: 'WvStWzar7tqdX3FOZbhCMDWSQsWAewUu',
+  cluster: {
+    readURL: 'https://atlantis.cluster.oramacore.com'
+  }
 })
-
 // TOOD: this shoule be ai generated
 const suggestions = [
   'When I should use Orama JS?',
@@ -67,9 +68,9 @@ export function SmartSearch() {
                 </div>
               ) : (
                 <Suggestions.Wrapper className='mx-auto py-3 mt-2'>
-                  <Suggestions.List className='w-full flex flex-wrap gap-4 items-center justify-center'>
+                  <ul className='w-full flex flex-wrap gap-4 items-center justify-center'>
                     {suggestions.map((suggestion, index) => (
-                      <Suggestions.Item
+                      <li
                         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                         key={index}
                         className={`text-xs text-muted-foreground opacity-0 ${
@@ -77,13 +78,14 @@ export function SmartSearch() {
                             ? `suggestion-animate suggestion-delay-${index}`
                             : ''
                         }`}
-                        itemClassName='cursor-pointer px-3 py-2 bg-input/30 rounded-md border border-input shadow-inner shadow-input/20 hover:bg-input/50 hover:text-base-foreground transition-colors duration-200'
                       >
-                        <Sparkles className='inline mr-2 size-4' />
-                        {suggestion}
-                      </Suggestions.Item>
+                        <Suggestions.Item className='cursor-pointer px-3 py-2 bg-input/30 rounded-md border border-input shadow-inner shadow-input/20 hover:bg-input/50 hover:text-base-foreground transition-colors duration-200'>
+                          <Sparkles className='inline mr-2 size-4' />
+                          {suggestion}
+                        </Suggestions.Item>
+                      </li>
                     ))}
-                  </Suggestions.List>
+                  </ul>
                 </Suggestions.Wrapper>
               )
             }

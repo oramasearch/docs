@@ -1,31 +1,14 @@
 'use client'
-
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent
-} from 'fumadocs-ui/components/tabs'
 import {
   PromptTextArea,
   ChatInteractions,
   ChatRoot
 } from '@orama/ui/components'
-import { useState, useEffect } from 'react'
-import {
-  Plus,
-  X,
-  MessageSquare,
-  MessagesSquare,
-  ArrowBigDown,
-  ArrowDown01,
-  Clipboard,
-  ArrowRight
-} from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { X, ArrowDown } from 'lucide-react'
 import { CollectionManager } from '@orama/core'
+import { Tabs } from '@orama/ui/components'
 import { useScrollableContainer } from '@orama/ui/hooks'
-import Link from 'next/link'
 
 type Item = {
   id: string
@@ -38,19 +21,21 @@ type Item = {
 }
 
 const collectionManager = new CollectionManager({
-  url: 'https://atlantis.cluster.oramacore.com',
   collectionID: 'ooo4f22zau7q7ta4i1grlgji',
-  readAPIKey: 'WvStWzar7tqdX3FOZbhCMDWSQsWAewUu'
+  apiKey: 'WvStWzar7tqdX3FOZbhCMDWSQsWAewUu',
+  cluster: {
+    readURL: 'https://atlantis.cluster.oramacore.com'
+  }
 })
 
 type TabsProps = {
-  items: Item[]
+  initialContent: React.ReactNode
 }
 
-export default function ChatTabs({ items }: TabsProps) {
-  const [tabChat, setTabChat] = useState(0)
-  const [selectedTab, setSelectedTab] = useState(items[0].id)
-  const [itemsWithChat, setItemsWithChat] = useState<Item[]>([])
+export default function ChatTabs({ initialContent }: TabsProps) {
+  const [tabID, setTabID] = useState(0)
+  const [selectedTab, setSelectedTab] = useState('tab-0')
+
   const {
     containerRef,
     showGoToBottomButton,
@@ -58,323 +43,175 @@ export default function ChatTabs({ items }: TabsProps) {
     recalculateGoToBottomButton
   } = useScrollableContainer()
 
-  // const API_KEY = process.env.NEXT_PUBLIC_ORAMA_INDEX_API_KEY
-  // const ENDPOINT = process.env.NEXT_PUBLIC_ORAMA_INDEX_ENDPOINT
-
-  const canInitChat = true
-
-  const path = usePathname()
-
-  useEffect(() => {
-    if (path && items[0]?.id) {
-      setSelectedTab(items[0].id)
-    }
-  }, [path, items])
-
-  const handleClick = () => {
-    // set prompt
-    setItemsWithChat((prevItems) => {
-      const updatedItems = prevItems.map((item) => {
-        if (item.id === `tab-${tabChat}`) {
-          return {
-            ...item,
-            prompt: 'What is Orama Core?',
-            chatStatus: 'processing' as const
-          }
-        }
-        return item
-      })
-      return updatedItems
-    })
-  }
-
-  const addNewChatTab = (label?: string) => {
-    if (!canInitChat) return
-
-    setTabChat(tabChat + 1)
-
-    const updatedItemsWithChat = [
-      ...itemsWithChat,
-      {
-        id: `tab-${tabChat}`,
-        label: label || 'Untitled',
-        prompt: undefined,
-        closable: true,
-        chatStatus: 'idle' as const
-      }
-    ]
-
-    setItemsWithChat(updatedItemsWithChat)
-    setSelectedTab(`tab-${tabChat}`)
-  }
-
   return (
     <>
-      <Tabs
-        value={selectedTab}
+      <Tabs.Wrapper
+        defaultTab={selectedTab}
         className='flex flex-col border-0 bg-transparent my-0 rounded-none h-full'
-        onValueChange={(value) => {
+        onTabChange={(value) => {
           setSelectedTab(value)
         }}
+        orientation='horizontal'
       >
-        <div className='z-20'>
-          <TabsList className='w-full border-b bg-fd-background border-fd-border overflow-auto'>
-            {items.map((item) => (
-              <TabsTrigger
-                value={item.id}
-                key={item.id}
-                className='flex items-center gap-x-1 text-gray-400 truncate max-w-40 over px-2 py-2 cursor-pointer'
-              >
-                <span className='truncate'>{item.label}</span>
-              </TabsTrigger>
-            ))}
-            {itemsWithChat.map((item, index) => (
-              <div key={item.id} className='flex items-center gap-x-2 relative'>
-                <TabsTrigger
-                  value={item.id}
-                  className='flex items-center gap-x-2 text-gray-400 truncate max-w-40 over px-2 py-2 pr-6 cursor-pointer'
-                >
-                  {item.chatStatus === 'idle' ? (
-                    <MessageSquare className='w-3 h-3 min-w-3' />
-                  ) : (
-                    <MessagesSquare className='w-4 h-4 min-w-4' />
-                  )}
-                  <span className='truncate'>{item.label}</span>
-                </TabsTrigger>
-                {item.closable && (
-                  <button
-                    type='button'
-                    tabIndex={0}
-                    aria-label='Close tab'
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      const previousTab = itemsWithChat[index - 1]
-                      const newItems = itemsWithChat.filter(
-                        (i) => i.id !== item.id
-                      )
-                      if (selectedTab === item.id) {
-                        setSelectedTab(
-                          previousTab ? previousTab.id : items[0].id
-                        )
-                      }
-                      setItemsWithChat(newItems)
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        const previousTab = itemsWithChat[index - 1]
-                        const newItems = itemsWithChat.filter(
-                          (i) => i.id !== item.id
-                        )
-                        if (selectedTab === item.id) {
-                          setSelectedTab(
-                            previousTab ? previousTab.id : items[0].id
-                          )
-                        }
-                        setItemsWithChat(newItems)
-                      }
-                    }}
-                    // display on hover only
-                    className='whitespace-nowrap ml-2 text-sm font-medium transition-colors hover:text-fd-accent-foreground cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none'
-                  >
-                    <X className='w-3 h-3' style={{ fill: 'currentColor' }} />
-                  </button>
-                )}
-              </div>
-            ))}
-            {canInitChat && (
-              <TabsTrigger
-                value='new-chat'
-                onClick={() => addNewChatTab()}
-                className='whitespace-nowrap border-b border-transparent py-2 text-sm font-medium transition-colors hover:text-fd-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=active]:border-fd-primary data-[state=active]:text-fd-primary flex items-center gap-x-1 text-gray-600 cursor-pointer'
-              >
-                <Plus size={16} />
-                New chat
-              </TabsTrigger>
-            )}
-          </TabsList>
-        </div>
-        {items.map((item) => (
-          <TabsContent
-            value={item.id}
-            key={item.id}
-            className={
-              item.id === selectedTab ? 'flex overflow-auto' : 'hidden'
-            }
-          >
-            {item.content}
-          </TabsContent>
-        ))}
-        {canInitChat &&
-          itemsWithChat.map((item) => (
-            <TabsContent
-              value={item.id}
-              key={item.id}
-              className={item.id === selectedTab ? 'p-0 flex h-full' : 'hidden'}
-              forceMount
-              hidden={item.id !== selectedTab}
+        <div className='flex items-center space-x-1 w-full overflow-y-auto'>
+          <Tabs.List>
+            <Tabs.Button
+              tabId='tab-0'
+              className={`w-full px-4 py-2 text-sm font-medium whitespace-nowrap text-left focus:border-blue-600 focus:border-l-4 ${
+                selectedTab === 'tab-0'
+                  ? 'bg-white text-blue-600 border-l-4 border-blue-600'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }`}
             >
-              <div id='nd-chatbot' className='flex w-full min-w-0 flex-col'>
-                <ChatRoot client={collectionManager}>
-                  <div className='container mx-auto max-w-6xl px-4 h-full'>
-                    <div className='h-full flex flex-col gap-2 justify-between'>
-                      <div className='flex-1 flex flex-col min-h-0'>
-                        <ChatInteractions.Wrapper
-                          ref={containerRef}
-                          onScroll={recalculateGoToBottomButton}
-                          onStreaming={recalculateGoToBottomButton}
-                          onNewInteraction={() => {
-                            scrollToBottom({ animated: true })
-                          }}
-                          className='items-start relative overflow-y-auto h-full'
-                        >
-                          {(interaction, index, totalInteractions) => (
-                            <>
-                              <ChatInteractions.UserPrompt>
-                                <p className='text-3xl leading-normal medium'>
-                                  {interaction.query}
-                                </p>
-                              </ChatInteractions.UserPrompt>
-
-                              {interaction.loading && !interaction.response ? (
-                                <p>Loading...</p>
-                              ) : (
-                                <>
-                                  <ChatInteractions.Sources
-                                    sources={
-                                      Array.isArray(interaction.sources)
-                                        ? interaction.sources
-                                        : []
-                                    }
-                                    // className={styles.chatSources}
-                                    // itemClassName={styles.chatSourceItem}
-                                  >
-                                    {(document, index: number) => (
-                                      <div key={index}>
-                                        <Link data-focus-on-arrow-nav href='#'>
-                                          <span>
-                                            {
-                                              document?.pageSectionTitle as string
-                                            }
-                                          </span>
-                                        </Link>
-                                      </div>
-                                    )}
-                                  </ChatInteractions.Sources>
-
-                                  <div>
-                                    <ChatInteractions.AssistantMessage>
-                                      {interaction.response}
-                                    </ChatInteractions.AssistantMessage>
-
-                                    {!interaction.loading && (
-                                      <div>
-                                        <ul>
-                                          {index === totalInteractions && (
-                                            <li>
-                                              <ChatInteractions.RegenerateLatest>
-                                                {/* <ArrowDown01 /> */}
-                                                Retry
-                                              </ChatInteractions.RegenerateLatest>
-                                            </li>
-                                          )}
-                                          <li>
-                                            <ChatInteractions.CopyMessage
-                                              interaction={interaction}
-                                              // copiedContent={
-                                              //   <DocumentCheckIcon
-                                              //     className={
-                                              //       styles.chatActionIconSelected
-                                              //     }
-                                              //   />
-                                              // }
-                                            >
-                                              <Clipboard />
-                                            </ChatInteractions.CopyMessage>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    )}
-                                  </div>
-                                </>
-                              )}
-                            </>
-                          )}
-                        </ChatInteractions.Wrapper>
-                      </div>
-                      <div className='relative flex-shrink-0 py-10'>
-                        <PromptTextArea.Wrapper className='flex items-center gap-2 w-full border border-input rounded-md focus:outline-none focus:border-input rounded-md p-3 bg-input/30'>
-                          <PromptTextArea.Field
-                            className='border-none focus:outline-none grow placeholder:text-muted-foreground text-fd-accen'
-                            rows={1}
-                            placeholder='What do you want to know?'
-                          />
-                          <PromptTextArea.Button
-                            aria-label='Send message'
-                            className='flex items-center justify-center p-2 bg-fd-primary text-fd-primary-foreground rounded-md hover:bg-fd-primary/90 transition-colors duration-200'
+              <span className='truncate max-w-[120px] block'>
+                Documentation
+              </span>
+            </Tabs.Button>
+          </Tabs.List>
+          <Tabs.DynamicList className='flex empty:hidden'>
+            {(item) => (
+              <div className='flex items-center relative'>
+                <Tabs.Button
+                  tabId={item.id}
+                  className={`px-4 py-2 pr-8 text-sm font-medium whitespace-nowrap text-left focus:border-b-4 ${
+                    selectedTab === item.id
+                      ? 'border-red border-b-4'
+                      : 'border-b-0'
+                  }`}
+                >
+                  <span className='truncate max-w-[120px] block'>
+                    {item.prompt
+                      ? item.prompt.length > 20
+                        ? `${item.prompt.slice(0, 20)}...`
+                        : item.prompt
+                      : item.label}
+                  </span>
+                </Tabs.Button>
+                <Tabs.Close
+                  tabId={item.id}
+                  className={
+                    'absolute right-2 top-1/2 transform -translate-y-1/2'
+                  }
+                >
+                  <X className='w-3 h-3' />
+                </Tabs.Close>
+              </div>
+            )}
+          </Tabs.DynamicList>
+          <Tabs.List>
+            <Tabs.Trigger
+              tabId={`tab-${tabID + 1}`}
+              onClick={() => setTabID(tabID + 1)}
+              className='flex items-center gap-x-1 text-gray-400 truncate max-w-40 over px-2 py-2 cursor-pointer'
+              data-focus-on-arrow-nav
+              data-focus-on-arrow-nav-left-right
+            >
+              New Chat
+            </Tabs.Trigger>
+          </Tabs.List>
+        </div>
+        <div className={'flex-1 min-h-96 overflow-y-auto'}>
+          <Tabs.Panel tabId='tab-0' className='h-full flex flex-col'>
+            <div className='flex-1 overflow-y-auto p-4'>{initialContent}</div>
+          </Tabs.Panel>
+          <Tabs.DynamicPanels>
+            {(item, chatTabs, setChatTabs) => (
+              <ChatRoot client={collectionManager}>
+                <Tabs.DynamicPanel tabId={item.id} className='h-full'>
+                  <div className='flex flex-col h-full'>
+                    {/* SCROLLABLE BLOCK */}
+                    <div ref={containerRef} className='flex-1 overflow-y-auto'>
+                      <ChatInteractions.Wrapper
+                        onScroll={recalculateGoToBottomButton}
+                        onStreaming={recalculateGoToBottomButton}
+                        onNewInteraction={(interaction: Interaction) => {
+                          scrollToBottom({ animated: true })
+                          if (
+                            !chatTabs?.find((chat) => chat.id === item.id)
+                              ?.prompt
+                          ) {
+                            if (typeof setChatTabs === 'function') {
+                              setChatTabs([
+                                ...(chatTabs ?? []).map((chat) =>
+                                  chat.id === item.id
+                                    ? { ...item, prompt: interaction.query }
+                                    : chat
+                                )
+                              ])
+                            }
+                          }
+                        }}
+                      >
+                        {(interaction) => (
+                          <div
+                            key={interaction.id}
+                            className='p-4 flex flex-col gap-2'
                           >
-                            <ArrowRight className='w-4 h-4' />
-                          </PromptTextArea.Button>
-                        </PromptTextArea.Wrapper>
-                      </div>
+                            <ChatInteractions.UserPrompt>
+                              {interaction.query}
+                            </ChatInteractions.UserPrompt>
+                            <ChatInteractions.Loading interaction={interaction}>
+                              <div className='animate-pulse h-4 w-3/4 rounded' />
+                            </ChatInteractions.Loading>
+                            <ChatInteractions.AssistantMessage
+                              markdownClassnames={{
+                                p: 'my-2',
+                                pre: 'rounded-md [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:my-3 [&_pre]:text-xs [&_pre]:whitespace-break-spaces wrap-break-word',
+                                code: 'p-1 rounded'
+                              }}
+                            >
+                              {interaction.response}
+                            </ChatInteractions.AssistantMessage>
+                          </div>
+                        )}
+                      </ChatInteractions.Wrapper>
+                    </div>
+
+                    {/* BOTTOM BLOCK */}
+                    <div
+                      className={
+                        'rounded-b-md flex flex-col items-center justify-between relative'
+                      }
+                    >
+                      {showGoToBottomButton && (
+                        <button
+                          className={
+                            'ml-2 px-2 py-1 rounded text-sm absolute -top-8 right-4 [&_svg]:text-current'
+                          }
+                          onClick={() => scrollToBottom()}
+                          type='button'
+                        >
+                          <ArrowDown className='w-5 h-5' />
+                        </button>
+                      )}
+                      <PromptTextArea.Wrapper
+                        className={'flex items-center gap-2 w-full p-3'}
+                      >
+                        <PromptTextArea.Field
+                          rows={1}
+                          id='prompt-input-2'
+                          name='prompt-input-2'
+                          placeholder='Ask something...'
+                          className={
+                            'flex-1 py-2 px-2 border focus:outline-none'
+                          }
+                        />
+                        <PromptTextArea.Button
+                          className={
+                            'py-2 px-4 disabled:opacity-50 disabled:cursor-not-allowed'
+                          }
+                        >
+                          Send
+                        </PromptTextArea.Button>
+                      </PromptTextArea.Wrapper>
                     </div>
                   </div>
-                </ChatRoot>
-                {/* <OramaChatBox
-                  index={{
-                    api_key: API_KEY,
-                    endpoint: ENDPOINT
-                  }}
-                  style={{ height: 'inherit' }}
-                  onStartConversation={(conversation) => {
-                    setItemsWithChat((prevItems) => {
-                      const updatedItems = prevItems.map((item) => {
-                        if (
-                          item.id === `tab-${tabChat}` &&
-                          item.label === 'Untitled'
-                        ) {
-                          return {
-                            ...item,
-                            label: conversation.detail.userPrompt,
-                            chatStatus: 'processing' as const
-                          }
-                        }
-                        return item
-                      })
-                      return updatedItems
-                    })
-                  }}
-                  onClearChat={() => {
-                    setItemsWithChat((prevItems) => {
-                      const updatedItems = prevItems.map((item) => {
-                        if (item.id === `tab-${tabChat}`) {
-                          return {
-                            ...item,
-                            label: 'Untitled',
-                            chatStatus: 'idle' as const
-                          }
-                        }
-                        return item
-                      })
-                      return updatedItems
-                    })
-                  }}
-                  colorScheme='dark'
-                  themeConfig={{
-                    radius: {
-                      '--textarea-radius': '0.5rem'
-                    },
-                    shadow: {
-                      '--textarea-shadow': 'none'
-                    }
-                  }}
-                  prompt={item.prompt}
-                /> */}
-              </div>
-            </TabsContent>
-          ))}
-      </Tabs>
+                </Tabs.DynamicPanel>
+              </ChatRoot>
+            )}
+          </Tabs.DynamicPanels>
+        </div>
+      </Tabs.Wrapper>
     </>
   )
 }

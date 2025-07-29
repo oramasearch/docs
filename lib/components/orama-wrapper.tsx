@@ -10,13 +10,14 @@ const OramaWrapper: React.FC<OramaWrapperProps> = ({ children }) => {
   return (
     <div className='pt-(--fd-nav-height) h-screen'>
       <ChatTabs
-        items={[
-          {
-            id: 'documentation',
-            label: 'Documentation',
-            content: children
-          }
-        ]}
+        initialContent={children}
+        // items={[
+        //   {
+        //     id: 'documentation',
+        //     label: 'Documentation',
+        //     content: children
+        //   }
+        // ]}
       />
     </div>
   )
