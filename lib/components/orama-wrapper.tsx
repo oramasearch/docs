@@ -9,16 +9,7 @@ interface OramaWrapperProps {
 const OramaWrapper: React.FC<OramaWrapperProps> = ({ children }) => {
   return (
     <div className='pt-(--fd-nav-height) h-screen'>
-      <ChatTabs
-        initialContent={children}
-        // items={[
-        //   {
-        //     id: 'documentation',
-        //     label: 'Documentation',
-        //     content: children
-        //   }
-        // ]}
-      />
+      <ChatTabs initialContent={children} />
     </div>
   )
 }

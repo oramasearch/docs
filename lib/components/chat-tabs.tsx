@@ -4,7 +4,7 @@ import {
   ChatInteractions,
   ChatRoot
 } from '@orama/ui/components'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, ArrowDown } from 'lucide-react'
 import { CollectionManager } from '@orama/core'
 import { Tabs } from '@orama/ui/components'
@@ -35,6 +35,18 @@ type TabsProps = {
 export default function ChatTabs({ initialContent }: TabsProps) {
   const [tabID, setTabID] = useState(0)
   const [selectedTab, setSelectedTab] = useState('tab-0')
+
+  const newChatRef = useRef<HTMLDivElement>(null)
+  const prompt = localStorage.getItem('orama_suggested_prompt')
+
+  useEffect(() => {
+    if (prompt) {
+      if (newChatRef.current) {
+        newChatRef.current.click()
+      }
+      localStorage.removeItem('orama_suggested_prompt')
+    }
+  }, [prompt])
 
   const {
     containerRef,
@@ -105,8 +117,10 @@ export default function ChatTabs({ initialContent }: TabsProps) {
               className='flex items-center gap-x-1 text-gray-400 truncate max-w-40 over px-2 py-2 cursor-pointer'
               data-focus-on-arrow-nav
               data-focus-on-arrow-nav-left-right
+              prompt={prompt || undefined}
             >
-              New Chat
+              {/* TODO: Trigger must support ref */}
+              <span ref={newChatRef}>New Chat</span>
             </Tabs.Trigger>
           </Tabs.List>
         </div>
@@ -195,6 +209,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                           className={
                             'flex-1 py-2 px-2 border focus:outline-none'
                           }
+                          autoFocus
                         />
                         <PromptTextArea.Button
                           className={

@@ -7,6 +7,7 @@ import {
   Suggestions,
   ChatRoot
 } from '@orama/ui/components'
+import { useRouter } from 'next/navigation'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
 import { FileText, Sparkles } from 'lucide-react'
 import { CollectionManager } from '@orama/core'
@@ -31,11 +32,17 @@ const suggestions = [
 
 export function SmartSearch() {
   const [mounted, setMounted] = useState(false)
+  const router = useRouter()
   const { ref, onKeyDown } = useArrowKeysNavigation()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const handleSearch = (prompt: string) => {
+    localStorage.setItem('orama_suggested_prompt', prompt)
+    router.push('/docs/oramacore')
+  }
 
   return (
     <SearchRoot client={collectionManager}>
@@ -79,7 +86,12 @@ export function SmartSearch() {
                             : ''
                         }`}
                       >
-                        <Suggestions.Item className='cursor-pointer px-3 py-2 bg-input/30 rounded-md border border-input shadow-inner shadow-input/20 hover:bg-input/50 hover:text-base-foreground transition-colors duration-200'>
+                        <Suggestions.Item
+                          className='cursor-pointer px-3 py-2 bg-input/30 rounded-md border border-input shadow-inner shadow-input/20 hover:bg-input/50 hover:text-base-foreground transition-colors duration-200'
+                          onClick={() => {
+                            handleSearch(suggestion)
+                          }}
+                        >
                           <Sparkles className='inline mr-2 size-4' />
                           {suggestion}
                         </Suggestions.Item>
