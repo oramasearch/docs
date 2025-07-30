@@ -5,8 +5,16 @@ import {
   ChatRoot
 } from '@orama/ui/components'
 import { useEffect, useRef, useState } from 'react'
-import { X, ArrowDown, Search, ArrowRight } from 'lucide-react'
-import { CollectionManager } from '@orama/core'
+import {
+  X,
+  ArrowDown,
+  Search,
+  ArrowRight,
+  FileText,
+  SparklesIcon,
+  Plus
+} from 'lucide-react'
+import { CollectionManager, Interaction } from '@orama/core'
 import { Tabs } from '@orama/ui/components'
 import { useScrollableContainer } from '@orama/ui/hooks'
 
@@ -77,32 +85,34 @@ export default function ChatTabs({ initialContent }: TabsProps) {
         }}
         orientation='horizontal'
       >
-        <div className='flex items-center space-x-1 w-full overflow-y-auto'>
-          <Tabs.List>
+        <div className='flex gap-2 w-full overflow-y-auto bg-input/30 px-6 pt-3'>
+          <Tabs.List className='flex items-stretch'>
             <Tabs.Button
               tabId='tab-0'
-              className={`w-full px-4 py-2 text-sm font-medium whitespace-nowrap text-left focus:border-blue-600 focus:border-l-4 ${
+              className={`transition-colors inline-flex items-center gap-2 w-full px-4 py-2 text-sm font-small rounded-t-md whitespace-nowrap text-left cursor-pointer ${
                 selectedTab === 'tab-0'
-                  ? 'bg-white text-blue-600 border-l-4 border-blue-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                  ? 'text-foreground bg-background from-medium'
+                  : 'bg-input/30 text-muted-foreground font-normal'
               }`}
             >
+              <FileText className='size-4' />
               <span className='truncate max-w-[120px] block'>
                 Documentation
               </span>
             </Tabs.Button>
           </Tabs.List>
-          <Tabs.DynamicList className='flex empty:hidden'>
+          <Tabs.DynamicList className='flex gap-2 empty:hidden items-stretch'>
             {(item) => (
-              <div className='flex items-center relative'>
+              <div className='flex gap-2 items-center relative'>
                 <Tabs.Button
                   tabId={item.id}
-                  className={`px-4 py-2 pr-8 text-sm font-medium whitespace-nowrap text-left focus:border-b-4 ${
+                  className={`transition-colors inline-flex items-center gap-2 w-full px-4 py-2 pr-8 text-sm font-small rounded-t-md whitespace-nowrap text-left cursor-pointer ${
                     selectedTab === item.id
-                      ? 'border-red border-b-4'
-                      : 'border-b-0'
+                      ? 'text-foreground bg-background font-medium'
+                      : 'bg-input/30 text-muted-foreground font-normal'
                   }`}
                 >
+                  <SparklesIcon className='size-4' />
                   <span className='truncate max-w-[120px] block'>
                     {item.prompt
                       ? item.prompt.length > 20
@@ -113,30 +123,27 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                 </Tabs.Button>
                 <Tabs.Close
                   tabId={item.id}
-                  className={
-                    'absolute right-2 top-1/2 transform -translate-y-1/2'
-                  }
+                  className='cursor-pointer absolute right-2 top-1/2 transform -translate-y-1/2'
                 >
                   <X className='w-3 h-3' />
                 </Tabs.Close>
               </div>
             )}
           </Tabs.DynamicList>
-          <Tabs.List>
+          <Tabs.List className='flex items-stretch'>
             <Tabs.Trigger
               tabId={`tab-${tabID + 1}`}
               onClick={() => setTabID(tabID + 1)}
-              className='flex items-center gap-x-1 text-gray-400 truncate max-w-40 over px-2 py-2 cursor-pointer'
-              data-focus-on-arrow-nav
-              data-focus-on-arrow-nav-left-right
+              className='flex gap-1 items-center truncate max-w-40 over px-4 py-2 cursor-pointer bg-input/30 text-muted-foreground font-normal text-sm rounded-t-md'
               prompt={prompt || undefined}
             >
               {/* TODO: Trigger must support ref */}
+              <Plus className='size-4' />
               <span ref={newChatRef}>New Chat</span>
             </Tabs.Trigger>
           </Tabs.List>
         </div>
-        <div className={'flex-1 min-h-96 overflow-y-auto'}>
+        <div className='flex-1 min-h-96 overflow-y-auto'>
           <Tabs.Panel tabId='tab-0' className='h-full flex flex-col'>
             <div className='flex-1 overflow-y-auto p-4'>{initialContent}</div>
           </Tabs.Panel>
@@ -220,7 +227,6 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                             name='prompt-input-2'
                             placeholder='Ask something...'
                             className='peer flex-1 border-0 focus:outline-none text-red'
-                            autoFocus
                           />
                         </div>
                         <PromptTextArea.Button
