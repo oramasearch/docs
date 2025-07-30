@@ -5,7 +5,7 @@ import {
   ChatRoot
 } from '@orama/ui/components'
 import { useEffect, useRef, useState } from 'react'
-import { X, ArrowDown } from 'lucide-react'
+import { X, ArrowDown, Search, ArrowRight } from 'lucide-react'
 import { CollectionManager } from '@orama/core'
 import { Tabs } from '@orama/ui/components'
 import { useScrollableContainer } from '@orama/ui/hooks'
@@ -35,16 +35,28 @@ type TabsProps = {
 export default function ChatTabs({ initialContent }: TabsProps) {
   const [tabID, setTabID] = useState(0)
   const [selectedTab, setSelectedTab] = useState('tab-0')
+  const [prompt, setPrompt] = useState<string | null>(null)
 
   const newChatRef = useRef<HTMLDivElement>(null)
-  const prompt = localStorage.getItem('orama_suggested_prompt')
 
   useEffect(() => {
-    if (prompt) {
-      if (newChatRef.current) {
-        newChatRef.current.click()
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const storedPrompt = localStorage.getItem('orama_suggested_prompt')
+      setPrompt(storedPrompt)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!prompt) return
+
+    const element = newChatRef.current
+    if (element) {
+      element.click()
+
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.removeItem('orama_suggested_prompt')
+        setPrompt(null)
       }
-      localStorage.removeItem('orama_suggested_prompt')
     }
   }, [prompt])
 
@@ -131,7 +143,10 @@ export default function ChatTabs({ initialContent }: TabsProps) {
           <Tabs.DynamicPanels>
             {(item, chatTabs, setChatTabs) => (
               <ChatRoot client={collectionManager}>
-                <Tabs.DynamicPanel tabId={item.id} className='h-full'>
+                <Tabs.DynamicPanel
+                  tabId={item.id}
+                  className='max-w-7xl mx-auto h-full'
+                >
                   <div className='flex flex-col h-full'>
                     {/* SCROLLABLE BLOCK */}
                     <div ref={containerRef} className='flex-1 overflow-y-auto'>
@@ -161,7 +176,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                             key={interaction.id}
                             className='p-4 flex flex-col gap-2'
                           >
-                            <ChatInteractions.UserPrompt>
+                            <ChatInteractions.UserPrompt className='text-3xl font-medium pt-8 pb-4'>
                               {interaction.query}
                             </ChatInteractions.UserPrompt>
                             <ChatInteractions.Loading interaction={interaction}>
@@ -184,39 +199,37 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                     {/* BOTTOM BLOCK */}
                     <div
                       className={
-                        'rounded-b-md flex flex-col items-center justify-between relative'
+                        'rounded-b-md flex flex-col items-center justify-between relative px-4'
                       }
                     >
                       {showGoToBottomButton && (
                         <button
-                          className={
-                            'ml-2 px-2 py-1 rounded text-sm absolute -top-8 right-4 [&_svg]:text-current'
-                          }
+                          className='ml-2 px-2 py-1 rounded text-sm absolute -top-8 right-4 [&_svg]:text-current'
                           onClick={() => scrollToBottom()}
                           type='button'
                         >
                           <ArrowDown className='w-5 h-5' />
                         </button>
                       )}
-                      <PromptTextArea.Wrapper
-                        className={'flex items-center gap-2 w-full p-3'}
-                      >
-                        <PromptTextArea.Field
-                          rows={1}
-                          id='prompt-input-2'
-                          name='prompt-input-2'
-                          placeholder='Ask something...'
-                          className={
-                            'flex-1 py-2 px-2 border focus:outline-none'
-                          }
-                          autoFocus
-                        />
+                      <PromptTextArea.Wrapper className='flex items-center gap-2 w-full p-3 my-6 bg-input/30 border border-input rounded-md max-w-4xl focus-within:border-ring'>
+                        <div className='flex-1 flex gap-2 items-center'>
+                          <Search className='w-5 h-5' />
+                          <PromptTextArea.Field
+                            rows={1}
+                            id='prompt-input-2'
+                            name='prompt-input-2'
+                            placeholder='Ask something...'
+                            className='peer flex-1 border-0 focus:outline-none text-red'
+                            autoFocus
+                          />
+                        </div>
                         <PromptTextArea.Button
                           className={
-                            'py-2 px-4 disabled:opacity-50 disabled:cursor-not-allowed'
+                            'py-2 px-3 disabled:opacity-50 disabled:cursor-not-allowed bg-primary rounded-md text-primary-foreground'
                           }
                         >
-                          Send
+                          <ArrowRight className='w-4 h-4' />
+                          <span className='sr-only'>Send</span>
                         </PromptTextArea.Button>
                       </PromptTextArea.Wrapper>
                     </div>
