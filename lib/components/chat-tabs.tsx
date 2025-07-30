@@ -12,11 +12,13 @@ import {
   ArrowRight,
   FileText,
   SparklesIcon,
-  Plus
+  Plus,
+  Link2
 } from 'lucide-react'
-import { CollectionManager, Interaction } from '@orama/core'
+import { CollectionManager, type Interaction } from '@orama/core'
 import { Tabs } from '@orama/ui/components'
 import { useScrollableContainer } from '@orama/ui/hooks'
+import Link from 'next/link'
 
 type Item = {
   id: string
@@ -181,14 +183,54 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                         {(interaction) => (
                           <div
                             key={interaction.id}
-                            className='p-4 flex flex-col gap-2'
+                            className='p-4 flex flex-col gap-4'
                           >
                             <ChatInteractions.UserPrompt className='text-3xl font-medium pt-8 pb-4'>
                               {interaction.query}
                             </ChatInteractions.UserPrompt>
                             <ChatInteractions.Loading interaction={interaction}>
-                              <div className='animate-pulse h-4 w-3/4 rounded' />
+                              <div className='animate-pulse space-y-4'>
+                                <div className='h-3 bg-gray-800 rounded w-3/4' />
+                                <div className='h-3 bg-gray-800 rounded w-1/2' />
+                                <div className='h-3 bg-gray-800 rounded w-5/6' />
+                              </div>
                             </ChatInteractions.Loading>
+                            {interaction.response && (
+                              <ChatInteractions.Sources
+                                sources={
+                                  Array.isArray(interaction.sources)
+                                    ? interaction.sources
+                                    : []
+                                }
+                                className='flex gap-3 justify-stretch'
+                              >
+                                {(document, i) => (
+                                  <Link
+                                    href={document.path as string}
+                                    className='block rounded-md p-2 bg-input/30 text-xs h-full hover:bg-input/60 transition-colors duration-200'
+                                    key={i}
+                                  >
+                                    <h3 className='flex gap-1 font-semibold text-secondary-foreground line-clamp-2'>
+                                      <Link2 className='size-4' />
+                                      {(document.title as string).slice(
+                                        0,
+                                        30
+                                      ) || ''}
+                                      {(document.title as string).length > 30
+                                        ? '...'
+                                        : ''}
+                                    </h3>
+                                    <p className='text-muted-foreground text-xs mt-1 line-clamp-2'>
+                                      {(document.content as string).slice(
+                                        0,
+                                        60
+                                      )}
+                                      ...
+                                    </p>
+                                  </Link>
+                                )}
+                              </ChatInteractions.Sources>
+                            )}
                             <ChatInteractions.AssistantMessage
                               markdownClassnames={{
                                 p: 'my-2',
