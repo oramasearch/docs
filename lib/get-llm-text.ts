@@ -1,5 +1,6 @@
 import type { Page } from '@/lib/source'
 
+import dedent from 'dedent'
 import remarkMdx from 'remark-mdx'
 import remarkGfm from 'remark-gfm'
 import { remark } from 'remark'
@@ -16,24 +17,35 @@ const processor = remark()
   .use(remarkInstall)
 
 export async function getLLMText(page: Page) {
-  const category =
-    {
-      ui: 'Fumadocs Framework',
-      headless: 'Fumadocs Core (core library of framework)',
-      mdx: 'Fumadocs MDX (the built-in content source)',
-      cli: 'Fumadocs CLI (the CLI tool for automating Fumadocs apps)'
-    }[page.slugs[0]] ?? page.slugs[0]
+  const category = page.slugs[0]
 
   const processed = await processor.process({
     path: page.data._file.absolutePath,
     value: page.data.content
   })
 
-  return `# ${category}: ${page.data.title}
-URL: ${page.url}
-Source: https://raw.githubusercontent.com/fuma-nama/fumadocs/refs/heads/main/apps/docs/content/docs/${page.file.path}
+  return dedent`# ${category}: ${page.data.title}
+  URL: ${page.url}
+  Source: https://raw.githubusercontent.com/oramasearch/docs/refs/heads/main/content/docs/${page.file.path}
 
-${page.data.description}
+  ${page.data.description}
         
-${processed.value}`
+  ${processed.value}`
+}
+
+export async function getOramaText(page: Page) {
+  const category = page.slugs[0]
+
+  const processed = await processor.process({
+    path: page.data._file.absolutePath,
+    value: page.data.content
+  })
+
+  return {
+    url: page.url,
+    category: category,
+    title: page.data.title,
+    description: page.data.description,
+    content: processed.value
+  }
 }
