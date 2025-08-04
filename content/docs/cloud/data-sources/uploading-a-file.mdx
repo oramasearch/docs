@@ -1,0 +1,46 @@
+---
+title: Uploading a File
+description: Learn how to upload a JSON, CSV, or XML file to Orama Cloud.
+---
+
+Sometimes it is just easier to export your data from any system into a JSON, JSONL, CSV, or XML file, and then upload it to Orama Cloud.
+
+You can do so by heading to the **Data Sources** section of your project and clicking `Connect to Data Source`:
+
+![Create Data Source](/docs/cloud/data-sources/create-data-source.png)
+
+Here you can choose which data source you want to connect to. For this specific guide, we will be uploading a JSON file. If you want to follow along, you can download the following [simple JSON file](/docs/cloud/data-sources/movies-database.json), which contains about 1000 movies in JSON format.
+
+Click on `Upload a File` to get started with the upload process.
+
+![Create Data Source](/docs/cloud/data-sources/select-data-source.png)
+
+Once you're in the following page, you can simply drag and drop your file and choose a name and an optional description for your index:
+
+![File Upload](/docs/cloud/data-sources/file-upload.png)
+
+After you've uploaded your file, you will notice that it will be queued for processing. Depending on the size of your file, this process can take a few minutes.
+
+![File Queued](/docs/cloud/data-sources/file-queued.png)
+
+Once the file is processed, you can access it by clicking on its raw in the data sources table, and here you can see a few more important information:
+
+- The data source ID
+- The project ID
+- The original file name and its size
+- Who uploaded it
+- When it was uploaded
+
+In case you need support, remember to include the data source ID and the project ID in your message. A simple screenshot of this page will be helpful as well.
+
+![File Info](/docs/cloud/data-sources/file-info.png)
+
+## Uploading a new File
+
+In case you need to replace the file with a new one, you can simply click on `upload a new file`. You will be presented with the same file upload page you used to upload the original file, allowing you to upload a new one.
+
+<Callout type='warn'>
+Remember that uploading a new file will replace the existing one, and all data associated with it will be lost. This action cannot be undone.
+</Callout>
+
+![Replace File](/docs/cloud/data-sources/replace-file.png)
