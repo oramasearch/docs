@@ -35,7 +35,6 @@ export function SmartSearch() {
           className='p-4 rounded-3xl border border-b w-full relative bg-fd-background'
           ref={ref}
           onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
-            console.log('KeyDown', e.nativeEvent, ref.current)
             onKeyDown(e.nativeEvent)
           }}
         >
@@ -88,28 +87,32 @@ export function SmartSearch() {
           </SearchResults.NoResults>
           <SearchResults.Wrapper className='mx-auto mt-4 empty:hidden h-64 overflow-auto'>
             <SearchResults.List className='w-full'>
-              {(result, index) => (
-                <SearchResults.Item
-                  key={result.id}
-                  data-focus-on-arrow-nav
-                  as={Link}
-                  href='#replace-me'
-                  className='text-left w-full flex items-center gap-2 p-2 rounded-lg hover:bg-accent focus:outline-0 focus:bg-accent transition-colors duration-200'
-                >
-                  <div className='flex-0'>
-                    <FileText className='w-4 h-4' />
-                  </div>
-                  <div className='flex-1'>
-                    <p className='text-sm text-secondary-foreground font-medium'>
-                      {(result.document?.title as string) ?? ''}
-                    </p>
-                    <p className='text-xs text-secondary-foreground min-w-0 mt-1'>
-                      {result.document?.content
-                        ? `${(result.document?.content as string).slice(0, 140)}...`
-                        : ''}
-                    </p>
-                  </div>
-                </SearchResults.Item>
+              {(result) => (
+                <>
+                  {result.document.path ? (
+                    <SearchResults.Item
+                      key={result.id}
+                      data-focus-on-arrow-nav
+                      as={Link}
+                      href={result.document.path}
+                      className='text-left w-full flex items-center gap-2 p-2 rounded-lg hover:bg-accent focus:outline-0 focus:bg-accent transition-colors duration-200'
+                    >
+                      <div className='flex-0'>
+                        <FileText className='w-4 h-4' />
+                      </div>
+                      <div className='flex-1'>
+                        <p className='text-sm text-secondary-foreground font-medium'>
+                          {(result.document?.title as string) ?? ''}
+                        </p>
+                        <p className='text-xs text-secondary-foreground min-w-0 mt-1'>
+                          {result.document?.content
+                            ? `${(result.document?.content as string).slice(0, 140)}...`
+                            : ''}
+                        </p>
+                      </div>
+                    </SearchResults.Item>
+                  ) : null}
+                </>
               )}
             </SearchResults.List>
           </SearchResults.Wrapper>
