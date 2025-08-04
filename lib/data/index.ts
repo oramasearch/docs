@@ -12,7 +12,6 @@ export const collectionManager = new CollectionManager({
   apiKey: process.env.NEXT_PUBLIC_ORAMA_API_KEY
 })
 
-// TODO: this shoule be ai generated
 export const promptSuggestions = [
   'When I should use Orama JS?',
   'What is the power of Orama?',

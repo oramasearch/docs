@@ -3,12 +3,8 @@ import { Cloud } from 'lucide-react'
 
 function Logo() {
   return (
-    <div className='flex items-center text-base'>
-      <img
-        src='/logo/orama-logo.svg'
-        className='h-6 mr-2'
-        alt='OramaSearch Inc. Logo'
-      />
+    <div className="flex items-center text-base">
+      <img src="/logo/orama-logo.svg" className="h-6 mr-2" alt="OramaSearch Inc. Logo" />
       Orama
     </div>
   )
