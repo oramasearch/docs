@@ -12,8 +12,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       '@orama/ui':
-        specifier: ^0.0.8
-        version: 0.0.8(@orama/core@1.0.0)(@types/react@19.1.6)(react@19.1.0)
+        specifier: ^0.0.9
+        version: 0.0.9(@orama/core@1.0.0)(@types/react@19.1.6)(react@19.1.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -557,8 +557,8 @@ packages:
   '@orama/oramacore-events-parser@0.0.5':
     resolution: {integrity: sha512-yAuSwog+HQBAXgZ60TNKEwu04y81/09mpbYBCmz1RCxnr4ObNY2JnPZI7HmALbjAhLJ8t5p+wc2JHRK93ubO4w==}
 
-  '@orama/ui@0.0.8':
-    resolution: {integrity: sha512-B1Ee1w5oWSnHQhNW/dje7+vAloh+P2PfVcJJLeUaNCqRtxcp1JVCXrgOWwE9648iyQ2sdx0eQIkNdpLotEeVNg==}
+  '@orama/ui@0.0.9':
+    resolution: {integrity: sha512-9k/zbsoyhUIiXBXt9E2UDpIdsuNLC0v80flpefhu6NHZ+IYW5NJcFBj3PDhwY235Q6yKJu+fAKyfv/trfVIXUw==}
     peerDependencies:
       '@orama/core': ^1.0.0
       react: ^19.0.0
@@ -2676,7 +2676,7 @@ snapshots:
 
   '@orama/oramacore-events-parser@0.0.5': {}
 
-  '@orama/ui@0.0.8(@orama/core@1.0.0)(@types/react@19.1.6)(react@19.1.0)':
+  '@orama/ui@0.0.9(@orama/core@1.0.0)(@types/react@19.1.6)(react@19.1.0)':
     dependencies:
       '@orama/core': 1.0.0
       prism-react-renderer: 1.3.5(react@19.1.0)

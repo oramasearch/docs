@@ -10,25 +10,9 @@ import {
 import { useRouter } from 'next/navigation'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
 import { FileText, Sparkles } from 'lucide-react'
-import { CollectionManager } from '@orama/core'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-
-const collectionManager = new CollectionManager({
-  collectionID: 'ooo4f22zau7q7ta4i1grlgji',
-  apiKey: 'WvStWzar7tqdX3FOZbhCMDWSQsWAewUu',
-  cluster: {
-    readURL: 'https://atlantis.cluster.oramacore.com'
-  }
-})
-// TOOD: this shoule be ai generated
-const suggestions = [
-  'When I should use Orama JS?',
-  'What is the power of Orama?',
-  'What are the minimum requirements for Orama Core?',
-  'I’d like to install Orama on my server',
-  'How many datasource can Orama support?'
-]
+import { collectionManager, promptSuggestions } from '../data'
 
 export function SmartSearch() {
   const [mounted, setMounted] = useState(false)
@@ -76,7 +60,7 @@ export function SmartSearch() {
               ) : (
                 <Suggestions.Wrapper className='mx-auto py-3 mt-2'>
                   <ul className='w-full flex flex-wrap gap-4 items-center justify-center'>
-                    {suggestions.map((suggestion, index) => (
+                    {promptSuggestions.map((suggestion, index) => (
                       <li
                         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                         key={index}

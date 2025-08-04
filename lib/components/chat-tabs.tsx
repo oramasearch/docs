@@ -13,30 +13,21 @@ import {
   FileText,
   SparklesIcon,
   Plus,
-  Link2
+  Link2,
+  Copy,
+  RefreshCw
 } from 'lucide-react'
-import { CollectionManager, type Interaction } from '@orama/core'
+import type { Interaction } from '@orama/core'
 import { Tabs } from '@orama/ui/components'
+import { usePathname, useRouter } from 'next/navigation'
 import { useScrollableContainer } from '@orama/ui/hooks'
-import Link from 'next/link'
+import { collectionManager } from '../data'
 
-type Item = {
-  id: string
-  label: string
-  prompt?: string
-  chatStatus?: 'idle' | 'active' | 'processing'
-  icon?: React.ReactNode
-  content?: React.ReactNode
-  closable?: boolean
+type Document = {
+  path: string
+  title: string
+  content: string
 }
-
-const collectionManager = new CollectionManager({
-  collectionID: 'ooo4f22zau7q7ta4i1grlgji',
-  apiKey: 'WvStWzar7tqdX3FOZbhCMDWSQsWAewUu',
-  cluster: {
-    readURL: 'https://atlantis.cluster.oramacore.com'
-  }
-})
 
 type TabsProps = {
   initialContent: React.ReactNode
@@ -47,7 +38,20 @@ export default function ChatTabs({ initialContent }: TabsProps) {
   const [selectedTab, setSelectedTab] = useState('tab-0')
   const [prompt, setPrompt] = useState<string | null>(null)
 
+  const pathname = usePathname()
+  const router = useRouter()
+
   const newChatRef = useRef<HTMLDivElement>(null)
+  const firstTabRef = useRef<HTMLDivElement>(null)
+  const prevPath = useRef(pathname)
+
+  useEffect(() => {
+    if (prevPath.current !== pathname) {
+      setSelectedTab('tab-0')
+      firstTabRef.current?.click()
+      prevPath.current = pathname
+    }
+  }, [pathname])
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -77,6 +81,14 @@ export default function ChatTabs({ initialContent }: TabsProps) {
     recalculateGoToBottomButton
   } = useScrollableContainer()
 
+  const handleSourceClick = (document: Document) => {
+    if (document.path) {
+      router.push(document.path)
+      setSelectedTab('tab-0')
+      firstTabRef.current?.click()
+    }
+  }
+
   return (
     <>
       <Tabs.Wrapper
@@ -98,7 +110,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
               }`}
             >
               <FileText className='size-4' />
-              <span className='truncate max-w-[120px] block'>
+              <span className='truncate max-w-[120px] block' ref={firstTabRef}>
                 Documentation
               </span>
             </Tabs.Button>
@@ -139,7 +151,6 @@ export default function ChatTabs({ initialContent }: TabsProps) {
               className='flex gap-1 items-center truncate max-w-40 over px-4 py-2 cursor-pointer bg-input/30 text-muted-foreground font-normal text-sm rounded-t-md'
               prompt={prompt || undefined}
             >
-              {/* TODO: Trigger must support ref */}
               <Plus className='size-4' />
               <span ref={newChatRef}>New Chat</span>
             </Tabs.Trigger>
@@ -185,7 +196,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                             key={interaction.id}
                             className='p-4 flex flex-col gap-4'
                           >
-                            <ChatInteractions.UserPrompt className='text-3xl font-medium pt-8 pb-4'>
+                            <ChatInteractions.UserPrompt className='text-3xl font-medium pt-8 pb-4 text-foreground'>
                               {interaction.query}
                             </ChatInteractions.UserPrompt>
                             <ChatInteractions.Loading interaction={interaction}>
@@ -195,42 +206,36 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                                 <div className='h-3 bg-gray-800 rounded w-5/6' />
                               </div>
                             </ChatInteractions.Loading>
-                            {interaction.response && (
-                              <ChatInteractions.Sources
-                                sources={
-                                  Array.isArray(interaction.sources)
-                                    ? interaction.sources
-                                    : []
-                                }
-                                className='flex gap-3 justify-stretch'
-                              >
-                                {(document, i) => (
-                                  <Link
-                                    href={document.path as string}
-                                    className='block rounded-md p-2 bg-input/30 text-xs h-full hover:bg-input/60 transition-colors duration-200'
-                                    key={i}
-                                  >
-                                    <h3 className='flex gap-1 font-semibold text-secondary-foreground line-clamp-2'>
-                                      <Link2 className='size-4' />
-                                      {(document.title as string).slice(
-                                        0,
-                                        30
-                                      ) || ''}
-                                      {(document.title as string).length > 30
-                                        ? '...'
-                                        : ''}
-                                    </h3>
-                                    <p className='text-muted-foreground text-xs mt-1 line-clamp-2'>
-                                      {(document.content as string).slice(
-                                        0,
-                                        60
-                                      )}
-                                      ...
-                                    </p>
-                                  </Link>
-                                )}
-                              </ChatInteractions.Sources>
-                            )}
+                            <ChatInteractions.Sources
+                              interaction={interaction}
+                              className='flex gap-3 justify-stretch'
+                            >
+                              {(document, i) => (
+                                <button
+                                  onClick={(
+                                    e: React.MouseEvent<HTMLButtonElement>
+                                  ) => {
+                                    handleSourceClick(document as Document)
+                                  }}
+                                  type='button'
+                                  className='cursor-pointer block text-left rounded-md p-2 bg-input/30 text-xs h-full hover:bg-input/60 transition-colors duration-200'
+                                  key={i}
+                                >
+                                  <h3 className='flex gap-1 font-semibold text-secondary-foreground line-clamp-2'>
+                                    <Link2 className='size-4' />
+                                    {(document.title as string).slice(0, 30) ||
+                                      ''}
+                                    {(document.title as string).length > 30
+                                      ? '...'
+                                      : ''}
+                                  </h3>
+                                  <p className='text-muted-foreground text-xs mt-1 line-clamp-2'>
+                                    {(document.content as string).slice(0, 60)}
+                                    ...
+                                  </p>
+                                </button>
+                              )}
+                            </ChatInteractions.Sources>
                             <ChatInteractions.AssistantMessage
                               markdownClassnames={{
                                 p: 'my-2',
@@ -240,6 +245,34 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                             >
                               {interaction.response}
                             </ChatInteractions.AssistantMessage>
+
+                            {!interaction.loading && (
+                              <ChatInteractions.UserActions className='flex items-center gap-6 justify-end opacity-0 transition-opacity duration-500 ease-in-out delay-150 opacity-100'>
+                                <ChatInteractions.CopyMessage
+                                  className='cursor-pointer'
+                                  interaction={interaction}
+                                >
+                                  {(copied) =>
+                                    copied ? (
+                                      <div className='flex items-center gap-2'>
+                                        <span className='text-xs text-muted-foreground'>
+                                          Copied!
+                                        </span>
+                                        <Copy className='w-4 h-4' />
+                                      </div>
+                                    ) : (
+                                      <Copy className='w-4 h-4' />
+                                    )
+                                  }
+                                </ChatInteractions.CopyMessage>
+                                <ChatInteractions.RegenerateLatest
+                                  className='cursor-pointer'
+                                  interaction={interaction}
+                                >
+                                  <RefreshCw className='w-4 h-4' />
+                                </ChatInteractions.RegenerateLatest>
+                              </ChatInteractions.UserActions>
+                            )}
                           </div>
                         )}
                       </ChatInteractions.Wrapper>
@@ -269,6 +302,13 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                             name='prompt-input-2'
                             placeholder='Ask something...'
                             className='peer flex-1 border-0 focus:outline-none text-red'
+                            askOptions={{
+                              related: {
+                                enabled: true,
+                                size: 3,
+                                format: 'question'
+                              }
+                            }}
                           />
                         </div>
                         <PromptTextArea.Button
