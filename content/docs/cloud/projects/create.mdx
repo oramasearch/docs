@@ -1,0 +1,37 @@
+---
+title: Create a Project
+description: Create a project in Orama Cloud
+---
+
+Once you have signed up for Orama Cloud, you can create a project. A project is a set of data sources that you can use to bring data into Orama Cloud.
+
+If you're not familiar with the concept of collections, check out the [introduction to Orama Cloud](/docs/cloud#projects) for more information.
+
+## Create a project
+
+The first time you log in to Orama Cloud, you will see an empty projects window. Click on the **Create your first project** button to create your first project:
+
+![Empty Projects Window](/docs/cloud/projects/empty-project.png)
+
+When asked, insert a project name and click on **Create project**. You will be redirected to the "create project page", which will look like this:
+
+![Create new Project Window](/docs/cloud/projects/new-project-settings.png)
+
+At this point, you can create your first project by giving it a name, and selecting the language and embedding model you want to use. You can also add an optional description to help you identify the project later.
+
+<Callout type='info'>
+You can always change the project language and embedding model later. This will require a complete reindex of your data, which could take some time depending on the size of your dataset.
+</Callout>
+
+Once you have created your new project, you will be redirected to the project overview page, which will look like this:
+
+![New Project Overview](/docs/cloud/projects/new-project-overview.png)
+
+The overview page contains the basic information about the project (name, description) as well as two fundamental, automatically generated information:
+
+- **Project ID** \
+This is the ID of the project you have just created. If you need to ask for assistance to the Orama team, always include this ID in your message.
+- **Read-Only API Key**: \
+This is a public key that you can use to query the project via API or SDK. It is safe to share on the browser or in your code, as it only gives read access to the project.
+
+This page will also give you some basic information about the project, such as the number of data connected sources, the number of documents, as well as the project language and embedding model information.

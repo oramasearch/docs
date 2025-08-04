@@ -1,0 +1,28 @@
+---
+title: Project Settings
+description: Changing language, embedding models, and more.
+---
+
+The project settings page allows you to manage various aspects of your project, including language settings, model embedding, and more.
+
+![Project Settings Page](/docs/cloud/projects/settings.png)
+
+## Changing a Project Name
+
+You can change the project name at any time without causing any disruption to your project's functionality or data. Simply navigate to the project settings page and update the name as needed.
+
+## NLP Configuration
+
+Here you can change the language used for natural language processing tasks. At the time of writing Orama supports ~30 languages out of the box. Changing the language will affect the way text is processed and indexed within your project, potentially impacting search results and relevance.
+
+If your project is multi-lingual, you may want to consider to keep the **English** language as the default.
+
+Also, please note that not all embedding models support all languages. Make sure to choose a model that supports the languages you need.
+
+As a rule of thumb, we recommend using a `BGE` model when your project is using English data, and either **E5 Multilingual** or **Paraphrase** for multi-lingual data.
+
+If your project is also hosting some code snippets, then the **Jina** embedding model is a good choice. It is optimized for both text and code embeddings and can handle a wide range of programming languages.
+
+## Deleting a Project
+
+In the settings page, you can also delete your project. This action is irreversible and will permanently remove all data associated with your project. Please proceed with caution.

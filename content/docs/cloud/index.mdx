@@ -27,13 +27,12 @@ And much more.
 
 Before you get started with Orama Cloud, it's important to understand some key concepts:
 
-- [Collections](#collections)
+- [Projects](#projects)
 - [Data sources](#data-sources)
-- [Transactions](#transactions)
 
-### Collections
+### Projects
 
-A collection is a set of [**data sources**](#data-sources) that you want to use for RAG, search, or any other method of retrieval. Each collection has its own set of documents, and depending on your plan, you can create as many collections as you need.
+A project is a set of [**data sources**](#data-sources) that you want to use for RAG, search, or any other method of retrieval. Each project has its own set of data sources, and depending on your plan, you can create as many projects as you need.
 
 > **Why do I need different data sources? And why not just use a single collection for all of my data?**
 
@@ -54,11 +53,3 @@ A data source identifies a specific set of documents, ideally coming from a sing
 Every data source is segregated from the others, so you can update, delete, or add new data without affecting the data in the other data sources.
 
 At retrieval time (be it search, RAG, or any other method of retrieval), you can choose to use a single data source, multiple sources, or all of them. This flexibility allows you to have a single collection with multiple data sources and use them as needed for different purposes.
-
-### Transactions
-
-A transaction is a set of operations that you want to perform on a data source. Let's say you want to re-import all of your documentation data periodically.
-
-Instead of deleting all the documents one by one, you can open a transaction, tell Orama to delete all the docs, add the new ones, and then commit the transaction. This way, you can be sure that all of the operations are performed atomically, and you don't have to worry about the state of the data source in between operations.
-
-In fact, the new data will not be available until you commit the transaction, so you can be sure that the data source is always in a consistent state.

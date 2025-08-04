@@ -6,7 +6,8 @@
 	"pages": [
 		"index",
 		"---Getting Started---",
-		"collections",
+		"projects",
+		"teams",
 		"---Data Sources---",
 		"...data-sources",
 		"---Importing Data---",
