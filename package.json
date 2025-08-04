@@ -11,6 +11,8 @@
 		"lint": "npx @biomejs/biome lint --fix ."
 	},
 	"dependencies": {
+		"@orama/core": "^1.0.0",
+		"@orama/ui": "^0.0.9",
 		"class-variance-authority": "^0.7.1",
 		"dedent": "^1.6.0",
 		"fumadocs-core": "15.3.3",
