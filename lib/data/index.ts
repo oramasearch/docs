@@ -1,21 +1,15 @@
-import { CollectionManager } from "@orama/core"
+import { CollectionManager } from '@orama/core'
 
 if (!process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID) {
-  throw new Error("NEXT_PUBLIC_ORAMA_COLLECTION_ID is not defined");
+  throw new Error('NEXT_PUBLIC_ORAMA_COLLECTION_ID is not defined')
 }
 if (!process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
-  throw new Error("NEXT_PUBLIC_ORAMA_API_KEY is not defined");
-}
-if (!process.env.NEXT_PUBLIC_ORAMA_READ_URL) {
-  throw new Error("NEXT_PUBLIC_ORAMA_READ_URL is not defined");
+  throw new Error('NEXT_PUBLIC_ORAMA_API_KEY is not defined')
 }
 
 export const collectionManager = new CollectionManager({
   collectionID: process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID,
-  apiKey: process.env.NEXT_PUBLIC_ORAMA_API_KEY,
-  cluster: {
-    readURL: process.env.NEXT_PUBLIC_ORAMA_READ_URL
-  }
+  apiKey: process.env.NEXT_PUBLIC_ORAMA_API_KEY
 })
 
 // TODO: this shoule be ai generated
