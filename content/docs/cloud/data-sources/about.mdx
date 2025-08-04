@@ -1,0 +1,21 @@
+---
+title: Adding your data to Orama Cloud
+description: Connect Orama Cloud to a data source to index and search your data.
+---
+
+When creating a project on Orama Cloud, you can start inserting data by connecting to one or more data sources.
+
+A data source, as the name suggests, is a source of data that can be indexed and searched using Orama Cloud. There are four main types of data sources:
+
+1. **REST APIs**: you can send data to your Orama instance using HTTP requests or the official SDKs.
+2. **Files**: you can upload a JSON, JSONL, CSV, XML, or PDF file to your Orama instance.
+3. **Crawler**: Orama Cloud comes with a crawler that can extract data from your website.
+4. **Connectors**: you can use one of the pre-built connectors to periodically sync your data.
+
+![Orama Cloud data sources](/docs/cloud/data-sources/empty-data-sources.png)
+
+There's also a fifth type of data source, that is a bit more different from the others, and serves a different purpose. It's called the **Knowledge Base**.
+
+## The Orama Knowledge Base
+
+In the knowledge base, you can store documents that are not meant to be searched, but that can be relevant at RAG-time. So when performing an AI Session, Orama can access the documents stored in the knowledge base to provide relevant information to the AI model, but this information is not used for search purposes, hiding it effectively from the search results and from your users.
