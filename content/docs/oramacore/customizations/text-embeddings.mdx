@@ -45,7 +45,7 @@ The supported models are:
 | [BGESmall](https://huggingface.co/BAAI/bge-small-en-v1.5) | English model by [BAAI](https://www.baai.ac.cn/english.html) | English | 384 |
 | [BGEBase](https://huggingface.co/BAAI/bge-base-en-v1.5) | English model by [BAAI](https://www.baai.ac.cn/english.html) | English | 768 |
 | [BGELarge](https://huggingface.co/BAAI/bge-large-en-v1.5) | English model by [BAAI](https://www.baai.ac.cn/english.html) | English | 1024 |
-| [ParaphraseMultilingualMiniLML12v2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) | Multilingual model by [Sentence Transformers](https://www.sbert.net/) | Multilingual | 384 |
+| [MultilingualMiniLML12V2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) | Multilingual model by [Sentence Transformers](https://www.sbert.net/) | Multilingual | 384 |
 | [JnaEmbeddingsV2BaseCode](https://huggingface.co/jinaai/jina-embeddings-v2-base-code) | Multilingual model by [Jina AI](https://jina.ai/) with support for code-oriented embeddings in many programming languages | Multilingual | 768 |
 
 
@@ -79,7 +79,7 @@ ai_server:
     # ...
     embeddings:
         default_model_group: all
-        dynamically_load_models: false 
+        dynamically_load_models: false
         execution_providers:
             - CUDAExecutionProvider
             - CPUExecutionProvider
@@ -96,10 +96,10 @@ At startup-time, OramaCore will preload the models specified in the `default_mod
 
 | Model Group | Description | Included Models |
 |------------|-------------|-----------------|
-| `small` | Small-sized models for text embeddings | - `MultilingualE5Small`<br/>- `BGESmall`<br/>- `ParaphraseMultilingualMiniLML12v2` |
-| `multilingual` | All multilingual models (default group) | - `MultilingualE5Small`<br/>- `MultilingualE5Base`<br/>- `MultilingualE5Large`<br/>- `ParaphraseMultilingualMiniLML12v2` |
+| `small` | Small-sized models for text embeddings | - `MultilingualE5Small`<br/>- `BGESmall`<br/>- `MultilingualMiniLML12V2` |
+| `multilingual` | All multilingual models (default group) | - `MultilingualE5Small`<br/>- `MultilingualE5Base`<br/>- `MultilingualE5Large`<br/>- `MultilingualMiniLML12V2` |
 | `en` | English-only models | - `BGESmall`<br/>- `BGEBase`<br/>- `BGELarge` |
-| `all` | Complete set of available models | - `MultilingualE5Small`<br/>- `MultilingualE5Base`<br/>- `MultilingualE5Large`<br/>- `BGESmall`<br/>- `BGEBase`<br/>- `BGELarge`<br/>- `ParaphraseMultilingualMiniLML12v2`<br/>- `JnaEmbeddingsV2BaseCode` |
+| `all` | Complete set of available models | - `MultilingualE5Small`<br/>- `MultilingualE5Base`<br/>- `MultilingualE5Large`<br/>- `BGESmall`<br/>- `BGEBase`<br/>- `BGELarge`<br/>- `MultilingualMiniLML12V2`<br/>- `JnaEmbeddingsV2BaseCode` |
 
 By default, OramaCore uses the `multilingual` group, which includes all multilingual models.
 
@@ -210,4 +210,4 @@ curl -X POST \
 
 - You may not have full control over which fields are used for text extraction, which may lead to unexpected results if the document structure changes.
 - It may not be suitable for all use cases, especially if you have specific requirements for text extraction.
-- It may require additional testing and validation to ensure that the automatically extracted fields are appropriate for your use case. 
+- It may require additional testing and validation to ensure that the automatically extracted fields are appropriate for your use case.
