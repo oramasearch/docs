@@ -3,6 +3,7 @@ import { CollectionManager } from '@orama/core'
 if (!process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID) {
   throw new Error('NEXT_PUBLIC_ORAMA_COLLECTION_ID is not defined')
 }
+
 if (!process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
   throw new Error('NEXT_PUBLIC_ORAMA_API_KEY is not defined')
 }

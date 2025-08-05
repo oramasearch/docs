@@ -1,7 +1,3 @@
 {
-	"pages": [
-		"create",
-		"---Native Integrations---",
-		"...native-integrations"
-	]
+	"pages": ["about", "uploading-a-file", "knowledge-base"]
 }
