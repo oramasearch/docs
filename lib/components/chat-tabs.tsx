@@ -97,13 +97,13 @@ export default function ChatTabs({ initialContent }: TabsProps) {
     <>
       <Tabs.Wrapper
         defaultTab={selectedTab}
-        className='flex flex-col border-0 bg-transparent my-0 rounded-none h-full'
+        className='flex flex-col border-0 bg-transparent my-0 rounded-none h-full w-full'
         onTabChange={(value) => {
           setSelectedTab(value)
         }}
         orientation='horizontal'
       >
-        <div className='flex gap-2 w-full overflow-y-auto bg-input/30 px-6 pt-3'>
+        <div className='flex shrink-0 gap-2 w-full overflow-y-auto bg-input/30 px-6 pt-3'>
           <Tabs.List className='flex items-stretch'>
             <Tabs.Button
               tabId='tab-0'
