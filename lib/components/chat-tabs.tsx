@@ -142,7 +142,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
         </div>
         <div className="flex-1 min-h-96 overflow-y-auto">
           <Tabs.Panel tabId="tab-0" className="h-full flex flex-col">
-            <div className="flex-1 overflow-y-auto p-4 grid" style={{ gridTemplateColumns: '1fr 250px' }}>
+            <div className="flex-1 overflow-y-auto p-4 grid -mt-20" style={{ gridTemplateColumns: '1fr 250px' }}>
               {initialContent}
             </div>
           </Tabs.Panel>
