@@ -1,5 +1,4 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
-import { Cloud } from 'lucide-react'
 
 function Logo() {
   return (
@@ -25,19 +24,4 @@ export const baseOptions: BaseLayoutProps = {
   themeSwitch: {
     enabled: false
   }
-  // links: [
-  //   {
-  //     text: 'Orama Cloud',
-  //     url: '/docs/cloud',
-  //     icon: <Cloud className='w-4 h-4' />
-  //   },
-  //   {
-  //     text: 'OramaCore',
-  //     url: '/docs/oramacore'
-  //   },
-  //   {
-  //     text: 'Orama JS',
-  //     url: '/docs/orama-js'
-  //   }
-  // ]
 }
