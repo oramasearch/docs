@@ -103,7 +103,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
         }}
         orientation='horizontal'
       >
-        <div className='flex shrink-0 gap-2 w-full overflow-y-auto bg-input/30 px-6 pt-3 pl-(--fd-sidebar-width)'>
+        <div className='flex shrink-0 gap-2 overflow-y-auto bg-input/30 px-6 pt-3 pl-(--fd-sidebar-width) -ml-(--fd-sidebar-width) w-screen'>
           <Tabs.List className='flex items-stretch pl-4'>
             <Tabs.Button
               tabId='tab-0'
