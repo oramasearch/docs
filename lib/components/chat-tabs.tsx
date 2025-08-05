@@ -45,13 +45,20 @@ export default function ChatTabs({ initialContent }: TabsProps) {
   const firstTabRef = useRef<HTMLDivElement>(null)
   const prevPath = useRef(pathname)
 
+  const {
+    containerRef,
+    containerElement,
+    showGoToBottomButton,
+    scrollToBottom,
+    recalculateGoToBottomButton
+  } = useScrollableContainer()
+
   useEffect(() => {
-    if (prevPath.current !== pathname) {
-      setSelectedTab('tab-0')
-      firstTabRef.current?.click()
+    if (prevPath.current !== pathname || !containerElement) {
+      resetToFirstTab()
       prevPath.current = pathname
     }
-  }, [pathname])
+  }, [pathname, containerElement])
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -74,18 +81,15 @@ export default function ChatTabs({ initialContent }: TabsProps) {
     }
   }, [prompt])
 
-  const {
-    containerRef,
-    showGoToBottomButton,
-    scrollToBottom,
-    recalculateGoToBottomButton
-  } = useScrollableContainer()
+  const resetToFirstTab = () => {
+    setSelectedTab('tab-0')
+    firstTabRef.current?.click()
+  }
 
   const handleSourceClick = (document: Document) => {
     if (document.path) {
       router.push(document.path)
-      setSelectedTab('tab-0')
-      firstTabRef.current?.click()
+      resetToFirstTab()
     }
   }
 
