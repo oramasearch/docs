@@ -103,8 +103,8 @@ export default function ChatTabs({ initialContent }: TabsProps) {
         }}
         orientation='horizontal'
       >
-        <div className='flex shrink-0 gap-2 w-full overflow-y-auto bg-input/30 px-6 pt-3'>
-          <Tabs.List className='flex items-stretch'>
+        <div className='flex shrink-0 gap-2 w-full overflow-y-auto bg-input/30 px-6 pt-3 pl-(--fd-sidebar-width)'>
+          <Tabs.List className='flex items-stretch pl-4'>
             <Tabs.Button
               tabId='tab-0'
               className={`transition-colors inline-flex items-center gap-2 w-full px-4 py-2 text-sm font-small rounded-t-md whitespace-nowrap text-left cursor-pointer ${
@@ -160,7 +160,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
             </Tabs.Trigger>
           </Tabs.List>
         </div>
-        <div className='flex-1 min-h-96 overflow-y-auto'>
+        <div className='flex-1 min-h-96 overflow-y-auto pl-(--fd-sidebar-width)'>
           <Tabs.Panel tabId='tab-0' className='h-full flex flex-col'>
             <div className='flex-1 overflow-y-auto p-4'>{initialContent}</div>
           </Tabs.Panel>
@@ -313,6 +313,7 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                                 format: 'question'
                               }
                             }}
+                            autoFocus
                           />
                         </div>
                         <PromptTextArea.Button
