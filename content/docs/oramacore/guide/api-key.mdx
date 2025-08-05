@@ -4,7 +4,7 @@ description: "API keys are used to authenticate requests to the OramaCore API"
 ---
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-As explained in the [Architecture](/docs/architecture/write-read) section, OramaCore is split in two sides: the **reader side** and the **writer side**.
+As explained in the [Architecture](/docs/oramacore/architecture/overview) section, OramaCore is split in two sides: the **reader side** and the **writer side**.
 
 Therefore, depending on the operation you want to perform, you will need to use different API keys.
 
@@ -18,7 +18,7 @@ In total, OramaCore will give you access to three different kinds API keys:
 
 The **master API key** is an essential key that allows you to configure the OramaCore instance and create or delete new collections.
 
-It's configurable via the [`config.yaml`](/docs/guide/configuration) file under the `writer_side` section:
+It's configurable via the [`config.yaml`](/docs/oramacore/guide/configuration) file under the `writer_side` section:
 
 ```yaml
 # ...
@@ -60,15 +60,15 @@ When using the JavaScript client, OramaCore will automatically set the correct A
 **Not safe to share**. Never share the write API key publicly. Treat it as a password.
 </Callout>
 
-The **write API key** is used to insert, update, or delete documents in a collection or index, as well as to create new hooks or tools.
+The **write API key** is used to insert, update, or delete documents in a project or index, as well as to create new hooks or tools.
 
-Every collection has its own write API key, which is generated when you create the collection.
+Every project has its own write API key, which is generated when you create the project.
 
 You will need this API key to:
 
-- Insert one or more documents into a collection/index
-- Update one or more documents in a collection/index
-- Delete one or more documents from a collection/index
+- Insert one or more documents into a project/index
+- Update one or more documents in a project/index
+- Delete one or more documents from a project/index
 - Create a new hook or tool
 
 In all the cases above, you will need to pass the write API key in the `Authorization` header of the request as a `Bearer` token.
@@ -78,7 +78,7 @@ Example:
 <Tabs groupId='insert' persist items={['cURL']}>
 ```bash tab="cURL"
 curl -X POST \
-  http://localhost:8080/v1/collections/{COLLECTION_ID}/indexes/create` \
+  http://localhost:8080/v1/collections/{PROJECT_ID}/indexes/create` \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <write_api_key>' \
   -d '{ "id": "products", "embedding": "automatic" }'
@@ -93,14 +93,14 @@ If you're connecting to your OramaCore instance from a web browser, please make 
 **Safe to share**. This API key performs read operations only. You can share it publicly.
 </Callout>
 
-The **read API key** is used to perform read operations on a collection.
+The **read API key** is used to perform read operations on a project.
 
-Every collection has its own read API key, which is generated when you create the collection.
+Every project has its own read API key, which is generated when you create the project.
 
 You will need this API key to:
 
 - Perform full-text, hybrid, or vector search
-- Read the documents in a collection
+- Read the documents in a project
 - Perform answer sessions
 - Run a tool
 
@@ -111,7 +111,7 @@ Example:
 <Tabs groupId='search' persist items={['cURL']}>
 ```bash tab="cURL"
 curl -X POST \
-  http://localhost:8080/v1/collections/{COLLECTION_ID}/search?api-key=<read_api_key> \
+  http://localhost:8080/v1/collections/{PROJECT_ID}/search?api-key=<read_api_key> \
   -H 'Content-Type: application/json' \
   -d '{ "term": "The quick brown fox" }'
 ```

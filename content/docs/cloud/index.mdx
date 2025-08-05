@@ -34,17 +34,17 @@ Before you get started with Orama Cloud, it's important to understand some key c
 
 A project is a set of [**data sources**](#data-sources) that you want to use for RAG, search, or any other method of retrieval. Each project has its own set of data sources, and depending on your plan, you can create as many projects as you need.
 
-> **Why do I need different data sources? And why not just use a single collection for all of my data?**
+> **Why do I need different data sources? And why not just use a single project for all of my data?**
 
 That is a fair question, and the answer is simple: imagine you're building a support agent for your company. You will have some data coming from Slack, some from Notion, some from your documentation, and so on.
 
-You could put everything in a single collection, but that could complicate things when it comes to updating, deleting, or adding new data.
+You could put everything in a single project, but that could complicate things when it comes to updating, deleting, or adding new data.
 
 For example, you may want to scrape your documentation every day, so you'd have to remove the old data and add the new data. But what if you also want to keep the data from Slack and Notion? You'd have to re-import all of that data every time you update your documentation, which would be a pain.
 
 Instead, you can put data that will be updated frequently in a single [data source](#data-sources) (let's call it `docs`), and put data that follows a different update schedule in another data source (let's call it `slack`). This way, you can update the `docs` data source every day, and the `slack` data source every hour, for example. You can also add new data sources as needed, without having to worry about updating everything at once.
 
-When you create a collection, you can choose its language (English, Spanish, etc.), and the embedding model you want to use. You can always change these settings in the future, but remember that they will be shared across all of the data sources in that collection.
+When you create a project, you can choose its language (English, Spanish, etc.), and the embedding model you want to use. You can always change these settings in the future, but remember that they will be shared across all of the data sources in that project.
 
 ### Data Sources
 
@@ -52,4 +52,4 @@ A data source identifies a specific set of documents, ideally coming from a sing
 
 Every data source is segregated from the others, so you can update, delete, or add new data without affecting the data in the other data sources.
 
-At retrieval time (be it search, RAG, or any other method of retrieval), you can choose to use a single data source, multiple sources, or all of them. This flexibility allows you to have a single collection with multiple data sources and use them as needed for different purposes.
+At retrieval time (be it search, RAG, or any other method of retrieval), you can choose to use a single data source, multiple sources, or all of them. This flexibility allows you to have a single project with multiple data sources and use them as needed for different purposes.
