@@ -60,15 +60,15 @@ When using the JavaScript client, OramaCore will automatically set the correct A
 **Not safe to share**. Never share the write API key publicly. Treat it as a password.
 </Callout>
 
-The **write API key** is used to insert, update, or delete documents in a project or index, as well as to create new hooks or tools.
+The **write API key** is used to insert, update, or delete documents in a collection or index, as well as to create new hooks or tools.
 
-Every project has its own write API key, which is generated when you create the project.
+Every collection has its own write API key, which is generated when you create the collection.
 
 You will need this API key to:
 
-- Insert one or more documents into a project/index
-- Update one or more documents in a project/index
-- Delete one or more documents from a project/index
+- Insert one or more documents into a collection/index
+- Update one or more documents in a collection/index
+- Delete one or more documents from a collection/index
 - Create a new hook or tool
 
 In all the cases above, you will need to pass the write API key in the `Authorization` header of the request as a `Bearer` token.
@@ -78,7 +78,7 @@ Example:
 <Tabs groupId='insert' persist items={['cURL']}>
 ```bash tab="cURL"
 curl -X POST \
-  http://localhost:8080/v1/collections/{PROJECT_ID}/indexes/create` \
+  http://localhost:8080/v1/collections/{COLLECTION_ID}/indexes/create` \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer <write_api_key>' \
   -d '{ "id": "products", "embedding": "automatic" }'
@@ -93,14 +93,14 @@ If you're connecting to your OramaCore instance from a web browser, please make 
 **Safe to share**. This API key performs read operations only. You can share it publicly.
 </Callout>
 
-The **read API key** is used to perform read operations on a project.
+The **read API key** is used to perform read operations on a collection.
 
-Every project has its own read API key, which is generated when you create the project.
+Every collection has its own read API key, which is generated when you create the collection.
 
 You will need this API key to:
 
 - Perform full-text, hybrid, or vector search
-- Read the documents in a project
+- Read the documents in a collection
 - Perform answer sessions
 - Run a tool
 
@@ -111,7 +111,7 @@ Example:
 <Tabs groupId='search' persist items={['cURL']}>
 ```bash tab="cURL"
 curl -X POST \
-  http://localhost:8080/v1/collections/{PROJECT_ID}/search?api-key=<read_api_key> \
+  http://localhost:8080/v1/collections/{COLLECTION_ID}/search?api-key=<read_api_key> \
   -H 'Content-Type: application/json' \
   -d '{ "term": "The quick brown fox" }'
 ```

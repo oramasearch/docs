@@ -135,7 +135,7 @@ The `writer_side` section configures the writer side of OramaCore. Here are the 
   - `data_dir`: The directory where the writer side will persist the data on disk. By default, it's set to `./.data/writer`.
   - `embedding_queue_limit`: The maximum number of embeddings that can be stored in the queue before the writer starts to be blocked. By default, it's set to `50000`.
   - `insert_batch_commit_size`: The number of document insertions after which the write side will commit the changes. By default, it's set to `50000000`.
-  - `default_embedding_model`: The default embedding model used to calculate the embeddings if not specified in the project creation. By default, it's set to `BGESmall`. See more about the available models in the [Embedding Models](/docs/oramacore/customizations/text-embeddings) section.
+  - `default_embedding_model`: The default embedding model used to calculate the embeddings if not specified in the collection creation. By default, it's set to `BGESmall`. See more about the available models in the [Embedding Models](/docs/oramacore/customizations/text-embeddings) section.
   - `javascript_queue_limit`: The maximum number of requests to the JavaScript runtime that can be stored in the queue. This is an in-memory queue, so be careful with this value. By default, it's set to `500000`.
   - `commit_interval`: The time interval after which changes will be committed to disk, regardless of the number of operations performed. By default, it's set to `1m` (1 minute). You can use time units like `s` (seconds), `m` (minutes), and `h` (hours).
 
@@ -164,7 +164,7 @@ The `ai_server` section configures the Python gRPC server that is responsible fo
 
 The `embeddings` section configures the embeddings calculation. Here are the available options:
 
-- `default_model_group`: The default model group used to calculate the embeddings if not specified in the project creation. By default, it's set to `small`. See more about the available models in the [Embedding Models](/docs/oramacore/customizations/text-embeddings) section.
+- `default_model_group`: The default model group used to calculate the embeddings if not specified in the collection creation. By default, it's set to `small`. See more about the available models in the [Embedding Models](/docs/oramacore/customizations/text-embeddings) section.
 - `dynamically_load_models`: Whether to dynamically load the models. By default, it's set to `false`.
 - `execution_providers`: The execution providers used to calculate the embeddings. By default, it's set to `CUDAExecutionProvider` and `CPUExecutionProvider`.
 - `total_threads`: The total number of threads used to calculate the embeddings. By default, it's set to `8`.
