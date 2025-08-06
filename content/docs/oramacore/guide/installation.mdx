@@ -88,7 +88,7 @@ services:
     restart: unless-stopped
 ```
 
-One thing to remember when using Docker is network management. When configuring [the OramaCore configuration file](/docs/guide/configuration) (`config.yaml`), ensure that the `ai_server.host` is set to `python-ai-server`, and the `ai_server.llm.host` is set to `vllm`.
+One thing to remember when using Docker is network management. When configuring [the OramaCore configuration file](/docs/oramacore/guide/configuration) (`config.yaml`), ensure that the `ai_server.host` is set to `python-ai-server`, and the `ai_server.llm.host` is set to `vllm`.
 
 Also, we recommend exposing the services through **Envoy**. You can find an example configuration file [here](https://github.com/oramasearch/oramacore/blob/develop/envoy/envoy.yaml).
 
@@ -140,7 +140,7 @@ Then, install the dependencies:
 pip install -r requirements.txt # or pip install -r requirements-cpu.txt
 ```
 
-When you run the server, OramaCore will automatically download the required models specified in the [configuration file](/docs/guide/configuration).
+When you run the server, OramaCore will automatically download the required models specified in the [configuration file](/docs/oramacore/guide/configuration).
 
 The download time will depend on your internet connection.
 
