@@ -1,0 +1,86 @@
+---
+title: Introduction
+description: Learn how to perform fast and efficient search operations with Orama Cloud.
+---
+
+Once you have imported your data into Orama Cloud, you can start performing search operations.
+
+Orama Cloud generates text embeddings automatically for your data using local, high-quality models. That means that you're able to perform full-text, vector, hybrid, and AI-powered NLP search operations right away as soon as you import your first document.
+
+## Using the Official SDKs
+
+At the time of writing, the only way to perform search operations is through the official SDKs.
+
+As for today, Orama Cloud officially supports the following SDKs:
+
+- [JavaScript/TypeScript](https://github.com/oramasearch/oramacore-client-javascript)
+- [Python](https://github.com/oramasearch/oramacore-client-python)
+- [Rust](https://github.com/oramasearch/oramacore-client-rust)
+
+Although not publicly available yet, we are working on adding support for more languages and platforms. If you need a specific language or platform that is not yet supported, please reach out to us at [info@orama.com](mailto:info@orama.com) and we will do our best to accommodate your request.
+
+You can get started by installing the SDK of your choice using your preferred package manager:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```sh
+  npm i @orama/core
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```sh
+  pip install oramacore-client
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```toml
+  [dependencies]
+  oramacore-client = "1.2.0"
+  tokio = { version = "1.0", features = ["full"] }
+  serde = { version = "1.0", features = ["derive"] }
+  ```
+  </Tab>
+</Tabs>
+
+Once you have your SDK installed, you're ready to get started searching with Orama Cloud.
+
+## 90 Shades of Search
+
+When performing search operations, Orama Cloud gives you the flexibility to choose the search algorithm that best suits your needs. Here are some of the search algorithms that Orama Cloud supports:
+
+- Full-text search
+- Vector search
+- Hybrid search
+- AI-powered NLP search
+
+### Full-Text Search
+
+Full-text search performs traditional keyword-based matching against your document content, using techniques like tokenization, stemming, and relevance scoring (TF-IDF/BM25).
+
+- **Pros:** Fast, predictable, excellent for exact keyword matches, and works well with structured queries.
+- **Cons:** Limited semantic understanding, struggles with synonyms or conceptually related terms, and requires users to know specific keywords.
+- **When to use:** Ideal for precise searches where users know exact terms, product catalogs, documentation searches, or when you need fast, deterministic results.
+
+### Vector Search
+
+Vector search converts your content into high-dimensional mathematical representations (embeddings) that capture semantic meaning, allowing for similarity-based matching.
+
+- **Pros:** Understands context and meaning, finds semantically related content even without exact keyword matches, and excels at discovering conceptually similar documents.
+- **Cons:** Can be slower than full-text search, results may seem less predictable to users, and requires quality embeddings for optimal performance.
+- **When to use:** Perfect for recommendation systems, content discovery, finding documents with similar themes, or when users search with natural language descriptions.
+
+### Hybrid Search
+
+Hybrid search combines the precision of full-text search with the semantic understanding of vector search, typically using weighted scoring to merge results from both approaches.
+
+- **Pros:** Balances exact keyword matching with semantic relevance, provides more comprehensive results, and reduces the weaknesses of using either method alone.
+- **Cons:** More complex to tune and optimize, potentially higher computational cost, and requires careful balance between the two scoring methods.
+- **When to use:** Ideal for most production search applications where you want both precise matches and semantic discovery, such as e-commerce, knowledge bases, or content platforms.
+
+### AI-Powered NLP Search (Natural Language Query Translation)
+
+NLP-based search interprets natural language queries and translates them into structured Orama queries, allowing users to search conversationally.
+
+- **Pros:** Intuitive user experience, handles complex queries with filters and conditions, and bridges the gap between how users think and how databases work.
+- **Cons:** Slightly slower, may misinterpret complex or ambiguous queries, and adds several additional processing layers.
+- **When to use:** Excellent for user-facing applications where you want to provide a ChatGPT-like search experience, business intelligence dashboards, or when non-technical users need to perform complex searches without learning query syntax.
