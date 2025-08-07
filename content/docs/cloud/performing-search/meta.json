@@ -1,3 +1,8 @@
 {
-	"pages": ["introduction", "full-text-search"]
+	"pages": [
+		"introduction",
+		"full-text-search",
+		"vector-search",
+		"hybrid-search"
+	]
 }
