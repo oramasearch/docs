@@ -1,5 +1,5 @@
 ---
-title: Importing Data via the official SDK
+title: Using the Official SDK
 description: Learn how to import data into Orama Cloud using the official SDK.
 ---
 
@@ -58,3 +58,13 @@ If you feel like you really need access to the REST APIs, please reach out to us
 As always, you can set a custom name and description for your data source:
 
 ![REST API Setup](/docs/cloud/data-sources/rest-api-setup.png)
+
+Once you've created the data source, you'll be automatically redirected to the data source details page, where you will be able to find the data source ID and API key needed to perform any write operation (so insert, update, and delete documents).
+
+<Callout type='warn'>
+    Please remember to keep your API key secret. If anyone gains access to it, they can perform any operation on your data source, including permanently deliting data or altering it.
+</Callout>
+
+You will also find some code exampls in the various available SDKs.
+
+![REST API Detail](/docs/cloud/data-sources/sdk-screen.png)

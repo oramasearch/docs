@@ -1,0 +1,128 @@
+---
+title: Inserting Documents
+description: Learn how to insert documents into your database using the official SDK.
+---
+
+Once you have [installed the SDK](/docs/cloud/data-sources/rest-APIs/introduction#officially-supported-sdks), you can insert documents into your Orama Cloud datasource.
+
+When inserting documents into Orama Cloud, you must provide an array of documents in valid JSON format:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const datasource = orama.dataSource('<your_data_source_id>')
+
+  await datasource.insertDocuments([
+    { id: '1', title: 'Document 1', content: 'This is the first document.'  },
+    { id: '2', title: 'Document 2', content: 'This is the second document.' },
+    { id: '3', title: 'Document 3', content: 'This is the third document.'  }
+  ])
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama import OramaCloud
+
+  async def main():
+      oramaCloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      datasource = oramaCloud.data_source("<your_data_source_id>")
+
+      await datasource.insert_documents([
+          { "id": "1", "title": "Document 1", "content": "This is the first document."  },
+          { "id": "2", "title": "Document 2", "content": "This is the second document." },
+          { "id": "3", "title": "Document 3", "content": "This is the third document."  }
+      ])
+
+      await orama.close()
+
+  asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::cloud::{OramaCloud, ProjectManagerConfig};
+  use serde::{Deserialize, Serialize};
+
+  #[derive(Debug, Serialize, Deserialize)]
+  struct Document {
+      id: String,
+      title: String,
+      content: String,
+  }
+
+  #[tokio::main]
+  async fn main() -> oramacore_client::error::Result<()> {
+      let cloud_config = ProjectManagerConfig::new(
+          "<your_project_id>",
+          "<your_project_key>",
+      );
+      let cloud_client = OramaCloud::new(cloud_config).await?;
+
+      let datasource = cloud_client.datasource("<your_data_source_id>");
+
+      let documents = vec![
+          Document { id: "1".to_string(), title: "Document 1".to_string(), content: "This is the first document.".to_string()  },
+          Document { id: "2".to_string(), title: "Document 2".to_string(), content: "This is the second document.".to_string() },
+          Document { id: "3".to_string(), title: "Document 3".to_string(), content: "This is the third document.".to_string()  },
+      ];
+
+      datasource.insert_documents(documents).await?;
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+## Document Structure
+
+Orama Cloud allows you to insert JSON documents regardless of their structure. This means that you can have several documents with different fields and structures, as long as they are valid JSON objects.
+
+For instance, you can insert the following documents:
+
+```json
+[
+  {
+    "id": "xyz",
+    "title": "Interstellar",
+    "plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "director": "Christopher Nolan"
+  },
+  {
+    "id": "123",
+    "film": {
+      "title": "Inception",
+      "director": "Christopher Nolan",
+      "description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
+      "meta": {
+        "genre": "Sci-Fi",
+        "year": 2010
+      }
+    }
+  }
+]
+```
+
+As you can see, the documents have very different structures, but that's fine as long as they are valid JSON objects.
+
+If you're coming from [Orama JS](https://github.com/oramasearch/orama), you will find that you don't need to specify a schema when inserting documents - Orama Cloud will automatically infer the schema from the documents.
+
+## Document IDs
+
+Although it's not required, we highly recommend specifying a document ID when inserting documents.
+
+The IDs **must** be of type `string`. If they're not (and they're for example numbers), Orama Cloud will generate a unique ID for the document.
+
+If you're inserting two documents with the same ID, Orama Cloud will overwrite the existing document with the new one, performing effectively an upsert operation.

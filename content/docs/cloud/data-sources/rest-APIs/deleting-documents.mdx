@@ -1,0 +1,69 @@
+---
+title: Deleting Documents
+description: Learn how to delete documents from your Orama index using the Official SDK.
+---
+
+To delete documents from your data source using the official SDKs, all you need to do is to call the `delete` method and pass a list of document IDs to be deleted.
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const datasource = orama.dataSource('<your_data_source_id>')
+
+  await datasource.deleteDocuments(['1', '2', '3'])
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama import OramaCloud
+
+  async def main():
+      oramaCloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      datasource = oramaCloud.data_source("<your_data_source_id>")
+
+      await datasource.delete_documents(["1", "2", "3"])
+
+      await orama.close()
+
+  asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::cloud::{OramaCloud, ProjectManagerConfig};
+
+  #[tokio::main]
+  async fn main() -> oramacore_client::error::Result<()> {
+      let cloud_config = ProjectManagerConfig::new(
+          "<your_project_id>",
+          "<your_private_api_key>"
+      );
+      let cloud_client = OramaCloud::new(cloud_config).await?;
+
+      let datasource = cloud_client.datasource("<your_data_source_id>");
+
+      let ids = vec!["1".to_string(), "2".to_string(), "3".to_string()];
+
+      datasource.delete_documents(ids).await?;
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+## Pay Attention to the IDs!
+
+Make sure to use the correct, unique IDs for each document when updating them. If you've inserted data containing IDs of type `number`, Orama will generate a unique ID for each document, meaning you will need to use the generated ID when deleting the documents.

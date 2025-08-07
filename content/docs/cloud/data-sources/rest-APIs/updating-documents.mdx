@@ -1,0 +1,93 @@
+---
+title: Updating Documents
+description: Learn how to update documents in your database using the official SDK.
+---
+
+By default, Orama performs **upsert** operations, which means that if a document with the same ID already exists, it will be updated; otherwise, a new document will be created.
+
+## Upsert Documents
+
+Updating (upserting) documents is as simple as inserting them. As a matter of fact, the `updateDocuments` method in the JavaScript SDK (or `upsert_documents` and `update_documents` in the other SDKs) is a proxy for inserting documents.
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const datasource = orama.dataSource('<your_data_source_id>')
+
+  await datasource.updateDocuments([
+    { id: '1', title: 'Document 1', content: 'This is the first document.'  },
+    { id: '2', title: 'Document 2', content: 'This is the second document.' },
+    { id: '3', title: 'Document 3', content: 'This is the third document.'  }
+  ])
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama import OramaCloud
+
+  async def main():
+      oramaCloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      datasource = oramaCloud.data_source("<your_data_source_id>")
+
+      await datasource.upsert_documents([
+          { "id": "1", "title": "Document 1", "content": "This is the first document."  },
+          { "id": "2", "title": "Document 2", "content": "This is the second document." },
+          { "id": "3", "title": "Document 3", "content": "This is the third document."  }
+      ])
+
+      await orama.close()
+
+  asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::cloud::{OramaCloud, ProjectManagerConfig};
+  use serde::{Deserialize, Serialize};
+
+  #[derive(Debug, Serialize, Deserialize)]
+  struct Document {
+      id: String,
+      title: String,
+      content: String,
+  }
+
+  #[tokio::main]
+  async fn main() -> oramacore_client::error::Result<()> {
+      let cloud_config = ProjectManagerConfig::new(
+          "<your_project_id>",
+          "<your_private_api_key>",
+      );
+      let cloud_client = OramaCloud::new(cloud_config).await?;
+
+      let datasource = cloud_client.datasource("<your_data_source_id>");
+
+      let documents = vec![
+          Document { id: "1".to_string(), title: "Document 1".to_string(), content: "This is the first document.".to_string()  },
+          Document { id: "2".to_string(), title: "Document 2".to_string(), content: "This is the second document.".to_string() },
+          Document { id: "3".to_string(), title: "Document 3".to_string(), content: "This is the third document.".to_string()  },
+      ];
+
+      datasource.update_documents(documents).await?;
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+## Pay Attention to the IDs!
+
+Make sure to use the correct, unique IDs for each document when updating them. If you've inserted data containing IDs of type `number`, Orama will generate a unique ID for each document, meaning you will need to use the generated ID when updating the documents.
