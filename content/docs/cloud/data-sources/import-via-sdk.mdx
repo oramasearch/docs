@@ -1,0 +1,60 @@
+---
+title: Importing Data via the official SDK
+description: Learn how to import data into Orama Cloud using the official SDK.
+---
+
+As seen in the [introduction](/docs/cloud/data-sources/about), Orama allows you to import data from various sources, including files, databases, and APIs.
+
+Sometimes though, you may need to customize the import process to fit your specific needs. In this guide, we will walk you through the process of importing data into Orama Cloud using the official SDKs.
+
+## Officially Supported SDKs
+
+As for today, Orama Cloud officially supports the following SDKs:
+
+- [JavaScript/TypeScript](https://github.com/oramasearch/oramacore-client-javascript)
+- [Python](https://github.com/oramasearch/oramacore-client-python)
+- [Rust](https://github.com/oramasearch/oramacore-client-rust)
+
+Although not publicly available yet, we are working on adding support for more languages and platforms. If you need a specific language or platform that is not yet supported, please reach out to us at [info@orama.com](mailto:info@orama.com) and we will do our best to accommodate your request.
+
+You can get started by installing the SDK of your choice using your preferred package manager:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```sh
+  npm i @orama/core
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```sh
+  pip install oramacore-client
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```toml
+  [dependencies]
+  oramacore-client = "1.2.0"
+  tokio = { version = "1.0", features = ["full"] }
+  serde = { version = "1.0", features = ["derive"] }
+  ```
+  </Tab>
+</Tabs>
+
+## Setting up the Data Source
+
+![Data Sources View](/docs/cloud/data-sources/data-sources-view.png)
+
+In the previous guide, we covered how to import data into Orama Cloud by uploading a file. This process involved creating a new data source and configuring it to pull data from the uploaded file.
+
+Now, let's dive into the details of setting up a data source using the SDK.
+
+The SDKs wraps the Orama Cloud REST APIs, allowing you to interact with the platform programmatically. Therefore, when setting up a new data source, choose the REST API data source:
+
+![Select REST APIs](/docs/cloud/data-sources/choose-rest-apis.png)
+
+At the time of writing, we do not provide direct access to the REST APIs - we will release this feature soon - so using an SDK is the only way to use this data source. \
+If you feel like you really need access to the REST APIs, please reach out to us at [info@orama.com](mailto:info@orama.com).
+
+As always, you can set a custom name and description for your data source:
+
+![REST API Setup](/docs/cloud/data-sources/rest-api-setup.png)

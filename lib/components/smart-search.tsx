@@ -19,7 +19,7 @@ export function SmartSearch() {
 
   const handleSearch = (prompt: string) => {
     localStorage.setItem('orama_suggested_prompt', prompt)
-    router.push('/docs/oramacore')
+    router.push('/docs/cloud')
   }
 
   return (
