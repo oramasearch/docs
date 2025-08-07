@@ -1,0 +1,791 @@
+---
+title: Performing AI Session
+description: Learn how to perform an AI session with Orama Cloud.
+---
+
+Once you have imported your data into Orama Cloud, you can start performing AI sessions. AI sessions are a way to interact with your data using interfaces that are different from the traditional search operations—for example, chats, recommendation systems, and more.
+
+It operates exclusively on your data, avoiding any external information (i.e., internal LLM knowledge base).
+
+## Using the Official SDKs
+
+At the time of writing, the only way to perform AI sessions is through the official SDKs.
+
+As for today, Orama Cloud officially supports the following SDKs:
+
+- [JavaScript/TypeScript](https://github.com/oramasearch/oramacore-client-javascript)
+- [Python](https://github.com/oramasearch/oramacore-client-python)
+- [Rust](https://github.com/oramasearch/oramacore-client-rust)
+
+Although not publicly available yet, we are working on adding support for more languages and platforms. If you need a specific language or platform that is not yet supported, please reach out to us at [info@orama.com](mailto:info@orama.com) and we will do our best to accommodate your request.
+
+You can get started by installing the SDK of your choice using your preferred package manager:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="JavaScript">
+  ```sh
+  npm i @orama/core
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```sh
+  pip install oramacore-client
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```toml
+  [dependencies]
+  oramacore-client = "1.2.0"
+  tokio = { version = "1.0", features = ["full"] }
+  serde = { version = "1.0", features = ["derive"] }
+  ```
+  </Tab>
+</Tabs>
+
+Once you have your SDK installed, you're ready to get started performing AI sessions with Orama Cloud.
+
+## Creating an AI Session
+
+Below you can find example snippets for creating an AI session with Orama Cloud using each official SDK. AI sessions let you interact with your data in a conversational way, ask complex questions, or get recommendations powered by large language models.
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  // Create the AI session
+  const aiSession = await orama.ai.createAISession()
+
+  // Stream an answer to a query
+  for await (const chunk of aiSession.answerStream({
+    query: 'Explain quantum computing in simple terms'
+  })) {
+    console.log(chunk)
+  }
+  ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      # Create AI session
+      session = cloud.ai.create_ai_session()
+
+      # Stream an answer
+      async for chunk in session.answer_stream({
+          "query": "Explain quantum computing in simple terms"
+      }):
+          print(chunk, end="", flush=True)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+  };
+  use futures::StreamExt;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session with LLM config
+      let session_config = CreateAiSessionConfig::new()
+      let ai_session = cloud.ai().create_ai_session().await?;
+
+      // Stream an answer
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let mut stream = ai_session.answer_stream(answer_config).await?;
+
+      while let Some(chunk) = stream.next().await {
+          match chunk {
+              Ok(data) => print!("{}", data),
+              Err(e) => eprintln!("Stream error: {}", e),
+          }
+      }
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>
+
+By default, Orama will use the internal `Qwen 2.5 14B` LLM for performing AI sessions, but you can specify a different, external model by providing a `LLMConfig` object when creating the AI session:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  // Create the AI session
+  const aiSession = await orama.ai.createAISession({
+    llmConfig: { // [!code highlight]
+      provider: 'openai', // [!code highlight]
+      model: 'gpt-4o-mini' // [!code highlight]
+    } // [!code highlight]
+  })
+
+  // Stream an answer to a query
+  for await (const chunk of aiSession.answerStream({
+    query: 'Explain quantum computing in simple terms'
+  })) {
+    console.log(chunk)
+  }
+  ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>",
+      })
+
+      # Create AI session
+      session = cloud.ai.create_ai_session({
+          "llm_config": LLMConfig(provider="openai", model="gpt-4o-mini") # [!code highlight]
+      })
+
+      # Stream an answer
+      async for chunk in session.answer_stream({
+          "query": "Explain quantum computing in simple terms"
+      }):
+          print(chunk, end="", flush=True)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+      types::{LlmConfig, LlmProvider},
+  };
+  use futures::StreamExt;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session with LLM config
+      let session_config = CreateAiSessionConfig::new()
+          .with_llm_config(LlmConfig { // [!code highlight]
+              provider: LlmProvider::OpenAI, // [!code highlight]
+              model: "gpt-4o-mini".to_string(), // [!code highlight]
+          }); // [!code highlight]
+
+      let ai_session = cloud.ai().create_ai_session().await?;
+
+      // Stream an answer
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let mut stream = ai_session.answer_stream(answer_config).await?;
+
+      while let Some(chunk) = stream.next().await {
+          match chunk {
+              Ok(data) => print!("{}", data),
+              Err(e) => eprintln!("Stream error: {}", e),
+          }
+      }
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>
+
+## Listening for State Changes
+
+Every AI session has a state, and everytime the state changes, you can update the UI accordingly.
+
+A state is essentially represented with an array of `Interaction` objects. An `Interaction` looks like this:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+  ```typescript
+  export type Interaction<D = AnyObject> = {
+    id: string
+    query: string
+    optimizedQuery: Nullable<SearchParams>
+    response: string
+    sources: Nullable<D>
+    loading: boolean
+    error: boolean
+    errorMessage: Nullable<string>
+    aborted: boolean
+    related: Nullable<string>
+    currentStep: Nullable<string>
+    currentStepVerbose: Nullable<string>
+    selectedLLM: Nullable<LLMConfig>
+    advancedAutoquery: Nullable<{
+      optimizedQueries?: Nullable<string[]>
+      selectedProperties?: Nullable<AnyObject[]>
+      selectedPropertiesWithValues?: {
+        [key: string]: {
+          collection: string
+          properties: string[]
+        }
+      }
+      queriesAndProperties?: Nullable<{
+        query: string
+        properties: AnyObject
+        filter_properties: AnyObject
+      }[]>
+      trackedQueries?: Nullable<{
+        index: number
+        original_query: string
+        generated_query_text: string
+        search_params: SearchParams
+      }[]>
+      searchResults?: Nullable<{
+        original_query: string
+        generated_query: string
+        search_params: SearchParams
+        results: SearchResult[]
+        query_index: number
+      }[]>
+      results?: Nullable<{
+        original_query: string
+        generated_query: string
+        search_params: SearchParams
+        results: SearchResult[]
+        query_index: number
+      }[]>
+    }>
+  }
+  ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  @dataclass
+  class Interaction:
+      id: str
+      query: str
+      response: str = ""
+      optimized_query: Optional[SearchParams] = None
+      sources: Optional[AnyObject] = None
+      loading: bool = True
+      error: bool = False
+      error_message: Optional[str] = None
+      aborted: bool = False
+      related: Optional[str] = None
+      current_step: Optional[str] = "starting"
+      current_step_verbose: Optional[str] = None
+      selected_llm: Optional[LLMConfig] = None
+      advanced_autoquery: Optional[AdvancedAutoquery] = None
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  #[derive(Debug, Clone)]
+  pub struct Interaction {
+      pub id: String,
+      pub query: String,
+      pub response: String,
+      pub sources: Option<AnyObject>,
+      pub loading: bool,
+      pub error: bool,
+      pub error_message: Option<String>,
+      pub aborted: bool,
+      pub related: Option<String>,
+      pub current_step: Option<String>,
+      pub current_step_verbose: Option<String>,
+      pub selected_llm: Option<LlmConfig>,
+      pub optimized_query: Option<SearchParams>,
+      pub advanced_autoquery: Option<serde_json::Value>,
+  }
+  ```
+  </Tab>
+
+</Tabs>
+
+Let's break it down a bit.
+
+### The Interaction Object
+
+Every `Interaction` object has the following properties:
+
+- `id`: A unique identifier for the interaction.
+- `query`: The original query that was sent to the AI session.
+- `response`: The full response from the AI assistant.
+- `sources`: The context provided to the LLM, the result coming from performing either AI-Powered Search, vector search, etc as part of the RAG pipeline.
+- `loading`: A boolean indicating whether the current interaction is loading (i.e., the AI assistant is processing the query or sending the response one token at a time).
+- `error`: A boolean indicating whether an error occurred during the interaction.
+- `error_message`: A string containing the error message, if an error occurred.
+- `aborted`: A boolean indicating whether the interaction was aborted.
+- `related`: An optional string containing information about related queries or topics.
+- `current_step`: An optional string indicating the current step in the AI session.
+- `current_step_verbose`: An optional string containing a more detailed description of the current step.
+- `selected_llm`: An optional `LlmConfig` object indicating the language model used for the interaction.
+- `optimized_query`: An optional `SearchParams` object indicating the optimized query used for the interaction.
+- `advanced_autoquery`: An optional `object` containing the advanced autoquery status.
+
+### State Callbacks
+
+When initializing the AI session, you can use the `events` properties to listen for state changes:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+    ```typescript
+    import { OramaCloud } from '@orama/core'
+
+    const orama = new OramaCloud({
+      projectId: '<your_project_id>',
+      apiKey: '<your_private_api_key>',
+    })
+
+    // Create the AI session
+    const aiSession = await orama.ai.createAISession({
+      events: {
+        onStateChange: (state) => {
+          console.log(state)
+        }
+      }
+    })
+
+    // Stream an answer to a query
+    for await (const chunk of aiSession.answerStream({ query: 'Explain quantum computing in simple terms' })) {
+      console.log(chunk)
+    }
+    ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      # Define the event callback
+      def on_state_change(state):
+          print("State changed:", state)
+
+      # Create AI session with events
+      session = cloud.ai.create_ai_session({
+          "events": {
+              "on_state_change": on_state_change
+          }
+      })
+
+      # Stream an answer
+      async for chunk in session.answer_stream({
+          "query": "Explain quantum computing in simple terms"
+      }):
+          print(chunk)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+      types::{LlmConfig, LlmProvider},
+  };
+  use futures::StreamExt;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session config with events - use a callback closure for state changes
+      let mut session_config = CreateAiSessionConfig::new();
+      session_config.on_state_change(|state| {
+          println!("State changed: {:?}", state);
+      });
+
+      let ai_session = cloud.ai().create_ai_session_with_config(session_config).await?;
+
+      // Stream an answer
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let mut stream = ai_session.answer_stream(answer_config).await?;
+
+      while let Some(chunk) = stream.next().await {
+          match chunk {
+              Ok(data) => println!("{:?}", data),
+              Err(e) => eprintln!("Stream error: {}", e),
+          }
+      }
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>
+
+As explained above, a `state` is an array of `Interaction` objects. So every time you're calling `aiSession.answerStream` on the same session, you're adding a new interaction to the session's state. This can be particularly useful when you want to keep track of the conversation history for instance to build a chat-style interface.
+
+## Avoiding Streaming
+
+Sometimes you might want to avoid streaming the answer and instead get the full answer at once. You can do this by calling `aiSession.answer` instead of `aiSession.answerStream`.
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+    ```typescript
+    import { OramaCloud } from '@orama/core'
+
+    const orama = new OramaCloud({
+      projectId: '<your_project_id>',
+      apiKey: '<your_private_api_key>',
+    })
+
+    // Create the AI session
+    const aiSession = await orama.ai.createAISession({
+      events: {
+        onStateChange: (state) => {
+          console.log(state)
+        }
+      }
+    })
+
+    // Get a single answer (non-streaming)
+    const answer = await aiSession.answer({ query: 'Explain quantum computing in simple terms' })
+    console.log(answer)
+    ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      # Define the event callback
+      def on_state_change(state):
+          print("State changed:", state)
+
+      # Create AI session with events
+      session = cloud.ai.create_ai_session({
+          "events": {
+              "on_state_change": on_state_change
+          }
+      })
+
+      # Get a single answer (non-streaming)
+      answer = await session.answer({
+          "query": "Explain quantum computing in simple terms"
+      })
+      print(answer)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+      types::{LlmConfig, LlmProvider},
+  };
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session config with events - use a callback closure for state changes
+      let mut session_config = CreateAiSessionConfig::new();
+      session_config.on_state_change(|state| {
+          println!("State changed: {:?}", state);
+      });
+
+      let ai_session = cloud.ai().create_ai_session_with_config(session_config).await?;
+
+      // Get a single answer (non-streaming)
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let answer = ai_session.answer(answer_config).await?;
+      println!("{:?}", answer);
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>
+
+## Aborting an AI Session
+
+To abort an AI session, you can call the `abort` method on the session object. This will stop the session and release any resources associated with it:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+    ```typescript
+    import { OramaCloud } from '@orama/core'
+
+    const orama = new OramaCloud({
+      projectId: '<your_project_id>',
+      apiKey: '<your_private_api_key>',
+    })
+
+    // Create the AI session
+    const aiSession = await orama.ai.createAISession({
+      events: {
+        onStateChange: (state) => {
+          console.log(state)
+        }
+      }
+    })
+
+    // Abort the AI session after 1s
+    setTimeout(async () => {
+      await aiSession.abort()
+    }, 1000)
+
+    // Get a single answer (non-streaming)
+    const answer = await aiSession.answer({ query: 'Explain quantum computing in simple terms' })
+
+    console.log(answer)
+    ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      # Define the event callback
+      def on_state_change(state):
+          print("State changed:", state)
+
+      # Create AI session with events
+      session = cloud.ai.create_ai_session({
+          "events": {
+              "on_state_change": on_state_change
+          }
+      })
+
+      # Schedule abort after 1 second
+      async def abort_session():
+          await asyncio.sleep(1)
+          await session.abort()
+
+      # Get a single answer (non-streaming)
+      answer = await session.answer({
+          "query": "Explain quantum computing in simple terms"
+      })
+      print(answer)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+      types::{LlmConfig, LlmProvider},
+  };
+  use tokio::time::{sleep, Duration};
+  use std::sync::Arc;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session config with events - use a callback closure for state changes
+      let mut session_config = CreateAiSessionConfig::new();
+      session_config.on_state_change(|state| {
+          println!("State changed: {:?}", state);
+      });
+
+      let ai_session = Arc::new(cloud.ai().create_ai_session_with_config(session_config).await?);
+
+      // Spawn a task to abort the session after 1s
+      let ai_session_clone = ai_session.clone();
+      tokio::spawn(async move {
+          sleep(Duration::from_secs(1)).await;
+          let _ = ai_session_clone.abort().await;
+      });
+
+      // Get a single answer (non-streaming)
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let answer = ai_session.answer(answer_config).await?;
+      println!("{:?}", answer);
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>
+
+## Retrieving the State
+
+You can retrieve the state of an AI session using the `state` getter at any time:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  // Create the AI session
+  const aiSession = await orama.ai.createAISession()
+
+  // Stream an answer to a query
+  for await (const chunk of aiSession.answerStream({
+    query: 'Explain quantum computing in simple terms'
+  })) {
+    console.log(chunk)
+  }
+
+  // Get the current state of the session
+  console.log('Session state:', aiSession.state)
+  ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      # Create AI session
+      session = cloud.ai.create_ai_session()
+
+      # Stream an answer
+      async for chunk in session.answer_stream({
+          "query": "Explain quantum computing in simple terms"
+      }):
+          print(chunk, end="", flush=True)
+
+      # Get the current state of the session
+      print("Session state:", session.state)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+  };
+  use futures::StreamExt;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session with LLM config
+      let session_config = CreateAiSessionConfig::new();
+      let ai_session = cloud.ai().create_ai_session().await?;
+
+      // Stream an answer
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let mut stream = ai_session.answer_stream(answer_config).await?;
+
+      while let Some(chunk) = stream.next().await {
+          match chunk {
+              Ok(data) => print!("{}", data),
+              Err(e) => eprintln!("Stream error: {}", e),
+          }
+      }
+
+      // Get the current state of the session
+      println!("Session state: {:?}", ai_session.state());
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>
