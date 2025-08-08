@@ -1,0 +1,223 @@
+---
+title: Choosing the Right LLM
+description: Learn how to choose the right LLM for your Orama Cloud project.
+---
+
+![Context Engineering Section](/docs/cloud/context-engineering/context-engineering.gif)
+
+Orama Cloud makes intensive use of Large Language Models not only to reply to the user queries, but also in intermediate steps of the context engineering process. Choosing the right LLM is crucial to ensure balance between quality and performance.
+
+By default, Orama Cloud uses OpenAI's open weight `GPT-OSS 120b` model, as it ensures great quality and performance. However, you can select a different model choosing from the available options.
+
+At the time of writing, the same model will be used throughout the entire context engineering process.
+
+## Available Models
+
+Right now, Orama Cloud supports the following models:
+
+| Provider | Author       | Model              | Description                                               |
+|----------|--------------|--------------------|-----------------------------------------------------------|
+| Orama    | OpenAI       | `GPT-OSS 120b`     | OpenAI's open weight `GPT-OSS 120b` model                 |
+| Orama    | Qwen         | `Qwen 3 32b`       | Qwen's flagship 32b model                                 |
+| Orama    | MoonShot AI  | `Kimi K2`          | 32b Parameter model by MoonShot AI                        |
+| OpenAI   | OpenAI       | `GPT-4o`           | Great for most tasks                                      |
+| OpenAI   | OpenAI       | `GPT-4o-mini`      | Small model for focused tasks                             |
+| OpenAI   | OpenAI       | `GPT-4.1`          | Great for quick coding and analysis                       |
+| OpenAI   | OpenAI       | `GPT-4.1`          | Great for quick coding and analysis                       |
+| OpenAI   | OpenAI       | `GPT-o3`           | Uses advanced reasoning                                   |
+| Google   | Google       | `Gemini 2.5 Flash` | Perfect for rapid development and efficient data insights |
+| Google   | Google       | `Gemini 2.5 Flash` | Great for advanced reasoning and deep data analysis       |
+
+You can choose any model that suits your needs and test it directly in the Orama Cloud dashboard, under the "Context Engineering" section.
+
+## Choosing the LLM Programmatically
+
+When you perform an [AI-Powered NLP Search](/docs/cloud/performing-search/search-modes/ai-powered-nlp-search) or an [AI Session](/docs/cloud/ai-sessions/performing-ai-session), you can choose the model programmatically via the official SDKs.
+
+**During an AI-Powered NLP Search:**
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const searchResults = await orama.ai.NLPSearch({
+    query: 'black elegant shoes under $200',
+    LLMConfig: { // [!code highlight]
+      provider: 'openai', // [!code highlight]
+      model: 'gpt-4o-mini', // [!code highlight]
+    },
+  })
+
+  console.log(searchResults)
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import NLPSearchParams
+  from orama import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      results = await cloud.ai.nlp_search(
+          NLPSearchParams(
+              query="black elegant shoes under $200",
+              llm_config=LLMConfig( # [!code highlight]
+                  provider="openai", # [!code highlight]
+                  model="gpt-4o-mini" # [!code highlight]
+              ) # [!code highlight]
+          )
+      )
+
+      print("NLP Search results:", results)
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      types::{NlpSearchParams, LlmConfig, LlmProvider},
+  };
+  use tokio;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new(
+          "<your_project_id>",
+          "<your_private_api_key>"
+      );
+      let cloud = OramaCloud::new(config).await?;
+
+      let nlp_params = NlpSearchParams {
+          query: "black elegant shoes under $200".to_string(),
+          llm_config: Some(LlmConfig { // [!code highlight]
+              provider: LlmProvider::OpenAI, // [!code highlight]
+              model: "gpt-4o-mini".to_string(), // [!code highlight]
+          }), // [!code highlight]
+          user_id: None,
+      };
+
+      let nlp_results = cloud.ai().nlp_search::<serde_json::Value>(nlp_params).await?;
+      println!("NLP Search Results: {:?}", nlp_results);
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+**During an AI Session:**
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+
+  <Tab value="JavaScript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  // Create the AI session
+  const aiSession = await orama.ai.createAISession({
+    llmConfig: { // [!code highlight]
+      provider: 'openai', // [!code highlight]
+      model: 'gpt-4o-mini' // [!code highlight]
+    } // [!code highlight]
+  })
+
+  // Stream an answer to a query
+  for await (const chunk of aiSession.answerStream({
+    query: 'Explain quantum computing in simple terms'
+  })) {
+    console.log(chunk)
+  }
+  ```
+  </Tab>
+
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>",
+      })
+
+      # Create AI session
+      session = cloud.ai.create_ai_session({
+          "llm_config": LLMConfig(provider="openai", model="gpt-4o-mini") # [!code highlight]
+      })
+
+      # Stream an answer
+      async for chunk in session.answer_stream({
+          "query": "Explain quantum computing in simple terms"
+      }):
+          print(chunk, end="", flush=True)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      stream_manager::{CreateAiSessionConfig, AnswerConfig},
+      types::{LlmConfig, LlmProvider},
+  };
+  use futures::StreamExt;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      // Create AI session with LLM config
+      let session_config = CreateAiSessionConfig::new()
+          .with_llm_config(LlmConfig { // [!code highlight]
+              provider: LlmProvider::OpenAI, // [!code highlight]
+              model: "gpt-4o-mini".to_string(), // [!code highlight]
+          }); // [!code highlight]
+
+      let ai_session = cloud.ai().create_ai_session().await?;
+
+      // Stream an answer
+      let answer_config = AnswerConfig::new("Explain quantum computing in simple terms");
+      let mut stream = ai_session.answer_stream(answer_config).await?;
+
+      while let Some(chunk) = stream.next().await {
+          match chunk {
+              Ok(data) => print!("{}", data),
+              Err(e) => eprintln!("Stream error: {}", e),
+          }
+      }
+
+      Ok(())
+  }
+  ```
+  </Tab>
+
+</Tabs>

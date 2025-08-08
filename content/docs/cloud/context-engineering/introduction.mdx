@@ -1,0 +1,48 @@
+---
+title: Introduction
+description: Learn how to use context engineering to improve RAG.
+---
+
+Context engineering is a powerful set of techniques for improving the quality of your RAG system. Orama Cloud provides all the tools you need to customize and optimize it.
+
+## RAG Stages
+
+After you inserted some data into your Orama Cloud project, you can start to perform [AI-Powered NLP Search](/docs/cloud/performing-search/search-modes/ai-powered-nlp-search) as well as [AI Sessions](/docs/cloud/ai-sessions/performing-ai-session).
+
+In both scenarios, Orama Cloud will go through a series of steps (stages) to retrieve the most relevant documents for your query.
+
+When engaging in context engineering, your goal is to optimize these stages to improve the quality and performance of each individual stage. There are several different ways to do this, including:
+
+- **Choosing the right embedding model**
+- **Choosing the right LLM**
+- **Adding the correct system prompt**
+- **Selecting/validating some training data**
+- **Adding JavaScript hooks**
+
+But we will look into that in the next section.
+
+### The Context Engineering Page
+
+![Context Engineering Section](/docs/cloud/context-engineering/page.png)
+
+You can access the context engineering configuration page by clicking on the "Context Engineering" tab in your project menu.
+
+From here, you can visualize the entire RAG flow and test out different large language models, add system prompts, validate training data, and add JavaScript hooks.
+
+### Context Engineering Flow
+
+![Context Engineering Section](/docs/cloud/context-engineering/flow.png)
+
+The context engineering flow allows you to visualize how Orama Cloud is working behind the scenes in real-time.
+
+You may notice that some flow steps contain some colorful icons. If you go over them with your mouse, you will see a tooltip with more information about each step:
+
+![Context Engineering Section](/docs/cloud/context-engineering/ceflow.gif)
+
+Some flow steps in fact accepts the following configurations:
+
+- **Custom System Prompts**. Instruct Orama Cloud on how to behave in a specific step.
+- **Training Data**. Orama Cloud will generate some training data for you - you will just have to give feedback on its quality to help Orama Cloud improve.
+- **JavaScript Hooks**. Add custom JavaScript code to modify the behavior of Orama Cloud programmatically.
+
+All these steps will have more detailed explanation in their own sections.

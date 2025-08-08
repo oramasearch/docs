@@ -1,9 +1,3 @@
 {
-	"pages": [
-		"introduction",
-		"full-text-search",
-		"vector-search",
-		"hybrid-search",
-		"ai-powered-nlp-search"
-	]
+	"pages": ["introduction", "search-modes"]
 }
