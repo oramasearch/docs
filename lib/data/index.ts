@@ -1,16 +1,8 @@
-import { CollectionManager } from '@orama/core'
+import { OramaCloud } from '@orama/core'
 
-if (!process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID) {
-  throw new Error('NEXT_PUBLIC_ORAMA_COLLECTION_ID is not defined')
-}
-
-if (!process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
-  throw new Error('NEXT_PUBLIC_ORAMA_API_KEY is not defined')
-}
-
-export const collectionManager = new CollectionManager({
-  collectionID: process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID,
-  apiKey: process.env.NEXT_PUBLIC_ORAMA_API_KEY
+export const collectionManager = new OramaCloud({
+  projectId: 'a28300a4-8d24-4da1-ad83-9b3f363244a9',
+  apiKey: 'c1_nP2ETUctm_rRJ0CiUGUHQqBwdzujsqHCtNTdRVK$V_WArF-mzzKBITHTaSr'
 })
 
 export const promptSuggestions = [
