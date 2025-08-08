@@ -5,6 +5,8 @@
 	"icon": "Cloud",
 	"pages": [
 		"index",
+		"---Orama Cloud---",
+		"what-is-orama-cloud",
 		"---Getting Started---",
 		"projects",
 		"teams",

@@ -1,0 +1,33 @@
+---
+title: What is Orama Cloud?
+description: Learn about the Orama Cloud context server.
+---
+
+Orama Cloud is the cloud version of Orama, based on the [OramaCore](https://github.com/oramasearch/oramacore) context server.
+
+## What is a Context Server?
+
+In the era of AI, context servers play a crucial role in providing the necessary context for AI models to make accurate predictions, decisions, and content generation. They act as a bridge between the AI model and the data it needs to process, ensuring that the model has access to the most relevant information at any given time.
+
+A context server is designed to efficiently produce the minimal amount of context for an LLM to produce a correct enough answer and no more. Too much context and the LLM becomes slower and less accurate. Too little and the LLM produces a poor response. The context server works in collaboration with the LLM during chains of reasoning and is available to produce relevant and curated context for the problem space.
+
+We started building Orama with the idea of making information retrieval more efficient, scalable, and accessible to everyone. The Orama Cloud context server is the natural progression of this idea, making it possible for everyone to benefit from the power of context servers without the need for complex infrastructure or technical expertise.
+
+## Components
+
+Orama Cloud is a distributed context server consisting of multiple services that work together to provide a fast, scalable, and high-quality data retrieval and generation service.
+
+A single Orama Cloud node consists of:
+
+1. **Full-Text Search Engine**. A powerful full-text search engine built from scratch, optimized for speed and accuracy, as well as typo tolerance, advanced filtering, sorting, and more.
+2. **Vector Search Engine**. A fast and scalable vector search engine built from the ground up to work in combination with the full-text search engine to provide a more comprehensive and accurate context for an LLM.
+3. **Embedding Engine**. Sub-millisecond embedding-generation engine that can generate high-quality embeddings for your data. It supports various embedding models and can be customized to meet your specific needs.
+4. **Inference Engine**. A fast inference engine that performs decision-making, reasoning, and many other tasks as well as generating text responses based on your data and user queries.
+
+This is all packed into a single context server where all the components work together within the same process, ensuring minimal latency and maximum efficiency.
+
+## On-Premise Support
+
+We offer on-premise support for Orama Cloud, allowing you to deploy the context server on your own infrastructure. This gives you full control over your data and ensures compliance with your organization's security and privacy policies.
+
+If you're interested in deploying Orama Cloud on your own infrastructure, please contact us at [info@orama.com](mailto:info@orama.com) for more information.
