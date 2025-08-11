@@ -1,3 +1,7 @@
+'use client'
+
+import { DropdownSearch } from './dropdown-search'
+
 export function Header() {
   return (
     <header className='fixed top-(--fd-banner-height) z-40 box-content backdrop-blur-lg w-full transition-colors lg:[--fd-padding:1rem] py-4 shadow-sm border-b border-base'>
@@ -10,6 +14,7 @@ export function Header() {
           />
           Orama
         </div>
+        <DropdownSearch />
       </div>
     </header>
   )

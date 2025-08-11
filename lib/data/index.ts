@@ -1,4 +1,4 @@
-import { CollectionManager } from '@orama/core'
+import { OramaCloud } from '@orama/core'
 
 if (!process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID) {
   throw new Error('NEXT_PUBLIC_ORAMA_COLLECTION_ID is not defined')
@@ -8,8 +8,8 @@ if (!process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
   throw new Error('NEXT_PUBLIC_ORAMA_API_KEY is not defined')
 }
 
-export const collectionManager = new CollectionManager({
-  collectionID: process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID,
+export const collectionManager = new OramaCloud({
+  projectId: process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID,
   apiKey: process.env.NEXT_PUBLIC_ORAMA_API_KEY
 })
 
