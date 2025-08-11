@@ -100,13 +100,15 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({
                         className='text-left w-full flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-0 focus:bg-gray-50 dark:focus:bg-gray-700 transition-colors duration-200 border-b border-gray-100 dark:border-gray-600 last:border-b-0'
                       >
                         <div className='flex-shrink-0'>
-                          <FileText className='w-4 h-4 text-gray-400' />
+                          <FileText className='w-4 h-4 text-secondary-foreground' />
                         </div>
                         <div className='flex-1 min-w-0'>
-                          <p className='text-sm font-medium text-gray-900 dark:text-gray-100 truncate'>
-                            {(result.document?.title as string) ?? ''}
-                          </p>
-                          <p className='text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2'>
+                          <div className='flex flex-col gap-1'>
+                            <p className='text-sm font-medium text-secondary-foreground truncate'>
+                              {result.document?.title as string}
+                            </p>
+                          </div>
+                          <p className='text-xs mt-1 line-clamp-2'>
                             {result.document?.content
                               ? `${(result.document?.content as string).slice(0, 120)}...`
                               : ''}
