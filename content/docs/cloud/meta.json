@@ -5,12 +5,18 @@
 	"icon": "Cloud",
 	"pages": [
 		"index",
+		"---Orama Cloud---",
+		"what-is-orama-cloud",
 		"---Getting Started---",
 		"projects",
 		"teams",
 		"---Data Sources---",
 		"...data-sources",
-		"---Importing Data---",
-		"...importing-data"
+		"---Context Engineering---",
+		"...context-engineering",
+		"---AI Sessions---",
+		"...ai-sessions",
+		"---Performing Search---",
+		"...performing-search"
 	]
 }

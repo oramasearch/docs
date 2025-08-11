@@ -1,11 +1,7 @@
 import { OramaCloud } from '@orama/core'
 
-if (!process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID) {
-  throw new Error('NEXT_PUBLIC_ORAMA_COLLECTION_ID is not defined')
-}
-
-if (!process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
-  throw new Error('NEXT_PUBLIC_ORAMA_API_KEY is not defined')
+if (!process.env.NEXT_PUBLIC_ORAMA_COLLECTION_ID || !process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
+  throw new Error('Orama collection ID and API key must be set in environment variables.');
 }
 
 export const collectionManager = new OramaCloud({

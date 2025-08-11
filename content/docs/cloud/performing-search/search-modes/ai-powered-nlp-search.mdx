@@ -1,0 +1,290 @@
+---
+title: AI-Powered NLP Search
+description: Learn how to perform AI-powered NLP search using Orama Cloud.
+---
+
+Orama Cloud enables you to perform AI-powered NLP search by leveraging advanced natural language processing techniques. With Orama Cloud, you can easily integrate AI-powered search into your applications, providing users with more accurate and relevant search results.
+
+## What is AI-Powered NLP Search?
+
+AI-Powered NLP Search is a feature of Orama Cloud that allows you to perform natural language processing (NLP) search using AI. This means that you can search for information in a way that is more natural and intuitive, using language that is more like how humans speak.
+
+Instead of setting up complex search queries and filters, you can simply type in your search terms and let Orama Cloud's AI-powered search engine do the rest. This makes it easier for users to find the information they need, without having to worry about the technical details of search.
+
+For example, if an user is searching for a pair of black, elegant shoes under $200, Orama Cloud's AI-powered search engine will automatically understand the user's intent, apply relevant filters, and return relevant results. So instead of setting up a query like:
+
+```json
+{
+  "term": "elegant shoes",
+  "where": {
+    "and": [
+      {
+        "color": "black"
+      },
+      {
+        "price": {
+          "lte": 200
+        }
+      }
+    ]
+  }
+}
+```
+
+You can simply set up an AI-powered search query like:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const searchResults = await orama.ai.NLPSearch({
+    query: 'black elegant shoes under $200'
+  })
+
+  console.log(searchResults)
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import NLPSearchParams
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      results = await cloud.ai.nlp_search(
+          NLPSearchParams(
+              query="black elegant shoes under $200"
+          )
+      )
+
+      print("NLP Search results:", results)
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      types::{NlpSearchParams, LlmConfig, LlmProvider},
+  };
+  use tokio;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new(
+          "<your_project_id>",
+          "<your_private_api_key>"
+      );
+      let cloud = OramaCloud::new(config).await?;
+
+      let nlp_params = NlpSearchParams {
+          query: "black elegant shoes under $200".to_string(),
+          llm_config: None,
+          user_id: None,
+      };
+
+      let nlp_results = cloud.ai().nlp_search::<serde_json::Value>(nlp_params).await?;
+      println!("NLP Search Results: {:?}", nlp_results);
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+and let Orama handle the rest.
+
+## Performances and Quality
+
+Of course, performing AI-Powered NLP Search is a complex task that requires multiple steps before being able to return the desired results.
+
+When compared to full-text and vector search, AI-Powered NLP Search is significantly slower. We're constantly working on improving the performances, but they'll likely never catch up to the speed of full-text and vector search.
+
+However, one way to improve performances and quality of your output is to use a more powerful language model. By default, Orama Cloud uses a local `gpt-oss 120b` model to perform all the NLP tasks, but you can select a different model by providing a `LlmConfig` object with the desired provider and model name:
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const searchResults = await orama.ai.NLPSearch({
+    query: 'black elegant shoes under $200',
+    llmConfig: { // [!code highlight]
+      provider: 'openai', // [!code highlight]
+      model: 'gpt-4o-mini' // [!code highlight]
+    } // [!code highlight]
+  })
+
+  console.log(searchResults)
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import NLPSearchParams, LLMConfig
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      results = await cloud.ai.nlp_search(
+          NLPSearchParams(
+              query="black elegant shoes under $200",
+              llm_config=LLMConfig(provider="openai", model="gpt-4o-mini") # [!code highlight]
+          )
+      )
+
+      print("NLP Search results:", results)
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      types::{NlpSearchParams, LlmConfig, LlmProvider},
+  };
+  use tokio;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      let nlp_params = NlpSearchParams {
+          query: "black elegant shoes under $200".to_string(),
+          llm_config: Some(LlmConfig { // [!code highlight]
+              provider: LlmProvider::OpenAI, // [!code highlight]
+              model: "gpt-4o-mini".to_string(), // [!code highlight]
+          }), // [!code highlight]
+          user_id: None,
+      };
+
+      let nlp_results = cloud.ai().nlp_search::<serde_json::Value>(nlp_params).await?;
+      println!("NLP Search Results: {:?}", nlp_results);
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+Of course, the choice of model is crucial for both quality and performance. Different models have different strengths and weaknesses, and the best choice depends on the specific use case and requirements.
+
+## Streaming the State
+
+Since AI-Powered NLP Search can be slower, Orama Cloud is giving you a way to provide feedback to your user on the status of the search.
+
+<Tabs items={['JavaScript', 'Python', 'Rust']}>
+  <Tab value="Javascript">
+  ```typescript
+  import { OramaCloud } from '@orama/core'
+
+  const orama = new OramaCloud({
+    projectId: '<your_project_id>',
+    apiKey: '<your_private_api_key>',
+  })
+
+  const stream = await orama.ai.NLPSearchStream({
+    query: 'black elegant shoes under $200'
+  })
+
+  for await (const chunk of stream) {
+    if (chunk.status) {
+      console.log(`Search status: ${chunk.status}`) // e.g., "processing", "completed"
+    }
+    console.log('Chunk:', chunk)
+  }
+  ```
+  </Tab>
+  <Tab value="Python">
+  ```python
+  import asyncio
+  from orama.cloud import OramaCloud
+  from orama.collection import NLPSearchParams
+
+  async def main():
+      cloud = OramaCloud({
+          "project_id": "<your_project_id>",
+          "api_key": "<your_private_api_key>"
+      })
+
+      async for chunk in cloud.ai.nlp_search_stream(
+          NLPSearchParams(query="black elegant shoes under $200")
+      ):
+          if hasattr(chunk, "status"):
+              print(f"Search status: {chunk.status}")
+          print("Chunk:", chunk)
+
+      await cloud.close()
+
+  if __name__ == "__main__":
+      asyncio.run(main())
+  ```
+  </Tab>
+  <Tab value="Rust">
+  ```rust
+  use oramacore_client::{
+      cloud::{OramaCloud, ProjectManagerConfig},
+      types::NlpSearchParams,
+  };
+  use futures::StreamExt;
+  use serde_json::Value;
+
+  #[tokio::main]
+  async fn main() -> Result<(), Box<dyn std::error::Error>> {
+      let config = ProjectManagerConfig::new("<your_project_id>", "<your_private_api_key>");
+      let cloud = OramaCloud::new(config).await?;
+
+      let nlp_params = NlpSearchParams {
+          query: "black elegant shoes under $200".to_string(),
+          llm_config: None,
+          user_id: None,
+      };
+
+      let mut stream = cloud.ai().nlp_search_stream::<Value>(nlp_params).await?;
+
+      while let Some(chunk) = stream.next().await {
+          match chunk {
+              Ok(data) => {
+                  if let Some(status) = data.get("status") {
+                      println!("Search status: {}", status);
+                  }
+                  println!("Chunk: {:?}", data);
+              }
+              Err(e) => eprintln!("Stream error: {}", e),
+          }
+      }
+
+      Ok(())
+  }
+  ```
+  </Tab>
+</Tabs>
+
+This way, you can easily update the UI with the search results as they come in.

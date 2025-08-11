@@ -1,0 +1,8 @@
+{
+	"pages": [
+		"introduction",
+		"inserting-documents",
+		"updating-documents",
+		"deleting-documents"
+	]
+}
