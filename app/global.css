@@ -117,6 +117,10 @@
 	background-color: hsl(240 20% 5%);
 }
 
+#nd-nav, #nd-tocnav {
+	top: calc(var(--fd-banner-height) + var(--fd-nav-height) + 48px) !important;
+}
+
 /* CUSTOM COLORS */
 
 :root {
