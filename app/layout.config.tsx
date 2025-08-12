@@ -1,9 +1,14 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
+import { Header } from '@/lib/components/header'
 
 function Logo() {
   return (
-    <div className="flex items-center text-base">
-      <img src="/logo/orama-logo.svg" className="h-6 mr-2" alt="OramaSearch Inc. Logo" />
+    <div className='flex items-center text-base'>
+      <img
+        src='/logo/orama-logo.svg'
+        className='h-6 mr-2'
+        alt='OramaSearch Inc. Logo'
+      />
       Orama
     </div>
   )
@@ -19,7 +24,8 @@ function Logo() {
 export const baseOptions: BaseLayoutProps = {
   nav: {
     transparentMode: 'always',
-    title: <Logo />
+    title: <Logo />,
+    component: <Header />
   },
   themeSwitch: {
     enabled: false
