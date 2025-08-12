@@ -107,6 +107,10 @@
 
 #nd-sidebar {
 	background-color: hsl(250 20% 90%);
+
+	.search-dropdown {
+		display: none;
+	}
 }
 
 .dark #nd-sidebar {

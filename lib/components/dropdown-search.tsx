@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from 'react'
 import { SearchInput, SearchRoot, SearchResults } from '@orama/ui/components'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
 import { FileText, SearchIcon } from 'lucide-react'
-import Link from 'next/link'
 import { collectionManager } from '../data'
+import { useRouter } from 'next/navigation'
 
 type SearchDropdownProps = {
   placeholder?: string
@@ -17,6 +17,7 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const { ref: arrowNavRef, onKeyDown } = useArrowKeysNavigation()
+  const router = useRouter()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -57,7 +58,7 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({
   }
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className='search-dropdown'>
       <SearchRoot client={collectionManager}>
         <section
           ref={arrowNavRef}
@@ -96,29 +97,32 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({
                       <SearchResults.Item
                         key={result.id}
                         data-focus-on-arrow-nav
-                        as={Link}
-                        href={result.document.path}
-                        onClick={() => {
-                          console.log('Navigating to:', result.document.path)
-                          setOpen(false)
-                        }}
                         className='text-left w-full flex items-center gap-3 p-3 hover:bg-accent focus:bg-accent focus:outline-0 transition-colors duration-200 border-b border-gray-100 dark:border-gray-600 last:border-b-0'
                       >
-                        <div className='flex-shrink-0'>
-                          <FileText className='w-4 h-4 text-secondary-foreground' />
-                        </div>
-                        <div className='flex-1 min-w-0'>
-                          <div className='flex flex-col gap-1'>
-                            <p className='text-sm font-medium text-secondary-foreground truncate'>
-                              {result.document?.title as string}
+                        <button
+                          type='button'
+                          onClick={() => {
+                            console.log('Navigating to:', result.document.path)
+                            router.push(result.document.path as string)
+                            setOpen(false)
+                          }}
+                        >
+                          <div className='flex-shrink-0'>
+                            <FileText className='w-4 h-4 text-secondary-foreground' />
+                          </div>
+                          <div className='flex-1 min-w-0'>
+                            <div className='flex flex-col gap-1'>
+                              <p className='text-sm font-medium text-secondary-foreground truncate'>
+                                {result.document?.title as string}
+                              </p>
+                            </div>
+                            <p className='text-xs mt-1 line-clamp-2'>
+                              {result.document?.content
+                                ? `${(result.document?.content as string).slice(0, 120)}...`
+                                : ''}
                             </p>
                           </div>
-                          <p className='text-xs mt-1 line-clamp-2'>
-                            {result.document?.content
-                              ? `${(result.document?.content as string).slice(0, 120)}...`
-                              : ''}
-                          </p>
-                        </div>
+                        </button>
                       </SearchResults.Item>
                     ) : null}
                   </>
