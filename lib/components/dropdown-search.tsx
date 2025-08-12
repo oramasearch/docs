@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useRef, useEffect } from 'react'
 import { SearchInput, SearchRoot, SearchResults } from '@orama/ui/components'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
@@ -96,8 +98,11 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({
                         data-focus-on-arrow-nav
                         as={Link}
                         href={result.document.path}
-                        onClick={() => setOpen(false)}
-                        className='text-left w-full flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-0 focus:bg-gray-50 dark:focus:bg-gray-700 transition-colors duration-200 border-b border-gray-100 dark:border-gray-600 last:border-b-0'
+                        onClick={() => {
+                          console.log('Navigating to:', result.document.path)
+                          setOpen(false)
+                        }}
+                        className='text-left w-full flex items-center gap-3 p-3 hover:bg-accent focus:bg-accent focus:outline-0 transition-colors duration-200 border-b border-gray-100 dark:border-gray-600 last:border-b-0'
                       >
                         <div className='flex-shrink-0'>
                           <FileText className='w-4 h-4 text-secondary-foreground' />
