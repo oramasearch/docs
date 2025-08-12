@@ -103,7 +103,7 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({
 
               {/* Search results dropdown */}
               <SearchResults.Wrapper className='h-[95vh] max-h-[90vh] md:max-h-80 overflow-auto empty:hidden fixed md:absolute md:h-80 top-[5vh] md:top-full right-0 left-0 md:left-auto mt-2 w-full md:w-md bg-popover border border-input rounded-lg shadow-lg z-50 suggestion-animate opacity-0'>
-                <SearchInput.Wrapper className='flex items-center gap-2 w-full p-3 py-2 rounded-md border border-input bg-input/30 shadow-inner shadow-input/20 focus-within:outline-none'>
+                <SearchInput.Wrapper className='flex md:hidden items-center gap-2 w-full p-3 py-2 rounded-md border border-input bg-input/30 shadow-inner shadow-input/20 focus-within:outline-none'>
                   <SearchIcon size={16} />
                   <SearchInput.Input
                     aria-label='Search'
