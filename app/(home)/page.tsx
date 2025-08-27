@@ -34,7 +34,7 @@ export default function HomePage() {
                 Get started
               </Link>
               <a
-                href="https://github.com/oramasearch"
+                href="https://github.com/oramasearch/oramacore"
                 className="w-full max-w-60 flex items-center justify-center py-2 px-4 text-center rounded-md bg-input/30 text-foreground hover:bg-fd-base-primary/90 transition-colors duration-200 shadow-md shadow-fd-base-primary/20"
                 rel="noopener noreferrer"
                 target="_blank"

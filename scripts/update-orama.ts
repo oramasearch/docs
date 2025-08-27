@@ -3,13 +3,6 @@ import { createHash } from 'node:crypto'
 import { globSync } from 'glob'
 import { compile } from '@mdx-js/mdx'
 
-type OramaDoc = {
-  id: string
-  title: string
-  category: string
-  content: string
-}
-
 function hash(string: string) {
   return createHash('md5').update(string).digest('hex')
 }

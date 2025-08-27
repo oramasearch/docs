@@ -1,7 +1,11 @@
 import { OramaCloud } from '@orama/core'
 
+if (!process.env.NEXT_PUBLIC_ORAMA_PROJECT_ID || !process.env.NEXT_PUBLIC_ORAMA_API_KEY) {
+  throw new Error('Orama project ID and API key must be set in environment variables.')
+}
+
 export const collectionManager = new OramaCloud({
-  projectId: 'a28300a4-8d24-4da1-ad83-9b3f363244a9',
+  projectId: process.env.NEXT_PUBLIC_ORAMA_PROJECT_ID,
   apiKey: 'c1_nP2ETUctm_rRJ0CiUGUHQqBwdzujsqHCtNTdRVK$V_WArF-mzzKBITHTaSr'
 })
 

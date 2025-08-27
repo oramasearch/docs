@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
+import { Header } from '@/lib/components/header'
 
 function Logo() {
   return (
@@ -19,7 +20,8 @@ function Logo() {
 export const baseOptions: BaseLayoutProps = {
   nav: {
     transparentMode: 'always',
-    title: <Logo />
+    title: <Logo />,
+    component: <Header />
   },
   themeSwitch: {
     enabled: false

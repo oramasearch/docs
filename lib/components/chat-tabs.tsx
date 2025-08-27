@@ -142,13 +142,22 @@ export default function ChatTabs({ initialContent }: TabsProps) {
         </div>
         <div className="flex-1 min-h-96 overflow-y-auto">
           <Tabs.Panel tabId="tab-0" className="h-full flex flex-col">
-            <div className="flex-1 overflow-y-auto p-4 grid -mt-20" style={{ gridTemplateColumns: '1fr 250px' }}>
-              {initialContent}
-            </div>
+            <div className="flex-1 overflow-y-auto p-4 grid lg:grid-cols-[1fr_250px] -mt-20">{initialContent}</div>
           </Tabs.Panel>
           <Tabs.DynamicPanels>
             {(item, chatTabs, setChatTabs) => (
-              <ChatRoot client={collectionManager}>
+              <ChatRoot
+                client={collectionManager}
+                initialState={{
+                  askOptions: {
+                    related: {
+                      enabled: true,
+                      size: 3,
+                      format: 'question'
+                    }
+                  }
+                }}
+              >
                 <Tabs.DynamicPanel tabId={item.id} className="max-w-7xl mx-auto h-full">
                   <div className="flex flex-col h-full">
                     {/* SCROLLABLE BLOCK */}
@@ -257,13 +266,6 @@ export default function ChatTabs({ initialContent }: TabsProps) {
                             name="prompt-input-2"
                             placeholder="Ask something..."
                             className="peer flex-1 border-0 focus:outline-none text-red"
-                            askOptions={{
-                              related: {
-                                enabled: true,
-                                size: 3,
-                                format: 'question'
-                              }
-                            }}
                             autoFocus
                           />
                         </div>

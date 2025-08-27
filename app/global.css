@@ -107,10 +107,20 @@
 
 #nd-sidebar {
 	background-color: hsl(250 20% 90%);
+
+	.search-dropdown {
+		display: none;
+	}
 }
 
 .dark #nd-sidebar {
 	background-color: hsl(240 20% 5%);
+}
+
+#nd-nav,
+#nd-tocnav {
+	top: calc(var(--fd-banner-height) + var(--fd-nav-height) + 48px) !important;
+	z-index: 5 !important;
 }
 
 /* CUSTOM COLORS */
