@@ -9,12 +9,8 @@ import { DropdownSearch } from '@/lib/components/dropdown-search'
 
 function Logo() {
   return (
-    <div className='flex items-center text-base'>
-      <img
-        src='/logo/orama-logo.svg'
-        className='h-6 mr-2'
-        alt='OramaSearch Inc. Logo'
-      />
+    <div className="flex items-center text-base">
+      <img src="/logo/orama-logo.svg" className="h-6 mr-2" alt="OramaSearch Inc. Logo" />
       Orama
     </div>
   )
@@ -43,7 +39,7 @@ const docsOptions: DocsLayoutProps = {
           ...option,
           icon: (
             <div
-              className='rounded-md p-1 shadow-lg ring-2 [&_svg]:size-6.5 md:[&_svg]:size-5'
+              className="rounded-md p-1 shadow-lg ring-2 [&_svg]:size-6.5 md:[&_svg]:size-5"
               style={
                 {
                   color,

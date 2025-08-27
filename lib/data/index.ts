@@ -6,7 +6,7 @@ if (!process.env.NEXT_PUBLIC_ORAMA_PROJECT_ID || !process.env.NEXT_PUBLIC_ORAMA_
 
 export const collectionManager = new OramaCloud({
   projectId: process.env.NEXT_PUBLIC_ORAMA_PROJECT_ID,
-  apiKey: process.env.NEXT_PUBLIC_ORAMA_API_KEY
+  apiKey: 'c1_nP2ETUctm_rRJ0CiUGUHQqBwdzujsqHCtNTdRVK$V_WArF-mzzKBITHTaSr'
 })
 
 export const promptSuggestions = [
