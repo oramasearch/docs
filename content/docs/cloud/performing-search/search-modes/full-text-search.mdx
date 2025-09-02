@@ -63,15 +63,16 @@ The client exposes a simple `search` method that can be used to query the index:
 Although the example above contains the bare minimum setup, you can actually perform more complex queries by using the following options:
 
 
-| Parameter    | Description                                                                                                         | Default        |
-| ------------ | ------------------------------------------------------------------------------------------------------------------- | -------------- |
-| `term`       | The search term.                                                                                                    | -              |
+| Parameter    | Description                                                                                                                                                          | Default        |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| `term`       | The search term.                                                                                                                                                     | -              |
 | `properties` | The properties to search in. Should be an array of strings (for example: `["title", "description", "author.name"]`) or `undefined` when searching on all properties. | -              |
-| `mode`       | The search mode. Can be `fulltext`, `vector`, or `hybrid`.                                                          | `fulltext`     |
-| `where`      | A filter to apply to the search results.                                                                            | -              |
-| `threshold`  | The percentage of matches required to return a document. Read more                                                  | `0`            |
-| `exact`      | Whether to use exact matching.                                                                                      | `false`        |
-| `sortBy`     | The property to sort the search results by.                                                                         | -              |
+| `mode`       | The search mode. Can be `fulltext`, `vector`, or `hybrid`.                                                                                                           | `fulltext`     |
+| `boost`      | The boost factors for different fields. Should be an object mapping field names to their boost values.                                                               | -              |
+| `where`      | A filter to apply to the search results.                                                                                                                             | -              |
+| `threshold`  | The percentage of matches required to return a document. Read more                                                                                                   | `0`            |
+| `exact`      | Whether to use exact matching.                                                                                                                                       | `false`        |
+| `sortBy`     | The property to sort the search results by.                                                                                                                          | -              |
 
 Here's an example of a more complex query using some of the fields above:
 
@@ -164,6 +165,37 @@ Here's an example of a more complex query using some of the fields above:
   ```
   </Tab>
 </Tabs>
+
+### Field Boosting
+
+Orama uses **BM25F** for field boosting, which allows you to give different importance to different fields in your search queries.
+
+For instance, if you're indexing a documentation website, each document may look like:
+
+```json
+{
+  "title": "Learning field boosting on Orama",
+  "content": "In this guide, we'll explore how to implement field boosting using Orama...",
+  "tags": ["field boosting", "search", "Orama"],
+  "path": "/docs/cloud/performing-search/search-modes/full-text-search#field-boosting"
+}
+```
+
+You may want to give more weight to the `title` field compared to the `content` field, as users are more likely to find relevant information from the title.
+
+You can do that by setting the `boost` property in your search query:
+
+```json
+{
+  "term": "my search term",
+  "boost": {
+    "title": 5,
+    "content": 2
+  }
+}
+```
+
+This way, Orama will prioritize results that match the `title` field more closely than those that match the `content` field.
 
 ### Sorting
 
