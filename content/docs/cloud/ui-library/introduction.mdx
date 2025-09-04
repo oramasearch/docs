@@ -13,6 +13,15 @@ It provides:
 
 Use it with your favorite UI framework (Tailwind, shadcn, Material UI, custom CSS) while focusing on functionality, not boilerplate.
 
+# Philosophy
+Orama UI follows these core principles:
+
+- **🧩 Composable:** Components are designed to be combined and nested as building blocks. Mix and match to create your perfect interface.
+- **🎨 Unstyled:** Zero default styles mean you have complete control over the visual design. No CSS conflicts or overrides needed.
+- **⚡ Flexible:** Use only what you need. Each component works independently or as part of a larger system.
+- **♿ Accessible:** Built with accessibility in mind, following ARIA best practices and keyboard navigation standards.
+- **🔧 Developer-friendly:** TypeScript support, comprehensive documentation, and intuitive APIs.
+
 ---
 
 ## Get started
@@ -26,23 +35,23 @@ Once you have created your project and uploaded your data, you can grab the **Pr
 Install the required packages:
 
 ```bash
-npm install @orama/ui @orama/client
+npm install @orama/ui @orama/core
 # or
-yarn add @orama/ui @orama/client
+yarn add @orama/ui @orama/core
 # or
-pnpm add @orama/ui @orama/client
+pnpm add @orama/ui @orama/core
 ```
 
 ## Set up
 Import the Orama JavaScript client and create your instance using your Cloud project configuration:
 
 ```javascript
-import { OramaCloud } from '@orama/client';
+import { OramaCloud } from '@orama/core';
 
-const orama = new Orama({
-  projectId: 'your-project-id',
-  apiKey: 'your-read-only-api-key',
-});
+const orama = new OramaCloud({
+  projectId: '<your-project-id>',
+  apiKey: '<your-read-only-api-key>',
+})
 ```
 
 ## Usage
@@ -78,6 +87,10 @@ Style as you wish! Orama UI components are unstyled by default. Use your own CSS
 ```javascript
 import "@orama/ui/styles.css"
 ```
+
+## Supported frameworks
+This library currently supports **React 19 with TypeScript only**, due to its strong ecosystem and TypeScript integration. Support for other frameworks may be considered in the future.
+
 
 
 

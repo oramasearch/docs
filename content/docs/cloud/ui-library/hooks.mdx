@@ -1,0 +1,27 @@
+---
+title: Hooks
+description: Learn how to use Orama UI hooks for your projects.
+---
+
+## Overview
+
+Orama UI provides a set of custom hooks to manage state and side effects in your components. These hooks are designed to work seamlessly with the Orama UI components and context. You don't necessarily need to import and use the hooks directly, as they are utilized by the Orama UI components themselves to function properly. However, you may need to use them for custom interfaces or advanced usage.
+Below is an overview of all available hooks. Each hook links to its detailed documentation on GitHub.
+
+## Available Hooks
+
+### Primary Hooks
+
+- **[`useSearch`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/hooks/useSearch.md)** - Access search state, query, results, and search functions
+- **[`useChat`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/hooks/useChat.md)** - Manage chat conversations, messages, and AI interactions
+
+The primary hooks must be used within the context of `SearchRoot` or `ChatRoot`, depending on whether you are building a search or chat experience. These root providers handle state management and context required by the hooks.
+
+### Utility Hooks
+
+- **[`useArrowKeyNavigation`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/hooks/useArrowKeyNavigation.md)** - Keyboard navigation for lists and results
+- **[`useClipboard`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/hooks/useClipboard.md)** - Copy text to clipboard with feedback
+- **[`useScrollableContainer`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/hooks/useScrollableContainer.md)** - Manage scrollable content areas
+- **[`useLastInteractionMinHeight`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/hooks/useLastInteractionMinHeight.md)** - Dynamic height management for chat interactions
+
+These utility hooks can be used independently of the `SearchRoot` or `ChatRoot` context, but they are often useful in building search or chat interfaces.

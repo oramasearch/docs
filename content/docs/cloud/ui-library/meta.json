@@ -1,3 +1,3 @@
 {
-	"pages": ["introduction"]
+	"pages": ["introduction", "components", "context", "hooks"]
 }
