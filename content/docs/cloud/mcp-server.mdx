@@ -1,0 +1,26 @@
+---
+title: MCP Server
+description: Using the the Orama-provided MCP Server to interact with your data
+---
+
+When [creating a new project](/docs/cloud/projects/create), Orama Cloud will automatically expose and MCP server for you. That way, you'll be able to interact with your data from different AI interfaces, including ChatGPT, Cursor, and many other.
+
+## What is the MCP Server?
+
+An MCP (Model Context Protocol) server is a standardized way for AI assistants like ChatGPT, Claude (and many others) to securely connect to and interact with external tools, data sources, and services. It acts as a bridge that allows the AI to access things like databases, APIs, file systems, or other applications while maintaining security and proper permissions.
+
+The MCP server handles requests from the AI, processes them, and returns the appropriate responses. This enables the AI to perform tasks such as retrieving information, executing commands, or integrating with other software in a controlled manner.
+
+## Orama MCP Server
+
+Every Orama Cloud project comes with an MCP server that is automatically configured to interact with your project's data. You can find the MCP server URL in your project's home page:
+
+![Orama MCP Server](/docs/cloud/projects/mcp.png)
+
+By copying the MCP Server URL, you can easily connect your Orama Cloud project to various AI assistants that support the MCP protocol. This allows you to leverage the power of AI to interact with your data in a more intuitive and efficient way.
+
+For example, you can connect Anthropic's Claude to your Orama Cloud project:
+
+![Claude MCP Setup](/docs/cloud/projects/claude.png)
+
+This way, Claude can decide to use your Orama Cloud data when answering questions, providing more accurate and contextually relevant responses.
