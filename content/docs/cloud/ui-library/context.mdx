@@ -1,4 +1,52 @@
 ---
 title: Context
-description: Learn how to leverage Orama UI for your projects.
+description: Learn how to use Orama UI context providers for your projects.
 ---
+
+# Contexts
+
+Orama UI provides React contexts that enable direct control over search and chat state management. These contexts are the foundation upon which the components like `SearchRoot` and `ChatRoot` are built.
+
+## When to Use Contexts
+
+**You typically don't need to use these contexts directly.** The `SearchRoot` and `ChatRoot` components provide all the functionality most applications need, with simplified APIs and built-in state management.
+
+However, contexts become useful when you need fine-grained control over state, want to build custom components, or have specific requirements that the root components don't cover.
+
+---
+
+## Available Contexts
+
+### Search Context
+
+**[`SearchContext`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/context/SearchContext.md)** - Provides search state and functionality to child components
+
+The SearchContext manages all search-related state including:
+- Search client instance
+- Current search terms and results
+- Facet selections and counts
+- Search dispatch actions
+
+### Chat Context
+
+**[`ChatContext`](https://github.com/oramasearch/orama-ui/blob/main/packages/ui/docs/context/ChatContext.md)** - Manages chat state, conversation history, and AI responses
+
+The ChatContext handles all chat-related functionality including:
+- Chat client instance
+- User prompts and interactions
+- Answer sessions and streaming
+- Conversation history management
+
+---
+
+Both contexts follow a similar pattern using React's `useReducer` pattern. Each context exposes:
+
+- State context: access to current state
+- Dispatch context: Functions to update state
+- Custom hooks: Convenient access to both state and dispatch
+- Reducer: State management logic
+- Initial state: Default values
+
+
+This architecture ensures predictable state updates and makes it easy to reason about how data flows through your application.
+
