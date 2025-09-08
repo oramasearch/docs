@@ -1,11 +1,11 @@
 'use client'
 
+import { useRouter, usePathname } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 import { SearchInput, SearchRoot, SearchResults } from '@orama/ui/components'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
 import { FileText, SearchIcon } from 'lucide-react'
 import { collectionManager } from '../data'
-import { useRouter } from 'next/navigation'
 
 type SearchDropdownProps = {
   placeholder?: string
@@ -16,6 +16,15 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({ placeholder = 'S
   const containerRef = useRef<HTMLDivElement>(null)
   const { ref: arrowNavRef, onKeyDown } = useArrowKeysNavigation()
   const router = useRouter()
+  const pathname = usePathname()
+  const [_, _x, websiteSection] = pathname.split('/')
+  const isCloud = websiteSection === 'cloud'
+  const isJS = websiteSection === 'orama-js'
+  const CLOUD_DATASOURCE = process.env.NEXT_PUBLIC_CLOUD_DATASOURCE as string
+  const JS_DATASOURCE = process.env.NEXT_PUBLIC_JS_DATASOURCE as string
+
+  const datasources =
+    isJS || isCloud ? [isCloud ? CLOUD_DATASOURCE : isJS ? JS_DATASOURCE : CLOUD_DATASOURCE] : undefined
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -69,6 +78,14 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({ placeholder = 'S
               placeholder={placeholder}
               onChange={changeHandler}
               className="focus:outline-none w-full"
+              searchParams={{
+                boost: {
+                  title: 12,
+                  content: 6
+                },
+                threshold: 1,
+                datasourceIDs: datasources
+              }}
             />
           </SearchInput.Wrapper>
 
