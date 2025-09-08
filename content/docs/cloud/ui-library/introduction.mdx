@@ -1,0 +1,99 @@
+---
+title: Introduction
+description: Learn how to leverage Orama UI for your projects.
+---
+
+**Orama UI** is a composable, unstyled React component library designed for building AI-driven interfaces powered by Orama. Whether you’re adding a **chat assistant**, **smart search**, or **custom AI-powered workflows**, this library gives you the headless building blocks you need. No styling or UI lock-in.
+
+It provides:
+
+- **⚡ Headless components**: unstyled primitives ready for your design system.
+- **🪝 Hooks**: utilities for managing AI queries, chat state, and search functionality.
+- **🌐 Context providers**: to handle global state across assistants, messages, or search results.
+
+Use it with your favorite UI framework (Tailwind, shadcn, Material UI, custom CSS) while focusing on functionality, not boilerplate.
+
+# Philosophy
+Orama UI follows these core principles:
+
+- **🧩 Composable:** Components are designed to be combined and nested as building blocks. Mix and match to create your perfect interface.
+- **🎨 Unstyled:** Zero default styles mean you have complete control over the visual design. No CSS conflicts or overrides needed.
+- **⚡ Flexible:** Use only what you need. Each component works independently or as part of a larger system.
+- **♿ Accessible:** Built with accessibility in mind, following ARIA best practices and keyboard navigation standards.
+- **🔧 Developer-friendly:** TypeScript support, comprehensive documentation, and intuitive APIs.
+
+---
+
+## Get started
+
+Orama UI is designed to work with [Orama Cloud](https://app.orama.com) projects. You'll need an active account and project set up on the Orama Cloud platform before using the library. 
+First time with Orama Cloud? Read the documentation to [create a project in Orama Cloud](/docs/cloud/projects/create).
+
+Once you have created your project and uploaded your data, you can grab the **Project ID** and **Read-Only API Key** from the Orama Cloud dashboard. These credentials will be used to configure the Orama UI components, so keep them handy and let’s get started!
+
+## Installation
+Install the required packages:
+
+```bash
+npm install @orama/ui @orama/core
+# or
+yarn add @orama/ui @orama/core
+# or
+pnpm add @orama/ui @orama/core
+```
+
+## Set up
+Import the Orama JavaScript client and create your instance using your Cloud project configuration:
+
+```javascript
+import { OramaCloud } from '@orama/core';
+
+const orama = new OramaCloud({
+  projectId: '<your-project-id>',
+  apiKey: '<your-read-only-api-key>',
+})
+```
+
+## Usage
+Import and use the components:
+
+```javascript
+import {
+  SearchRoot,
+  SearchInput,
+  SearchResults,
+} from "@orama/ui/components";
+
+<SearchRoot client={orama}>
+  <SearchInput.Input placeholder="Search for anything..." />
+  <SearchResults.Wrapper>
+    <SearchResults.List>
+      {(result) => (
+        <SearchResults.Item>
+          <h3>{result.title}</h3>
+          <p>{result.description}</p>
+        </SearchResults.Item>
+      )}
+    </SearchResults.List>
+  </SearchResults.Wrapper>
+</SearchRoot>
+```
+
+## Styling
+Style as you wish! Orama UI components are unstyled by default. Use your own CSS, Tailwind, styled-components, or any styling solution.
+
+> Please note that, while Orama UI components are unstyled, some layout components may require minimal styling to function properly. If you choose to use a layout component (i.e. `SlidingPanel`), ensure you import the `styles.css` file provided in the library for basic layout support.
+
+```javascript
+import "@orama/ui/styles.css"
+```
+
+## Supported frameworks
+This library currently supports **React 19 with TypeScript only**, due to its strong ecosystem and TypeScript integration. Support for other frameworks may be considered in the future.
+
+
+
+
+
+
+
