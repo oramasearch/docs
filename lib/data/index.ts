@@ -10,9 +10,9 @@ export const collectionManager = new OramaCloud({
 })
 
 export const promptSuggestions = [
-  'When I should use Orama JS?',
-  'What is the power of Orama?',
-  'What are the minimum requirements for Orama Core?',
-  'I’d like to install Orama on my server',
-  'How many datasource can Orama support?'
+  'Tell me about Orama Cloud',
+  'Do I need an external inference provider?',
+  'How does Orama generate text embeddings?',
+  'What SDKs does Orama provide?',
+  'How do I insert data into Orama Cloud?'
 ]
