@@ -7,7 +7,7 @@ By default, Orama performs **upsert** operations, which means that if a document
 
 ## Upsert Documents
 
-Updating (upserting) documents is as simple as inserting them. As a matter of fact, the `updateDocuments` method in the JavaScript SDK (or `upsert_documents` and `update_documents` in the other SDKs) is a proxy for inserting documents.
+Updating (upserting) documents is as simple as inserting them. As a matter of fact, the `upsertDocuments` method in the JavaScript SDK (or `upsert_documents` and `update_documents` in the other SDKs) is a proxy for inserting documents.
 
 <Tabs items={['JavaScript', 'Python', 'Rust']}>
   <Tab value="Javascript">
@@ -21,7 +21,7 @@ Updating (upserting) documents is as simple as inserting them. As a matter of fa
 
   const datasource = orama.dataSource('<your_data_source_id>')
 
-  await datasource.updateDocuments([
+  await datasource.upsertDocuments([
     { id: '1', title: 'Document 1', content: 'This is the first document.'  },
     { id: '2', title: 'Document 2', content: 'This is the second document.' },
     { id: '3', title: 'Document 3', content: 'This is the third document.'  }
