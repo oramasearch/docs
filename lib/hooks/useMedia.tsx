@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react'
  * const isMdUp = useMedia("(min-width: 768px)");
  */
 export function useMedia(query: string): boolean {
-  const getMatch = () =>
-    typeof window !== 'undefined' ? window.matchMedia(query).matches : false
+  const getMatch = () => (typeof window !== 'undefined' ? window.matchMedia(query).matches : false)
 
   const [matches, setMatches] = useState(getMatch)
 
