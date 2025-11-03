@@ -6,6 +6,7 @@ import { SearchInput, SearchRoot, SearchResults } from '@orama/ui/components'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
 import { FileText, SearchIcon } from 'lucide-react'
 import { collectionManager } from '../data'
+import { useMedia } from '@/hooks/useMedia'
 
 type SearchDropdownProps = {
   placeholder?: string
@@ -20,6 +21,7 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({ placeholder = 'S
   const [_, _x, websiteSection] = pathname.split('/')
   const isCloud = websiteSection === 'cloud'
   const isJS = websiteSection === 'orama-js'
+  const isMdUp = useMedia('(min-width: 768px)')
   const CLOUD_DATASOURCE = process.env.NEXT_PUBLIC_CLOUD_DATASOURCE as string
   const JS_DATASOURCE = process.env.NEXT_PUBLIC_JS_DATASOURCE as string
 
@@ -78,6 +80,8 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({ placeholder = 'S
               placeholder={placeholder}
               onChange={changeHandler}
               className="focus:outline-none w-full"
+              tabIndex={!isMdUp ? -1 : 0}
+              aria-hidden={!isMdUp}
               searchParams={{
                 boost: {
                   title: 12,
@@ -123,6 +127,8 @@ export const DropdownSearch: React.FC<SearchDropdownProps> = ({ placeholder = 'S
                       placeholder={placeholder}
                       onChange={changeHandler}
                       className="focus:outline-none w-full"
+                      tabIndex={isMdUp ? -1 : 0}
+                      aria-hidden={isMdUp}
                     />
                   </SearchInput.Wrapper>
                 </div>
