@@ -7,8 +7,8 @@ import styles from './index.module.css'
 
 export type Document = {
   path: string
-  siteSection: string
-  pageSectionTitle?: string
+  section: string
+  title?: string
 }
 
 type DocumentLinkProps = {
@@ -25,7 +25,7 @@ export const DocumentLink: FC<DocumentLinkProps> = ({
   'data-focus-on-arrow-nav': dataFocusOnArrowNav,
   ...props
 }) => {
-  const href = document.siteSection?.toLowerCase()
+  const href = document.path?.toLowerCase()
 
   return (
     <Link
@@ -35,9 +35,7 @@ export const DocumentLink: FC<DocumentLinkProps> = ({
       {...props}
     >
       {children || (
-        <span className={styles.documentTitle}>
-          {document.pageSectionTitle}
-        </span>
+        <span className={styles.documentTitle}>{document.title}</span>
       )}
     </Link>
   )

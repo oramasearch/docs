@@ -28,13 +28,11 @@ export const SearchItem: FC<SearchItemProps> = ({ document }) => {
       >
         <FileText />
         <div>
-          {typeof document?.pageSectionTitle === 'string' && (
-            <h3>{document.pageSectionTitle}</h3>
-          )}
-          {typeof document?.pageSectionTitle === 'string' &&
+          {typeof document?.title === 'string' && <h3>{document.title}</h3>}
+          {typeof document?.title === 'string' &&
             typeof document?.path === 'string' && (
               <p className={styles.searchResultsItemDescription}>
-                {getFormattedPath(document.path, document.pageSectionTitle)}
+                {getFormattedPath(document.path, document.title)}
               </p>
             )}
         </div>

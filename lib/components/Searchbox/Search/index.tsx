@@ -29,10 +29,10 @@ export const Search: FC<SearchProps> = ({ ref }) => {
           className={styles.searchInput}
           searchParams={{
             groupBy: {
-              properties: ['siteSection']
+              properties: ['category']
             },
             facets: {
-              siteSection: {}
+              category: {}
             }
           }}
           ref={ref}

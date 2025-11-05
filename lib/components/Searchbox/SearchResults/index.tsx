@@ -50,7 +50,7 @@ export const SearchResultsWrapper: FC = () => {
                   <FacetTabs.Item
                     isSelected={group.name === selectedFacet}
                     group={group}
-                    filterBy='siteSection'
+                    filterBy='category'
                     searchParams={{
                       term: searchTerm ?? ''
                     }}
@@ -105,7 +105,7 @@ export const SearchResultsWrapper: FC = () => {
 
           <SearchResults.GroupsWrapper
             className={styles.searchResultsGroupWrapper}
-            groupBy='siteSection'
+            groupBy='category'
           >
             {(group) => (
               <div key={group.name} className={styles.searchResultsGroup}>
