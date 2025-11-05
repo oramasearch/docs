@@ -32,15 +32,15 @@ const Searchbox: FC = () => {
           <Modal.Wrapper
             closeOnOutsideClick
             closeOnEscape
-            className='fixed left-0 top-0 z-50 mx-auto my-0 flex w-svw h-svh items-start justify-center bg-white/70 lg:pt-[5vh] dark:bg-zinc-950/70'
+            className='fixed left-0 top-0 z-50 mx-auto my-0 flex w-svw! h-svh! items-start justify-center lg:pt-[5vh] dark:bg-zinc-900/80!'
           >
             <SearchRoot client={collectionManager}>
               <ChatRoot
                 client={collectionManager}
                 askOptions={{ throttle_delay: 50 }}
               >
-                <Modal.Inner className='fixed bottom-0 top-0 mx-auto my-0 flex h-full max-w-none bg-white lg:bottom-auto lg:top-auto lg:h-auto lg:max-w-3xl lg:bg-neutral-100 dark:bg-zinc-950 lg:dark:bg-neutral-950'>
-                  <Modal.Content className='flex h-full flex-col border-neutral-200 lg:h-auto lg:max-h-[70vh] lg:rounded-xl lg:border dark:border-neutral-900'>
+                <Modal.Inner className='fixed bottom-0 top-0 mx-auto! mb-0! mt-12! flex h-full max-w-none bg-white lg:bottom-auto lg:top-auto lg:h-auto lg:max-w-3xl lg:bg-neutral-100 dark:bg-zinc-950 lg:dark:bg-neutral-950'>
+                  <Modal.Content className='flex h-full flex-col border-neutral-200 lg:h-auto lg:max-h-[70vh] lg:border dark:border-neutral-900'>
                     <InnerSearchboxModal />
                   </Modal.Content>
                 </Modal.Inner>

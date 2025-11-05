@@ -4,17 +4,16 @@ import type { FC } from 'react'
 
 import { ChatActions } from '../ChatActions'
 import ChatSources from '../ChatSources'
-import styles from './index.module.css'
 
 type ChatMessageProps = {
   interaction: Interaction
 }
 
 const TypingIndicator: FC = () => (
-  <div className={styles.typingIndicator}>
-    <span className={styles.typingDot} />
-    <span className={styles.typingDot} />
-    <span className={styles.typingDot} />
+  <div className='flex items-center gap-1 rounded-xl bg-neutral-200 p-4 dark:bg-neutral-950'>
+    <span className='animate-dot-move size-1 rounded-full bg-neutral-500 dark:bg-neutral-400' />
+    <span className='animate-dot-move-delay-200 size-1 rounded-full bg-neutral-500 dark:bg-neutral-400' />
+    <span className='animate-dot-move-delay-400 size-1 rounded-full bg-neutral-500 dark:bg-neutral-400' />
   </div>
 )
 
@@ -25,22 +24,22 @@ export const ChatMessage: FC<ChatMessageProps> = ({ interaction }) => {
 
   return (
     <>
-      <ChatInteractions.UserPrompt className={styles.chatUserPrompt}>
+      <ChatInteractions.UserPrompt className='py-3 [&_p]:max-w-2xl [&_p]:rounded-xl [&_p]:text-neutral-900 [&_p]:dark:text-neutral-200'>
         <p>{interaction?.query}</p>
       </ChatInteractions.UserPrompt>
 
       <ChatSources interaction={interaction} />
 
       <ChatInteractions.Loading interaction={interaction}>
-        <div className={styles.chatLoadingWrapper}>
+        <div className='rounded-xl bg-neutral-100 px-4 py-1 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-200'>
           <TypingIndicator />
         </div>
       </ChatInteractions.Loading>
 
       {interaction.response && (
-        <div className={styles.chatAssistantMessageWrapper}>
+        <div className='my-2 rounded-xl bg-neutral-100 px-4 py-1 text-neutral-900 empty:hidden dark:bg-neutral-950 dark:text-neutral-200'>
           <ChatInteractions.AssistantMessage
-            className={styles.chatAssistantMessage}
+            className=''
             markdownClassnames={{
               p: 'my-2 leading-relaxed',
               pre: 'my-6 text-md overflow-x-auto hljs [&_pre]:bg-neutral-900! [&_pre]:text-sm [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:whitespace-break-spaces wrap-break-word',

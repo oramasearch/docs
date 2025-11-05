@@ -10,7 +10,6 @@ import { Footer } from '../Footer'
 import { MobileTopBar } from '../MobileTopBar'
 import { Search } from '../Search'
 import { SlidingChatPanel } from '../SlidingChatPanel'
-import styles from './index.module.css'
 
 export const InnerSearchboxModal: FC<PropsWithChildren> = () => {
   const searchbox = useSearchbox()
@@ -42,11 +41,11 @@ export const InnerSearchboxModal: FC<PropsWithChildren> = () => {
       {displaySearch && <Search ref={searchInputRef} />}
       {isMobileScreen && searchbox?.mode === 'chat' && (
         <>
-          <div className={styles.mobileChatContainer}>
-            <div className={styles.mobileChatTop}>
+          <div className='flex grow flex-col overflow-hidden px-4 pb-4'>
+            <div className='grow overflow-hidden'>
               <ChatInteractionsContainer />
             </div>
-            <div className={styles.mobileChatBottom}>
+            <div className='mt-4'>
               <ChatInput />
             </div>
           </div>

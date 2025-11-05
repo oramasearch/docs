@@ -8,7 +8,6 @@ import type { FC } from 'react'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
-import styles from './index.module.css'
 import type { Document } from '../DocumentLink'
 import { EmptyResults } from '../EmptyResults'
 import { SearchItem } from '../SearchItem'
@@ -21,13 +20,16 @@ export const SearchResultsWrapper: FC = () => {
   const isSearchMode = searchbox?.mode === 'search'
 
   return (
-    <div className={styles.searchResultsContainer}>
-      <div className={styles.chatButtonWrapper}>
+    <div className='flex grow flex-col overflow-y-auto'>
+      <div className='hidden border-b border-neutral-200 p-2 lg:block dark:border-neutral-900 [&_svg]:size-4'>
         <SlidingPanel.Trigger
           onClick={() => searchbox?.switchTo('chat')}
-          className={classNames(styles.chatButton, {
-            [styles.chatButtonWithSearch]: searchTerm
-          })}
+          className={classNames(
+            'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent bg-transparent p-3 text-sm duration-300 hover:bg-neutral-300 focus-visible:border-green-600 focus-visible:outline-none motion-safe:transition-colors dark:hover:bg-neutral-900 dark:focus-visible:border-green-400',
+            {
+              'bg-neutral-300 dark:bg-neutral-900': searchTerm
+            }
+          )}
           tabIndex={isSearchMode ? 0 : -1}
           aria-hidden={!isSearchMode}
           initialPrompt={searchTerm || undefined}
@@ -41,10 +43,10 @@ export const SearchResultsWrapper: FC = () => {
         </SlidingPanel.Trigger>
       </div>
 
-      <div className={styles.searchResultsWrapper}>
+      <div className='grow overflow-y-auto px-5 pt-3 text-neutral-900 lg:grow-0 dark:text-neutral-200 [&::-webkit-scrollbar]:size-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-md [&::-webkit-scrollbar-thumb]:bg-neutral-900'>
         <SearchResults.Wrapper>
-          <FacetTabs.Wrapper className={styles.facetTabsWrapper}>
-            <FacetTabs.List className={styles.facetTabsList}>
+          <FacetTabs.Wrapper className='mb-2 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
+            <FacetTabs.List className='flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
               {(group, isSelected) => (
                 <>
                   <FacetTabs.Item
@@ -57,14 +59,15 @@ export const SearchResultsWrapper: FC = () => {
                     tabIndex={isSearchMode ? 0 : -1}
                     aria-hidden={!isSearchMode}
                     className={classNames(
-                      isSelected && styles.facetTabItemSelected,
-                      styles.facetTabItem
+                      'flex cursor-pointer items-center gap-2 rounded-3xl border border-neutral-200 px-3 py-1 text-sm duration-300 focus:outline-none focus-visible:bg-neutral-300 motion-safe:transition-colors dark:border-neutral-900 dark:focus-visible:bg-neutral-900',
+                      {
+                        'border-2 border-green-600 dark:border-green-400':
+                          isSelected
+                      }
                     )}
                   >
                     {group.name}
-                    <span className={styles.facetTabItemCount}>
-                      ({group.count})
-                    </span>
+                    <span className='text-neutral-700'>({group.count})</span>
                   </FacetTabs.Item>
                 </>
               )}
@@ -72,29 +75,14 @@ export const SearchResultsWrapper: FC = () => {
           </FacetTabs.Wrapper>
 
           <SearchResults.Loading>
-            <div className={styles.skeletonWrapper}>
+            <div className='flex flex-col gap-5 py-6'>
               {[...Array(3)].map((_, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                <div key={index} className={styles.skeletonItem}>
-                  <div
-                    className={classNames(
-                      styles.skeletonAnim,
-                      styles.skeletonAvatar
-                    )}
-                  />
-                  <div className={styles.skeletonText}>
-                    <div
-                      className={classNames(
-                        styles.skeletonAnim,
-                        styles.skeletonLineShort
-                      )}
-                    />
-                    <div
-                      className={classNames(
-                        styles.skeletonAnim,
-                        styles.skeletonLineLong
-                      )}
-                    />
+                <div key={index} className='flex items-center gap-4'>
+                  <div className='dark:animate-pulse-dark animate-pulse rounded-md h-6 w-5 shrink-0' />
+                  <div className='flex flex-1 flex-col gap-2'>
+                    <div className='dark:animate-pulse-dark animate-pulse rounded-md h-3 w-1/3' />
+                    <div className='dark:animate-pulse-dark animate-pulse rounded-md h-3 w-2/3' />
                   </div>
                 </div>
               ))}
@@ -104,12 +92,17 @@ export const SearchResultsWrapper: FC = () => {
           <EmptyResults />
 
           <SearchResults.GroupsWrapper
-            className={styles.searchResultsGroupWrapper}
+            className='relative items-start overflow-y-auto'
             groupBy='category'
           >
             {(group) => (
-              <div key={group.name} className={styles.searchResultsGroup}>
-                <h2 className={styles.searchResultsGroupTitle}>{group.name}</h2>
+              <div
+                key={group.name}
+                className='mb-3 border-t border-neutral-200 dark:border-neutral-900 first:border-0'
+              >
+                <h2 className='mb-3 mt-4 pl-2 text-sm font-semibold text-neutral-600 dark:text-neutral-600'>
+                  {group.name}
+                </h2>
                 <SearchResults.GroupList group={group}>
                   {(hit) => <SearchItem document={hit.document as Document} />}
                 </SearchResults.GroupList>

@@ -8,8 +8,6 @@ import { useState } from 'react'
 
 import '@orama/ui/styles.css'
 
-import styles from './index.module.css'
-
 export const MobileTopBar: FC<{
   isChatOpen: boolean
   onSelect?: (mode: 'search' | 'chat') => void
@@ -25,20 +23,24 @@ export const MobileTopBar: FC<{
   }
 
   return (
-    <div className={styles.topBar}>
+    <div className='relative flex justify-center p-4 lg:hidden'>
       <Modal.Close
-        className={styles.topBarArrow}
+        className='absolute left-4 top-1/2 -translate-y-1/2 text-neutral-900 dark:text-neutral-200 [&_svg]:size-4'
         aria-label='Close search modal'
       >
         <ArrowLeftIcon />
       </Modal.Close>
-      <div className={styles.topBarTabs}>
+      <div className='rounded-4xl flex bg-neutral-200 p-1 text-sm text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200'>
         <button
           type='button'
-          className={classNames(styles.topBarTab, {
-            [styles.topBarTabActive]: !isChatOpen,
-            [styles.topBarTabAnimated]: animated
-          })}
+          className={classNames(
+            'flex items-center gap-1 px-4 py-1 [&_svg]:size-4',
+            {
+              'before:rounded-4xl relative z-10 text-white before:absolute before:inset-0 before:z-[-1] before:bg-black motion-safe:transition-colors dark:text-neutral-900 dark:before:bg-white':
+                !isChatOpen,
+              'before:animate-slide-to-left': !isChatOpen && animated
+            }
+          )}
           onClick={() => selectMode('search')}
         >
           <span>Search</span>
@@ -46,10 +48,14 @@ export const MobileTopBar: FC<{
         </button>
         <button
           type='button'
-          className={classNames(styles.topBarTab, {
-            [styles.topBarTabActive]: isChatOpen,
-            [styles.topBarTabAnimated]: animated
-          })}
+          className={classNames(
+            'flex items-center gap-1 px-4 py-1 [&_svg]:size-4',
+            {
+              'before:rounded-4xl relative z-10 text-white before:absolute before:inset-0 before:z-[-1] before:bg-black motion-safe:transition-colors dark:text-neutral-900 dark:before:bg-white':
+                isChatOpen,
+              'before:animate-slide-to-right': isChatOpen && animated
+            }
+          )}
           onClick={() => selectMode('chat')}
         >
           <SparklesIcon />

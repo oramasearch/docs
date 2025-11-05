@@ -2,7 +2,6 @@ import type { Interaction, AnyObject } from '@orama/core'
 import { ChatInteractions } from '@orama/ui/components'
 import type { FC } from 'react'
 
-import styles from './index.module.css'
 import type { Document } from '../DocumentLink'
 import { DocumentLink } from '../DocumentLink'
 
@@ -18,18 +17,20 @@ const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
   return (
     <ChatInteractions.Sources
       interaction={interaction}
-      className={styles.chatSources}
-      itemClassName={styles.chatSourceItem}
+      className='mb-4 flex flex-nowrap items-center gap-3 overflow-x-scroll scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
     >
       {(document: AnyObject, index: number) => (
-        <div className={styles.chatSource} key={index}>
+        <div
+          className='flex max-w-full items-center gap-2 text-base'
+          key={index}
+        >
           {!!document.title && typeof document.title === 'string' && (
             <DocumentLink
               document={document as Document}
-              className={styles.chatSourceLink}
+              className='w-3xs rounded-xl bg-neutral-100 px-4 py-2 text-neutral-900 duration-300 hover:bg-neutral-200 focus:bg-neutral-200 focus:outline-none motion-safe:transition-colors dark:bg-neutral-950 dark:text-neutral-200 hover:dark:bg-neutral-900 focus:dark:bg-neutral-900'
               data-focus-on-arrow-nav
             >
-              <span className={styles.chatSourceTitle}>
+              <span className='max-w-full overflow-hidden truncate text-ellipsis whitespace-nowrap text-sm font-semibold'>
                 {document.title && document.title.length > 25
                   ? `${document.title.substring(0, 25)}...`
                   : document.title}

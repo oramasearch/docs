@@ -12,8 +12,6 @@ import classNames from 'classnames'
 import type { FC } from 'react'
 import { useState } from 'react'
 
-import styles from './index.module.css'
-
 type ChatActionsProps = {
   interaction: Interaction
 }
@@ -28,11 +26,11 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
   }
 
   return (
-    <div className={styles.chatActionsContainer}>
-      <ul className={styles.chatActionsList}>
+    <div className='flex items-center justify-end'>
+      <ul className='flex list-none items-center gap-2 p-0'>
         <li>
           <ChatInteractions.RegenerateLatest
-            className={styles.chatAction}
+            className='cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 [&_svg]:size-4'
             interaction={interaction}
           >
             <RotateCcwIcon />
@@ -40,12 +38,12 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
         </li>
         <li>
           <ChatInteractions.CopyMessage
-            className={styles.chatAction}
+            className='cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 [&_svg]:size-4'
             interaction={interaction}
           >
             {(copied: boolean) =>
               copied ? (
-                <FileCheck className={styles.chatActionIconSelected} />
+                <FileCheck className='text-green-600 dark:text-green-400' />
               ) : (
                 <ClipboardIcon />
               )
@@ -55,9 +53,12 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
         {!interaction.loading && (
           <li>
             <button
-              className={classNames(styles.chatAction, {
-                [styles.chatActionDisaliked]: isDisliked
-              })}
+              className={classNames(
+                'cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 [&_svg]:size-4',
+                {
+                  'text-neutral-900 dark:text-neutral-800': isDisliked
+                }
+              )}
               onClick={dislikeMessage}
               type='button'
             >

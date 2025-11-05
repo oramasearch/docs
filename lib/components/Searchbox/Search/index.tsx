@@ -8,7 +8,6 @@ import { useSearchbox } from '@/providers/searchboxProvider'
 
 import { Footer } from '../Footer'
 import { SearchResultsWrapper } from '../SearchResults'
-import styles from './index.module.css'
 
 type SearchProps = PropsWithChildren & React.RefAttributes<HTMLInputElement>
 
@@ -17,8 +16,8 @@ export const Search: FC<SearchProps> = ({ ref }) => {
   const isSearchMode = searchbox?.mode === 'search'
 
   return (
-    <div className={styles.searchContainer}>
-      <SearchInput.Wrapper className={styles.searchInputWrapper}>
+    <div className='flex grow flex-col overflow-hidden'>
+      <SearchInput.Wrapper className='relative [&_svg]:absolute [&_svg]:left-3 [&_svg]:top-1/2 [&_svg]:size-4 [&_svg]:-translate-y-1/2 [&_svg]:text-neutral-500 [&_svg]:dark:text-neutral-600'>
         <SearchIcon />
         <SearchInput.Input
           inputId='orama-doc-search'
@@ -26,7 +25,7 @@ export const Search: FC<SearchProps> = ({ ref }) => {
           placeholder='Search documents'
           tabIndex={isSearchMode ? 0 : -1}
           aria-hidden={!isSearchMode}
-          className={styles.searchInput}
+          className='w-full border-b border-neutral-200 bg-transparent py-4 pl-9 pr-4 text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none dark:border-neutral-900 dark:text-neutral-200 dark:placeholder:text-neutral-600'
           searchParams={{
             groupBy: {
               properties: ['category']

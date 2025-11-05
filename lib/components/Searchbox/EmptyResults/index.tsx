@@ -6,8 +6,6 @@ import type { FC } from 'react'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
-import styles from './index.module.css'
-
 export const EmptyResults: FC = () => {
   const searchbox = useSearchbox()
   const isSearchMode = searchbox?.mode === 'search'
@@ -17,17 +15,19 @@ export const EmptyResults: FC = () => {
       {(term) => (
         <>
           {term ? (
-            <div className={styles.noResultsWrapper}>
+            <div className='pb-31 flex h-full items-center justify-center pt-10 text-sm text-neutral-800 dark:text-neutral-500'>
               <p>No results found for "{term}"</p>
             </div>
           ) : (
-            <Suggestions.Wrapper className={styles.suggestionsWrapper}>
-              <p className={styles.suggestionsTitle}>Suggestions</p>
+            <Suggestions.Wrapper className='flex min-h-0 flex-1 flex-col overflow-y-auto pb-4 text-neutral-900 dark:text-neutral-200'>
+              <p className='my-3 text-xs font-semibold uppercase text-neutral-800 dark:text-neutral-500'>
+                Suggestions
+              </p>
               <Suggestions.Item
                 onClick={() => searchbox?.switchTo('chat')}
                 tabIndex={isSearchMode ? 0 : -1}
                 aria-hidden={!isSearchMode}
-                className={styles.suggestionItem}
+                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-green-600 focus-visible:border-green-600 focus-visible:outline-none dark:text-green-400 dark:focus-visible:border-green-400 [&_svg]:size-5'
               >
                 <Sparkles />
                 components.search.suggestionOne
@@ -36,7 +36,7 @@ export const EmptyResults: FC = () => {
                 onClick={() => searchbox?.switchTo('chat')}
                 tabIndex={isSearchMode ? 0 : -1}
                 aria-hidden={!isSearchMode}
-                className={styles.suggestionItem}
+                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-green-600 focus-visible:border-green-600 focus-visible:outline-none dark:text-green-400 dark:focus-visible:border-green-400 [&_svg]:size-5'
               >
                 <Sparkles />
                 components.search.suggestionTwo
@@ -45,7 +45,7 @@ export const EmptyResults: FC = () => {
                 tabIndex={isSearchMode ? 0 : -1}
                 aria-hidden={!isSearchMode}
                 onClick={() => searchbox?.switchTo('chat')}
-                className={styles.suggestionItem}
+                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-green-600 focus-visible:border-green-600 focus-visible:outline-none dark:text-green-400 dark:focus-visible:border-green-400 [&_svg]:size-5'
               >
                 <Sparkles />
                 components.search.suggestionThree
