@@ -36,8 +36,8 @@ export const ChatInteractionsContainer = () => {
         <button
           type='button'
           onClick={() => scrollToBottom({ animated: true })}
-          className='absolute bottom-36 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-xl bg-neutral-200 p-2 text-neutral-900 duration-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors lg:bottom-28 dark:bg-neutral-900 dark:text-neutral-200 focus:dark:bg-neutral-800 [&_svg]:size-4'
-          aria-label={'components.search.scrollToBottom'}
+          className='absolute bottom-36 left-1/2 inline-flex -translate-x-1/2 items-center justify-center rounded-xl bg-neutral-200 p-2 text-neutral-900 duration-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors lg:bottom-28 dark:bg-neutral-900 dark:text-neutral-200 focus:dark:bg-neutral-800 [&_svg]:size-4 cursor-pointer'
+          aria-label='Scroll to bottom'
         >
           <ArrowDown />
         </button>

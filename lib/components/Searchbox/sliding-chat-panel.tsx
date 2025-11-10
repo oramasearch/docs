@@ -18,10 +18,10 @@ export const SlidingChatPanel: FC<SlidingChatPanelProps> = ({
 }) => {
   return (
     <>
-      <SlidingPanel.Wrapper open={open} onClose={onClose}>
+      <SlidingPanel.Wrapper open={open} onClose={onClose} className='h-lvh!'>
         <SlidingPanel.Content
           position='bottom'
-          className='fixed bottom-0 left-0 box-border h-[95vh] w-full overflow-hidden rounded-lg border border-neutral-300 bg-white p-0 text-white duration-300 motion-safe:ease-in-out dark:border-neutral-900 dark:bg-zinc-950'
+          className='fixed bottom-0! left-0 box-border h-[95vh] top-[5vh]! w-full overflow-hidden rounded-lg border border-neutral-300 bg-white p-0 text-white duration-300 motion-safe:ease-in-out dark:border-neutral-900 dark:bg-zinc-950'
         >
           <SlidingPanel.Close
             className='absolute right-6 top-2 z-20 cursor-pointer rounded-full p-2 text-neutral-700 duration-300 hover:bg-white/20 focus:bg-white/20 focus:outline-none motion-safe:transition-colors dark:text-white [&_svg]:size-5'

@@ -27,10 +27,10 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
 
   return (
     <div className='flex items-center justify-end'>
-      <ul className='flex list-none items-center gap-2 p-0'>
+      <ul className='flex list-none items-center gap-2 p-0 mb-2'>
         <li>
           <ChatInteractions.RegenerateLatest
-            className='cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 [&_svg]:size-4'
+            className='cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 [&_svg]:size-4'
             interaction={interaction}
           >
             <RotateCcwIcon />
@@ -38,7 +38,7 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
         </li>
         <li>
           <ChatInteractions.CopyMessage
-            className='cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 [&_svg]:size-4'
+            className='cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 [&_svg]:size-4'
             interaction={interaction}
           >
             {(copied: boolean) =>
@@ -54,9 +54,9 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
           <li>
             <button
               className={classNames(
-                'cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-400 dark:hover:bg-neutral-900 dark:focus:bg-neutral-900 [&_svg]:size-4',
+                'cursor-pointer rounded-full p-2 text-neutral-800 duration-300 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none motion-safe:transition-colors dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700 [&_svg]:size-4',
                 {
-                  'text-neutral-900 dark:text-neutral-800': isDisliked
+                  'text-neutral-900 dark:text-neutral-500': isDisliked
                 }
               )}
               onClick={dislikeMessage}

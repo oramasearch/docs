@@ -10,7 +10,7 @@ type ChatMessageProps = {
 }
 
 const TypingIndicator: FC = () => (
-  <div className='flex items-center gap-1 rounded-xl bg-neutral-200 p-4 dark:bg-neutral-950'>
+  <div className='flex items-center gap-1 rounded-xl bg-neutral-200 p-4 dark:bg-neutral-900'>
     <span className='animate-dot-move size-1 rounded-full bg-neutral-500 dark:bg-neutral-400' />
     <span className='animate-dot-move-delay-200 size-1 rounded-full bg-neutral-500 dark:bg-neutral-400' />
     <span className='animate-dot-move-delay-400 size-1 rounded-full bg-neutral-500 dark:bg-neutral-400' />
@@ -31,19 +31,19 @@ export const ChatMessage: FC<ChatMessageProps> = ({ interaction }) => {
       <ChatSources interaction={interaction} />
 
       <ChatInteractions.Loading interaction={interaction}>
-        <div className='rounded-xl bg-neutral-100 px-4 py-1 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-200'>
+        <div className='rounded-xl bg-neutral-100 px-4 py-1 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-200'>
           <TypingIndicator />
         </div>
       </ChatInteractions.Loading>
 
       {interaction.response && (
-        <div className='my-2 rounded-xl bg-neutral-100 px-4 py-1 text-neutral-900 empty:hidden dark:bg-neutral-950 dark:text-neutral-200'>
+        <div className='my-2 rounded-xl bg-neutral-100 px-4 py-1 text-neutral-900 empty:hidden dark:bg-neutral-900 dark:text-neutral-200'>
           <ChatInteractions.AssistantMessage
             className=''
             markdownClassnames={{
               p: 'my-2 leading-relaxed',
-              pre: 'my-6 text-md overflow-x-auto hljs [&_pre]:bg-neutral-900! [&_pre]:text-sm [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:whitespace-break-spaces wrap-break-word',
-              code: 'px-2 py-1 rounded text-sm whitespace-pre-wrap hljs bg-neutral-300 dark:bg-neutral-900',
+              pre: 'my-6 text-md overflow-x-auto hljs [&_pre]:bg-neutral-950! [&_pre]:text-sm [&_pre]:rounded-md [&_pre]:p-4 [&_pre]:whitespace-break-spaces wrap-break-word',
+              code: 'px-2 py-1 rounded text-sm whitespace-pre-wrap hljs bg-neutral-300 dark:bg-neutral-950',
               table: 'w-full border-collapse my-6',
               thead: 'dark:bg-neutral-900',
               th: 'border border-neutral-300 dark:border-neutral-900 px-3 py-2 text-left font-semibold',

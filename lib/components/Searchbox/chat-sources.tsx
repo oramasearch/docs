@@ -28,7 +28,7 @@ export const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
           {!!document.title && typeof document.title === 'string' && (
             <DocumentLink
               document={document as Document}
-              className='w-3xs rounded-xl bg-neutral-100 px-4 py-2 text-neutral-900 duration-300 hover:bg-neutral-200 focus:bg-neutral-200 focus:outline-none motion-safe:transition-colors dark:bg-neutral-950 dark:text-neutral-200 hover:dark:bg-neutral-900 focus:dark:bg-neutral-900'
+              className='w-3xs rounded-xl bg-neutral-100 px-4 py-2 text-neutral-900 duration-300 hover:bg-neutral-200 focus:bg-neutral-200 focus:outline-none motion-safe:transition-colors dark:bg-neutral-900 dark:text-neutral-200 hover:dark:bg-neutral-700 focus:dark:bg-neutral-700'
               data-focus-on-arrow-nav
             >
               <span className='max-w-full overflow-hidden truncate text-ellipsis whitespace-nowrap text-sm font-semibold'>

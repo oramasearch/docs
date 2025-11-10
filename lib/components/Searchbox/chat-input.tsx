@@ -13,9 +13,9 @@ export const ChatInput: FC = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const suggestions = [
-    'components.search.suggestionOne',
-    'components.search.suggestionTwo',
-    'components.search.suggestionThree'
+    'What is Orama?',
+    'Does Orama integrate with Shopify?',
+    'How do I create an answer session?'
   ]
 
   const hasInteractions = !!interactions?.length
@@ -45,11 +45,11 @@ export const ChatInput: FC = () => {
         </Suggestions.Wrapper>
       )}
       <div className='px-1'>
-        <PromptTextArea.Wrapper className='flex items-center rounded-2xl border border-neutral-300 bg-neutral-100 py-2 pl-3 pr-1 dark:border-neutral-900 dark:bg-neutral-950'>
+        <PromptTextArea.Wrapper className='flex items-center rounded-2xl border border-neutral-300 bg-neutral-100 py-2 pl-3 pr-1 dark:border-neutral-800 dark:bg-neutral-900'>
           <PromptTextArea.Field
             id='orama-chat-input'
             name='chat-input'
-            placeholder={'components.search.chatPlaceholder'}
+            placeholder='How can I help you today?'
             rows={1}
             maxLength={500}
             autoFocus
@@ -58,13 +58,15 @@ export const ChatInput: FC = () => {
           />
           <PromptTextArea.Button
             abortContent={<CirclePause />}
-            className='cursor-pointer rounded-xl bg-fd-primary p-2 text-white duration-300 focus:bg-fd-primary/75 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-200/60 disabled:text-neutral-800 motion-safe:transition-colors dark:bg-fd-primary dark:text-neutral-400 focus:dark:bg-fd-primary/75 disabled:dark:bg-neutral-900/60 [&_svg]:size-4'
+            className='cursor-pointer rounded-xl bg-fd-primary p-2 text-white duration-300 focus:bg-fd-primary/75 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-200/60 disabled:text-neutral-700 motion-safe:transition-colors dark:bg-fd-primary dark:text-neutral-800 focus:dark:bg-fd-primary/75 disabled:dark:bg-neutral-900/60 [&_svg]:size-4'
           >
             <Send />
           </PromptTextArea.Button>
         </PromptTextArea.Wrapper>
         <div className='pt-1 text-center text-xs text-neutral-800 sm:text-sm dark:text-neutral-500'>
-          <small>components.search.disclaimer</small>
+          <small>
+            Orama can make mistakes. Please verify critical information.
+          </small>
         </div>
       </div>
     </>

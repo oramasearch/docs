@@ -30,7 +30,7 @@ export const EmptyResults: FC = () => {
                 className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-fd-primary focus-visible:border-fd-primary focus-visible:outline-none dark:text-fd-primary dark:focus-visible:border-fd-primary [&_svg]:size-5'
               >
                 <Sparkles />
-                components.search.suggestionOne
+                What is Orama?
               </Suggestions.Item>
               <Suggestions.Item
                 onClick={() => searchbox?.switchTo('chat')}
@@ -39,7 +39,7 @@ export const EmptyResults: FC = () => {
                 className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-fd-primary focus-visible:border-fd-primary focus-visible:outline-none dark:text-fd-primary dark:focus-visible:border-fd-primary [&_svg]:size-5'
               >
                 <Sparkles />
-                components.search.suggestionTwo
+                Does Orama integrate with Shopify?
               </Suggestions.Item>
               <Suggestions.Item
                 tabIndex={isSearchMode ? 0 : -1}
@@ -48,7 +48,7 @@ export const EmptyResults: FC = () => {
                 className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-fd-primary focus-visible:border-fd-primary focus-visible:outline-none dark:text-fd-primary dark:focus-visible:border-fd-primary [&_svg]:size-5'
               >
                 <Sparkles />
-                components.search.suggestionThree
+                How do I create an answer session?
               </Suggestions.Item>
             </Suggestions.Wrapper>
           )}
