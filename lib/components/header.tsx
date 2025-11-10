@@ -1,7 +1,6 @@
 'use client'
 
-import { DropdownSearch } from './dropdown-search'
-import Searchbox from './searchbox/index'
+import Searchbox from './searchbox'
 
 export function Header() {
   return (
@@ -15,7 +14,6 @@ export function Header() {
           />
           Orama
         </div>
-        {/* <DropdownSearch /> */}
         <Searchbox />
       </div>
     </header>
