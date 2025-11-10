@@ -5,7 +5,7 @@ import type { Interaction } from '@orama/core'
 import { ChatInteractions } from '@orama/ui/components'
 import { useScrollableContainer } from '@orama/ui/hooks/useScrollableContainer'
 
-import { ChatMessage } from './chat-message'
+import { ChatMessage } from '@/components/chat-message'
 
 export const ChatInteractionsContainer = () => {
   const {

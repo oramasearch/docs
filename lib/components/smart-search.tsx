@@ -9,7 +9,7 @@ import {
 } from '@orama/ui/components'
 import { useRouter } from 'next/navigation'
 import { useArrowKeysNavigation } from '@orama/ui/hooks'
-import { FileText, Search, Sparkles } from 'lucide-react'
+import { FileText, Sparkles } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { collectionManager, promptSuggestions } from '@/data/index'

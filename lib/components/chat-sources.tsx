@@ -3,8 +3,8 @@ import { ChatInteractions } from '@orama/ui/components'
 import type { FC } from 'react'
 import { Link2 } from 'lucide-react'
 
-import type { Document } from './document-link'
-import { DocumentLink } from './document-link'
+import type { Document } from '@/components/document-link'
+import { DocumentLink } from '@/components/document-link'
 
 type ChatSourcesProps = {
   interaction: Interaction

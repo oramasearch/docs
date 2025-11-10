@@ -8,9 +8,9 @@ import type { FC } from 'react'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
-import type { Document } from './document-link'
-import { EmptyResults } from './empty-results'
-import { SearchItem } from './search-item'
+import type { Document } from '@/components/document-link'
+import { EmptyResults } from '@/components/empty-results'
+import { SearchItem } from '@/components/search-item'
 
 export const SearchResultsWrapper: FC = () => {
   const {
