@@ -7,6 +7,7 @@ export type Document = {
   path: string
   section: string
   title?: string
+  content?: string
 }
 
 type DocumentLinkProps = {

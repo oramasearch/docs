@@ -28,9 +28,14 @@ export const SearchItem: FC<SearchItemProps> = ({ document }) => {
         <FileText />
         <div>
           {typeof document?.title === 'string' && <h3>{document.title}</h3>}
+          {typeof document?.content === 'string' && (
+            <p className='text-sm text-muted-foreground'>
+              {document.content.substring(0, 180)}...
+            </p>
+          )}
           {typeof document?.title === 'string' &&
             typeof document?.path === 'string' && (
-              <p className='text-sm text-muted-foreground'>
+              <p className='text-xs mt-1 text-muted-foreground/70'>
                 {getFormattedPath(document.path, document.title)}
               </p>
             )}

@@ -25,7 +25,7 @@ export const MobileTopBar: FC<{
   return (
     <div className='relative flex justify-center p-4 lg:hidden'>
       <Modal.Close
-        className='absolute left-4 top-1/2 -translate-y-1/2 text-neutral-900 dark:text-neutral-200 [&_svg]:size-4'
+        className='absolute left-4 top-1/2 -translate-y-1/2 text-neutral-900 dark:text-neutral-200 [&_svg]:size-4 cursor-pointer'
         aria-label='Close search modal'
       >
         <ArrowLeftIcon />
@@ -34,7 +34,7 @@ export const MobileTopBar: FC<{
         <button
           type='button'
           className={classNames(
-            'flex items-center gap-1 px-4 py-1 [&_svg]:size-4',
+            'flex items-center gap-1 px-4 py-1 [&_svg]:size-4 cursor-pointer',
             {
               'before:rounded-4xl relative z-10 text-white before:absolute before:inset-0 before:z-[-1] before:bg-black motion-safe:transition-colors dark:text-neutral-900 dark:before:bg-white':
                 !isChatOpen,
@@ -49,7 +49,7 @@ export const MobileTopBar: FC<{
         <button
           type='button'
           className={classNames(
-            'flex items-center gap-1 px-4 py-1 [&_svg]:size-4',
+            'flex items-center gap-1 px-4 py-1 [&_svg]:size-4 cursor-pointer',
             {
               'before:rounded-4xl relative z-10 text-white before:absolute before:inset-0 before:z-[-1] before:bg-black motion-safe:transition-colors dark:text-neutral-900 dark:before:bg-white':
                 isChatOpen,
