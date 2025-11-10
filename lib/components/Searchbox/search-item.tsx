@@ -6,8 +6,8 @@ import { useReducer, type FC } from 'react'
 
 import searchReducer, { searchState } from '@/reducers/searchboxReducer'
 
-import { DocumentLink } from '../DocumentLink'
-import type { Document } from '../DocumentLink'
+import { DocumentLink } from './document-link'
+import type { Document } from './document-link'
 import { getFormattedPath } from './utils'
 
 type SearchItemProps = {

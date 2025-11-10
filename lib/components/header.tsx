@@ -1,7 +1,7 @@
 'use client'
 
 import { DropdownSearch } from './dropdown-search'
-import Searchbox from './Searchbox'
+import Searchbox from './searchbox'
 
 export function Header() {
   return (

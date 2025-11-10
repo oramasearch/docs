@@ -6,8 +6,8 @@ import type { FC, PropsWithChildren } from 'react'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
-import { Footer } from '../Footer'
-import { SearchResultsWrapper } from '../SearchResults'
+import { Footer } from './footer'
+import { SearchResultsWrapper } from './search-results'
 
 type SearchProps = PropsWithChildren & React.RefAttributes<HTMLInputElement>
 

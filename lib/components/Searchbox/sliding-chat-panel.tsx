@@ -4,8 +4,8 @@ import { X } from 'lucide-react'
 import { SlidingPanel } from '@orama/ui/components'
 import type { FC, PropsWithChildren } from 'react'
 
-import { ChatInput } from '../ChatInput'
-import { ChatInteractionsContainer } from '../ChatInteractions'
+import { ChatInput } from './chat-input'
+import { ChatInteractionsContainer } from './chat-interactions'
 
 type SlidingChatPanelProps = PropsWithChildren<{
   open: boolean

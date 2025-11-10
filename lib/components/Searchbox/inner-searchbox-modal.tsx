@@ -4,12 +4,12 @@ import { useEffect, useState, useRef } from 'react'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
-import { ChatInput } from '../ChatInput'
-import { ChatInteractionsContainer } from '../ChatInteractions'
-import { Footer } from '../Footer'
-import { MobileTopBar } from '../MobileTopBar'
-import { Search } from '../Search'
-import { SlidingChatPanel } from '../SlidingChatPanel'
+import { ChatInput } from './chat-input'
+import { ChatInteractionsContainer } from './chat-interactions'
+import { Footer } from './footer'
+import { MobileTopBar } from './mobile-top-bar'
+import { Search } from './search'
+import { SlidingChatPanel } from './sliding-chat-panel'
 
 export const InnerSearchboxModal: FC<PropsWithChildren> = () => {
   const searchbox = useSearchbox()

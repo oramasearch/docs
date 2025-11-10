@@ -2,14 +2,14 @@ import type { Interaction, AnyObject } from '@orama/core'
 import { ChatInteractions } from '@orama/ui/components'
 import type { FC } from 'react'
 
-import type { Document } from '../DocumentLink'
-import { DocumentLink } from '../DocumentLink'
+import type { Document } from './document-link'
+import { DocumentLink } from './document-link'
 
 type ChatSourcesProps = {
   interaction: Interaction
 }
 
-const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
+export const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
   if (!interaction?.sources) {
     return null
   }
@@ -18,6 +18,7 @@ const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
     <ChatInteractions.Sources
       interaction={interaction}
       className='mb-4 flex flex-nowrap items-center gap-3 overflow-x-scroll scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'
+      itemClassName=''
     >
       {(document: AnyObject, index: number) => (
         <div
@@ -42,5 +43,3 @@ const ChatSources: FC<ChatSourcesProps> = ({ interaction }) => {
     </ChatInteractions.Sources>
   )
 }
-
-export default ChatSources
