@@ -27,7 +27,7 @@ export const EmptyResults: FC = () => {
                 onClick={() => searchbox?.switchTo('chat')}
                 tabIndex={isSearchMode ? 0 : -1}
                 aria-hidden={!isSearchMode}
-                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-green-600 focus-visible:border-green-600 focus-visible:outline-none dark:text-green-400 dark:focus-visible:border-green-400 [&_svg]:size-5'
+                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-fd-primary focus-visible:border-fd-primary focus-visible:outline-none dark:text-fd-primary dark:focus-visible:border-fd-primary [&_svg]:size-5'
               >
                 <Sparkles />
                 components.search.suggestionOne
@@ -36,7 +36,7 @@ export const EmptyResults: FC = () => {
                 onClick={() => searchbox?.switchTo('chat')}
                 tabIndex={isSearchMode ? 0 : -1}
                 aria-hidden={!isSearchMode}
-                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-green-600 focus-visible:border-green-600 focus-visible:outline-none dark:text-green-400 dark:focus-visible:border-green-400 [&_svg]:size-5'
+                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-fd-primary focus-visible:border-fd-primary focus-visible:outline-none dark:text-fd-primary dark:focus-visible:border-fd-primary [&_svg]:size-5'
               >
                 <Sparkles />
                 components.search.suggestionTwo
@@ -45,7 +45,7 @@ export const EmptyResults: FC = () => {
                 tabIndex={isSearchMode ? 0 : -1}
                 aria-hidden={!isSearchMode}
                 onClick={() => searchbox?.switchTo('chat')}
-                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-green-600 focus-visible:border-green-600 focus-visible:outline-none dark:text-green-400 dark:focus-visible:border-green-400 [&_svg]:size-5'
+                className='flex cursor-pointer items-center gap-2 rounded-lg border border-transparent py-2 text-sm text-fd-primary focus-visible:border-fd-primary focus-visible:outline-none dark:text-fd-primary dark:focus-visible:border-fd-primary [&_svg]:size-5'
               >
                 <Sparkles />
                 components.search.suggestionThree

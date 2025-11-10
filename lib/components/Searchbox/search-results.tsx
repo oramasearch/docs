@@ -25,7 +25,7 @@ export const SearchResultsWrapper: FC = () => {
         <SlidingPanel.Trigger
           onClick={() => searchbox?.switchTo('chat')}
           className={classNames(
-            'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent bg-transparent p-3 text-sm duration-300 hover:bg-neutral-300 focus-visible:border-green-600 focus-visible:outline-none motion-safe:transition-colors dark:hover:bg-neutral-900 dark:focus-visible:border-green-400',
+            'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent bg-transparent p-3 text-sm duration-300 hover:bg-neutral-300 focus-visible:border-fd-primary focus-visible:outline-none motion-safe:transition-colors dark:hover:bg-neutral-900 dark:focus-visible:border-fd-primary',
             {
               'bg-neutral-300 dark:bg-neutral-900': searchTerm
             }
@@ -43,10 +43,13 @@ export const SearchResultsWrapper: FC = () => {
         </SlidingPanel.Trigger>
       </div>
 
-      <div className='grow overflow-y-auto px-5 pt-3 text-neutral-900 lg:grow-0 dark:text-neutral-200 [&::-webkit-scrollbar]:size-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-md [&::-webkit-scrollbar-thumb]:bg-neutral-900'>
+      <div className='grow overflow-y-auto px-5 pt-3 text-muted-foreground lg:grow-0 [&::-webkit-scrollbar]:size-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-md [&::-webkit-scrollbar-thumb]:bg-neutral-900'>
         <SearchResults.Wrapper>
           <FacetTabs.Wrapper className='mb-2 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
-            <FacetTabs.List className='flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden'>
+            <FacetTabs.List
+              className='flex items-center gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden'
+              itemClassName='min-w-fit'
+            >
               {(group, isSelected) => (
                 <>
                   <FacetTabs.Item
@@ -59,15 +62,17 @@ export const SearchResultsWrapper: FC = () => {
                     tabIndex={isSearchMode ? 0 : -1}
                     aria-hidden={!isSearchMode}
                     className={classNames(
-                      'flex cursor-pointer items-center gap-2 rounded-3xl border border-neutral-200 px-3 py-1 text-sm duration-300 focus:outline-none focus-visible:bg-neutral-300 motion-safe:transition-colors dark:border-neutral-900 dark:focus-visible:bg-neutral-900',
+                      'flex cursor-pointer items-center gap-2 rounded-3xl border px-3 py-1 text-sm duration-300 focus:outline-none focus-visible:bg-neutral-300 motion-safe:transition-colors dark:border-neutral-900 dark:focus-visible:bg-neutral-900 text-primary',
                       {
-                        'border-2 border-green-600 dark:border-green-400':
-                          isSelected
+                        'border-fd-primary!': isSelected,
+                        'border-neutral-800!': !isSelected
                       }
                     )}
                   >
                     {group.name}
-                    <span className='text-neutral-700'>({group.count})</span>
+                    <span className='text-muted-foreground/60'>
+                      ({group.count})
+                    </span>
                   </FacetTabs.Item>
                 </>
               )}
@@ -100,7 +105,7 @@ export const SearchResultsWrapper: FC = () => {
                 key={group.name}
                 className='mb-3 border-t border-neutral-200 dark:border-neutral-900 first:border-0'
               >
-                <h2 className='mb-3 mt-4 pl-2 text-sm font-semibold text-neutral-600 dark:text-neutral-600'>
+                <h2 className='mb-3 mt-4 pl-2 text-sm font-semibold text-muted-foreground/70'>
                   {group.name}
                 </h2>
                 <SearchResults.GroupList group={group}>

@@ -43,7 +43,7 @@ export const ChatActions: FC<ChatActionsProps> = ({ interaction }) => {
           >
             {(copied: boolean) =>
               copied ? (
-                <FileCheck className='text-green-600 dark:text-green-400' />
+                <FileCheck className='text-fd-primary' />
               ) : (
                 <ClipboardIcon />
               )

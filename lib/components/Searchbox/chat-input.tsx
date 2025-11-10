@@ -58,7 +58,7 @@ export const ChatInput: FC = () => {
           />
           <PromptTextArea.Button
             abortContent={<CirclePause />}
-            className='cursor-pointer rounded-xl bg-green-600 p-2 text-white duration-300 focus:bg-green-600/75 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-200/60 disabled:text-neutral-800 motion-safe:transition-colors dark:bg-green-400 dark:text-neutral-400 focus:dark:bg-green-400/75 disabled:dark:bg-neutral-900/60 [&_svg]:size-4'
+            className='cursor-pointer rounded-xl bg-fd-primary p-2 text-white duration-300 focus:bg-fd-primary/75 focus:outline-none disabled:cursor-not-allowed disabled:bg-neutral-200/60 disabled:text-neutral-800 motion-safe:transition-colors dark:bg-fd-primary dark:text-neutral-400 focus:dark:bg-fd-primary/75 disabled:dark:bg-neutral-900/60 [&_svg]:size-4'
           >
             <Send />
           </PromptTextArea.Button>
