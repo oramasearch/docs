@@ -5,6 +5,7 @@ export const getFormattedPath = (path: string, title: string) =>
   `${path
     .replace(/#.+$/, '')
     .split('/')
+    .filter(element => element && element.toLowerCase() !== 'docs')
     .map(element => element.replaceAll('-', ' '))
     .map(element => uppercaseFirst(element))
     .filter(Boolean)

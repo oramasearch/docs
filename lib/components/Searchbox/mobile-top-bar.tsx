@@ -6,8 +6,6 @@ import classNames from 'classnames'
 import type { FC } from 'react'
 import { useState } from 'react'
 
-import '@orama/ui/styles.css'
-
 export const MobileTopBar: FC<{
   isChatOpen: boolean
   onSelect?: (mode: 'search' | 'chat') => void

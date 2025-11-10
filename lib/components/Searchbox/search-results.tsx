@@ -84,10 +84,10 @@ export const SearchResultsWrapper: FC = () => {
               {[...Array(3)].map((_, index) => (
                 // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 <div key={index} className='flex items-center gap-4'>
-                  <div className='dark:animate-pulse-dark animate-pulse rounded-md h-6 w-5 shrink-0' />
+                  <div className='animate-pulse bg-gray-800 rounded-md h-6 w-5 shrink-0' />
                   <div className='flex flex-1 flex-col gap-2'>
-                    <div className='dark:animate-pulse-dark animate-pulse rounded-md h-3 w-1/3' />
-                    <div className='dark:animate-pulse-dark animate-pulse rounded-md h-3 w-2/3' />
+                    <div className='animate-pulse bg-gray-800 rounded-md h-3 w-1/3' />
+                    <div className='animate-pulse bg-gray-800 rounded-md h-3 w-2/3' />
                   </div>
                 </div>
               ))}

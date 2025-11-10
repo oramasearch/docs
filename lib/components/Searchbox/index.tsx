@@ -9,6 +9,8 @@ import { SearchboxProvider } from '@/providers/searchboxProvider'
 import { InnerSearchboxModal } from './inner-searchbox-modal'
 import { collectionManager } from '@/data/index'
 
+import '@orama/ui/styles.css'
+
 const Searchbox: FC = () => {
   return (
     <SearchboxProvider>
@@ -18,7 +20,7 @@ const Searchbox: FC = () => {
             type='button'
             disabled={!collectionManager}
             enableCmdK
-            className='flex w-full grow cursor-pointer items-center justify-between gap-1 rounded-xl border border-neutral-300 bg-white p-1.5 text-neutral-900 duration-300 hover:bg-neutral-100 motion-safe:transition-colors dark:border-neutral-900 dark:bg-neutral-950 dark:text-neutral-200 hover:dark:bg-neutral-900 min-w-[200px] focus:outline-none focus-visible:border-fd-primary'
+            className='flex w-full grow cursor-pointer items-center justify-between gap-1 rounded-xl border border-neutral-300 bg-white p-1.5 text-neutral-900 duration-300 hover:bg-neutral-100 motion-safe:transition-colors dark:border-neutral-900 dark:bg-neutral-950 dark:text-neutral-200 hover:dark:bg-neutral-900 min-w-[240px] focus:outline-none focus-visible:border-fd-primary'
           >
             <div className='relative flex flex-nowrap items-center gap-1 text-sm [&_svg]:size-4'>
               <Search />
@@ -39,7 +41,7 @@ const Searchbox: FC = () => {
                 client={collectionManager}
                 askOptions={{ throttle_delay: 50 }}
               >
-                <Modal.Inner className='fixed bottom-0 top-0 mx-auto! mb-0! lg:mt-12! flex h-full max-w-none bg-white lg:bottom-auto lg:top-auto lg:h-auto lg:max-w-3xl lg:bg-neutral-100 dark:bg-zinc-950 lg:dark:bg-neutral-950'>
+                <Modal.Inner className='fixed bottom-0 top-0 mx-auto! mb-0! lg:mt-12! flex h-full max-w-none! bg-white lg:bottom-auto lg:top-auto lg:h-auto lg:max-w-3xl! lg:bg-neutral-100 dark:bg-zinc-950 lg:dark:bg-neutral-950'>
                   <Modal.Content className='flex h-full flex-col border-neutral-200 lg:h-auto lg:max-h-[70vh] lg:border dark:border-neutral-900'>
                     <InnerSearchboxModal />
                   </Modal.Content>
