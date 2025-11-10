@@ -25,7 +25,7 @@ export const SearchResultsWrapper: FC = () => {
         <SlidingPanel.Trigger
           onClick={() => searchbox?.switchTo('chat')}
           className={classNames(
-            'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent bg-transparent p-3 text-sm duration-300 hover:bg-neutral-300 focus-visible:border-fd-primary focus-visible:outline-none motion-safe:transition-colors dark:hover:bg-neutral-900 dark:focus-visible:border-fd-primary',
+            'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-transparent bg-transparent p-3 text-sm duration-300 hover:bg-neutral-300 focus-visible:border-fd-primary focus-visible:outline-none motion-safe:transition-colors dark:hover:bg-neutral-900 dark:focus-visible:border-fd-primary text-primary',
             {
               'bg-neutral-300 dark:bg-neutral-900': searchTerm
             }
