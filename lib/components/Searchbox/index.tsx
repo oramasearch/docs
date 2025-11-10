@@ -6,7 +6,7 @@ import type { FC } from 'react'
 
 import { SearchboxProvider } from '@/providers/searchboxProvider'
 
-import { InnerSearchboxModal } from './inner-searchbox-modal'
+import { InnerSearchboxModal } from '@/components/searchbox/inner-searchbox-modal'
 import { collectionManager } from '@/data/index'
 
 import '@orama/ui/styles.css'

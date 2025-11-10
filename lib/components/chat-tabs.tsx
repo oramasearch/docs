@@ -21,7 +21,7 @@ import type { Interaction } from '@orama/core'
 import { Tabs } from '@orama/ui/components'
 import { usePathname, useRouter } from 'next/navigation'
 import { useScrollableContainer } from '@orama/ui/hooks'
-import { collectionManager } from '../data'
+import { collectionManager } from '@/data/index'
 
 type Document = {
   path: string

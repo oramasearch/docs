@@ -2,7 +2,7 @@
 
 import type { FC, ReactNode } from 'react'
 
-import ChatTabs from './chat-tabs'
+import ChatTabs from '@/components/chat-tabs'
 
 interface OramaWrapperProps {
   children: ReactNode

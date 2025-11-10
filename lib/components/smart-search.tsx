@@ -12,7 +12,7 @@ import { useArrowKeysNavigation } from '@orama/ui/hooks'
 import { FileText, Search, Sparkles } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { collectionManager, promptSuggestions } from '../data'
+import { collectionManager, promptSuggestions } from '@/data/index'
 
 export function SmartSearch() {
   const [mounted, setMounted] = useState(false)

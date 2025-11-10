@@ -1,6 +1,6 @@
 'use client'
 
-import Searchbox from './searchbox'
+import Searchbox from '@/components/searchbox/index'
 
 export function Header() {
   return (

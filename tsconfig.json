@@ -18,6 +18,7 @@
 		"paths": {
 			"@/*": ["./*"],
 			"@/hooks/*": ["lib/hooks/*"],
+			"@/components/*": ["lib/components/*"],
 			"@/reducers/*": ["lib/reducers/*"],
 			"@/providers/*": ["lib/providers/*"],
 			"@/types/*": ["lib/types/*"],
