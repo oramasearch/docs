@@ -20,7 +20,7 @@ const Searchbox: FC = () => {
             type='button'
             disabled={!collectionManager}
             enableCmdK
-            className='flex w-full grow cursor-pointer items-center justify-between gap-1 rounded-xl border border-neutral-300 bg-white p-1.5 text-neutral-900 duration-300 hover:bg-neutral-100 motion-safe:transition-colors dark:border-neutral-900 dark:bg-neutral-950 dark:text-neutral-200 hover:dark:bg-neutral-900 min-w-[240px] focus:outline-none focus-visible:border-fd-primary'
+            className='flex w-full grow cursor-pointer items-center justify-between gap-1 rounded-xl border border-neutral-300 bg-white p-1.5 duration-300 hover:bg-neutral-100 motion-safe:transition-colors dark:border-neutral-900 dark:bg-neutral-950 text-neutral-200 hover:dark:bg-neutral-900 min-w-[240px] focus:outline-none focus-visible:border-fd-primary'
           >
             <div className='relative flex flex-nowrap items-center gap-1 text-sm [&_svg]:size-4'>
               <Search />
