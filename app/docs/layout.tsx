@@ -5,7 +5,6 @@ import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import { baseOptions } from '@/app/layout.config'
 import { source } from '@/lib/source'
 import OramaWrapper from '@/lib/components/orama-wrapper'
-import { DropdownSearch } from '@/lib/components/dropdown-search'
 import Searchbox from '@/lib/components/searchbox'
 
 function Logo() {
