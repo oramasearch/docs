@@ -122,6 +122,11 @@
   z-index: 5 !important;
 }
 
+#nd-subnav {
+  /* Blur removed: backdrop-blur creates a new containing block, breaking fixed child positioning of chat sliding panel */
+  backdrop-filter: none !important;
+}
+
 /* CUSTOM COLORS */
 :root {
   --oramacore-color: hsl(264, 93%, 68%);
