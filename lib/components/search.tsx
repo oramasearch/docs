@@ -3,6 +3,7 @@
 import { Search as SearchIcon } from 'lucide-react'
 import { SearchInput } from '@orama/ui/components'
 import type { FC, PropsWithChildren } from 'react'
+import { usePathname } from 'next/navigation'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
@@ -14,6 +15,14 @@ type SearchProps = PropsWithChildren & React.RefAttributes<HTMLInputElement>
 export const Search: FC<SearchProps> = ({ ref }) => {
   const searchbox = useSearchbox()
   const isSearchMode = searchbox?.mode === 'search'
+
+  const pathname = usePathname()
+  const pathSegment = pathname.split('/')[2]
+  const datasourceIDMap: Record<string, string> = {
+    'orama-js': process.env.NEXT_PUBLIC_ORAMA_JS_DATASOURCE_ID as string,
+    cloud: process.env.NEXT_PUBLIC_ORAMA_CLOUD_DATASOURCE_ID as string
+  }
+  const datasourceIDs = datasourceIDMap[pathSegment]
 
   return (
     <div className='flex grow flex-col overflow-hidden'>
@@ -32,7 +41,8 @@ export const Search: FC<SearchProps> = ({ ref }) => {
             },
             facets: {
               category: {}
-            }
+            },
+            ...(!datasourceIDs ? {} : { datasourceIDs: [datasourceIDs] })
           }}
           ref={ref}
         />
