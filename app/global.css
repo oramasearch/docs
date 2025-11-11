@@ -125,6 +125,7 @@
 #nd-subnav {
   /* Blur removed: backdrop-blur creates a new containing block, breaking fixed child positioning of chat sliding panel */
   backdrop-filter: none !important;
+  display: none;
 }
 
 /* CUSTOM COLORS */
