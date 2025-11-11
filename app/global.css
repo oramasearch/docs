@@ -110,29 +110,6 @@
   .search-dropdown {
     display: none;
   }
-
-  > div {
-    border-color: var(--color-fd-border);
-  }
-}
-
-#nd-subnav {
-  > div {
-    border-color: var(--color-fd-border);
-  }
-}
-
-article {
-  button,
-  a {
-    border-color: var(--color-fd-border);
-  }
-}
-
-.prose {
-  * {
-    border-color: var(--color-fd-border);
-  }
 }
 
 .dark #nd-sidebar {

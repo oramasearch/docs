@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 
 import { useSearchbox } from '@/providers/searchboxProvider'
 
-import { Footer } from '@/components/footer'
+import { Footer } from '@/lib/components/footer-searchbox'
 import { SearchResultsWrapper } from '@/components/search-results'
 
 type SearchProps = PropsWithChildren & React.RefAttributes<HTMLInputElement>

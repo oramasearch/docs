@@ -6,7 +6,7 @@ import { useSearchbox } from '@/providers/searchboxProvider'
 
 import { ChatInput } from '@/components/chat-input'
 import { ChatInteractionsContainer } from '@/components/chat-interactions'
-import { Footer } from '@/components/footer'
+import { Footer } from '@/lib/components/footer-searchbox'
 import { MobileTopBar } from '@/components/mobile-top-bar'
 import { Search } from '@/components/search'
 import { SlidingChatPanel } from '@/components/sliding-chat-panel'
