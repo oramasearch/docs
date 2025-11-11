@@ -2,7 +2,7 @@
 
 import type { FC, ReactNode } from 'react'
 
-import ChatTabs from './chat-tabs'
+import ChatTabs from '@/components/chat-tabs'
 
 interface OramaWrapperProps {
   children: ReactNode
@@ -10,7 +10,7 @@ interface OramaWrapperProps {
 
 const OramaWrapper: FC<OramaWrapperProps> = ({ children }) => {
   return (
-    <div className="pt-(--fd-nav-height) h-screen">
+    <div className='pt-(--fd-nav-height) h-screen'>
       <ChatTabs initialContent={children} />
     </div>
   )

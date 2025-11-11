@@ -18,7 +18,11 @@
 		"paths": {
 			"@/*": ["./*"],
 			"@/hooks/*": ["lib/hooks/*"],
-			"@/components/*": ["lib/components/*"]
+			"@/components/*": ["lib/components/*"],
+			"@/reducers/*": ["lib/reducers/*"],
+			"@/providers/*": ["lib/providers/*"],
+			"@/types/*": ["lib/types/*"],
+			"@/data/*": ["lib/data/*"],
 		},
 		"plugins": [
 			{
