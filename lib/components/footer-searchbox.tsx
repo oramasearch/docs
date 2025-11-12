@@ -2,13 +2,8 @@
 
 import { ArrowDownIcon, ArrowUpIcon, CornerDownRight } from 'lucide-react'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
 
 export const Footer = () => {
-  const { resolvedTheme } = useTheme()
-
-  const oramaLogo = `https://website-assets.oramasearch.com/orama-when-${resolvedTheme}.svg`
-
   return (
     <div className='flex justify-center border-t border-neutral-200 bg-neutral-100 p-4 align-baseline lg:justify-between lg:rounded-b-xl dark:border-neutral-900 dark:bg-neutral-950'>
       <div className='hidden items-center gap-2 lg:flex'>
@@ -43,7 +38,7 @@ export const Footer = () => {
         >
           <small>Powered by</small>
           <Image
-            src={oramaLogo}
+            src='https://website-assets.oramasearch.com/orama-when-light.svg'
             alt='Powered by Orama'
             width='62'
             height='12'
