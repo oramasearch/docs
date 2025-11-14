@@ -5,11 +5,12 @@ const withMDX = createMDX()
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/open-source/:path*',
-        destination: '/orama-js/:path*',
+        destination: '/docs/orama-js/:path*',
+        permanent: true,
       },
     ]
   }
