@@ -38,7 +38,7 @@ export const Footer = () => {
         >
           <small>Powered by</small>
           <Image
-            src='https://website-assets.oramasearch.com/orama-when-dark.svg'
+            src='https://docs.orama.com/logo/orama-logo.svg'
             alt='Powered by Orama'
             width='62'
             height='12'
