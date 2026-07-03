@@ -42,12 +42,12 @@ const db = create({
 });
 ```
 
-Right now, Orama supports 30 languages and stemmers out of the box:
+Right now, Orama supports 31 languages and stemmers out of the box:
 
 - Arabic
 - Armenian
 - Bulgarian
-- Chinese (Mandarin - stemmer not supported)
+- Czech
 - Danish
 - Dutch
 - English
@@ -60,7 +60,7 @@ Right now, Orama supports 30 languages and stemmers out of the box:
 - Indonesian
 - Irish
 - Italian
-- Mandarin (stemmer not supported)
+- Lithuanian
 - Nepali
 - Norwegian
 - Portuguese
@@ -74,3 +74,6 @@ Right now, Orama supports 30 languages and stemmers out of the box:
 - Tamil
 - Turkish
 - Ukrainian
+- Vietnamese
+
+Chinese (Mandarin) and Japanese have no stemmer: they are supported through dedicated tokenizers (`@orama/tokenizers`) and stop-word removal (`@orama/stopwords`). See the guides on [using Chinese](/docs/orama-js/supported-languages/using-chinese-with-orama) and [using Japanese](/docs/orama-js/supported-languages/using-japanese-with-orama) with Orama.
